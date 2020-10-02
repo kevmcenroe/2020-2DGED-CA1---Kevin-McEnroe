@@ -76,13 +76,28 @@ var p1 = {
     type: "sniper",
     health: 75
 };
-console.log(p1);
+//console.log(p1);
 p1.health = 85;
-console.log(p1);
+//console.log(p1);
 
 var p2 = {
-    
+    name: "max",
+    type: "sniper",
+    health: 75
 };
 
+var p3 = p1; //shallow-copy of p1 i.e. p3 and p1 point to SAME obj
+p3.health = 100000;
+console.log(p1);
+
+//creates a blank that we populate with COPY of data from p1
+var p4 = {
+    name: "",
+    type: "",
+    health: -1
+};
+//properly populated DEEP COPY
+p4.name = p1.name;
+//...etc
 
 
