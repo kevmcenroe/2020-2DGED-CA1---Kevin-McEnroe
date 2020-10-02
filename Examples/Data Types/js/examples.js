@@ -143,7 +143,7 @@ level1.reset();
 var person1 = {
     name: "anna",
     height: 1.9,
-    eye: 3 //1=blue,2=green,3=brown,4=black
+    eye: 1 //1=blue,2=green,3=brown,4=black
 };
 
 var person2 = {
@@ -155,17 +155,67 @@ var person2 = {
 var person3 = {
     name: "ciara",
     height: 1.75,
-    eye: 1 
+    eye: 3 
 };
+var peopleArr1 = [person1, person2, person3];
+var peopleArr2 = new Array();
+peopleArr2.push(person1); peopleArr2.push(person2); peopleArr2.push(person3);
+console.log(peopleArr1);
+
+//use the filter() with a callback to remove eye == 1
+var filteredPeople = peopleArr1.filter(filterByEye);
+filteredPeople.forEach(print);
+
+function filterByEye(animal){
+    return animal.eye == 1;// && animal.height >= 1.85;
+}
+
+function filterByHeight(animal){
+    return animal.height >= 1.85;
+}
+
+//use as a cascade of filters - CPU EXSPENSIZE - COST FPS
+var callbackFiltersArr = [filterByEye, filterByHeight];
+
+function applyFiltersTo(array, arrayCallbackFunctions){
+
+    if(array == null || array.length == 0);
+        throw "Invalid array - null or empty";
+
+    //make a copy and put in filtered
+    var filtered = new Array();
+    for(var i = 0; i < array.length; i++)
+        filtered.push(array[i]);
+
+    //apply each successive to the SAME filtered array
+    for(var i = 0; i < arrayCallbackFunctions.length; i++){
+        filtered = filtered.filter(arrayCallbackFunctions[i]);
+    }
+
+    return filtered;
+}
+
+try{
+    var results = applyFiltersTo(new Array(), callbackFiltersArr);
+    console.log(results);
+}
+catch(err){
+    console.log("recovery code..." + err);
+}
+
+
+
+
+
 
 
 
 
 
 //dynamically added vars and functions are GREAT but UNPREDICTABLE
-person1.gender = "male";
-console.log(person1);
-delete person1.gender;
+// person1.gender = "male";
+// console.log(person1);
+// delete person1.gender;
 
 
 
