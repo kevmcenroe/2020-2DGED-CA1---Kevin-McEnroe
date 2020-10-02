@@ -141,14 +141,31 @@ level1.display();
 level1.reset();
 
 var person1 = {
-    name: "niall",
+    name: "anna",
     height: 1.9,
-    eye: 1 //1=blue,2=green,3=brown,4=black
+    eye: 3 //1=blue,2=green,3=brown,4=black
 };
+
+var person2 = {
+    name: "ben",
+    height: 1.88,
+    eye: 2 
+};
+
+var person3 = {
+    name: "ciara",
+    height: 1.75,
+    eye: 1 
+};
+
+
+
+
 
 //dynamically added vars and functions are GREAT but UNPREDICTABLE
 person1.gender = "male";
 console.log(person1);
 delete person1.gender;
+
 
 
