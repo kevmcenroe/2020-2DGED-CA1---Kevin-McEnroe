@@ -101,3 +101,16 @@ p4.name = p1.name;
 //...etc
 
 
+var pickup1 = {
+    type: "ammo", //efficient? integer? TODO!!!
+    value: 25,
+    ttl: 60000, //time to live is 60,000ms = 60s
+    model: {
+        image: "pacman_spritesheet.jpg",
+        type: "animated", //or "static"
+        upos: 50, //position within the spritesheet
+        vpos: 100
+    }
+}
+
+
