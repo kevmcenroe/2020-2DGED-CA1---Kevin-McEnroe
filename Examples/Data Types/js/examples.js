@@ -179,7 +179,7 @@ var callbackFiltersArr = [filterByEye, filterByHeight];
 
 function applyFiltersTo(array, arrayCallbackFunctions){
 
-    if(array == null || array.length == 0);
+    if(array == null || array.length == 0)
         throw "Invalid array - null or empty";
 
     //make a copy and put in filtered
