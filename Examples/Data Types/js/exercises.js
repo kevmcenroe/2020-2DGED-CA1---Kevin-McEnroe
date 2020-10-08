@@ -35,13 +35,13 @@ function isValidNumber(value){
 }
 
 function toRadians(degrees){  
-    if(degrees == null || typeof(degrees) != "number" || isNaN(degrees))
+    if(degrees == undefined || degrees == null || typeof(degrees) != "number" || isNaN(degrees))
             throw "degrees value provided is invalid!";
     return degrees * Math.PI/180;
 }
 
 function toUpperStringArray(array){
-    if(array == null || array.length == 0 || typeof (array[0]) != "string")
+    if(array == undefined || array == null || array.length == 0 || typeof (array[0]) != "string")
         throw "Exception!";
     return 1;
 }
