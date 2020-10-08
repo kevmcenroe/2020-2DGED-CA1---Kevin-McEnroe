@@ -3,21 +3,13 @@
 2. Invoke functions (function, function expression)
 3. Pass function to a function
 4. array
-
 5. object
 6. array of objects
 7. function that takes array of objects and a function
 8. function that takes array of objects and an array of functions
 */
-/*
-var ages = [19, 21, 23, 34, 32, 18];
-console.log(ages);
-console.log(ages.length);
-console.log(ages[0]);
 
-for(var i = 0; i < ages.length; i++)
-    console.log(ages[i]);
-*/
+/**************************************************************************************/
 
 var names = new Array();
 names.push("alan");
@@ -31,6 +23,8 @@ console.log("\npush and pop...\n");
 names.unshift("ANNA");
 console.log(names); //push to front
 names.shift(); //pop from front
+
+/**************************************************************************************/
 
 function print(x){
     console.log(x);
@@ -51,7 +45,6 @@ function longerThan(a){
     return a.length >= 6;
 }
 
-
 var capitals = ["dublin","paris","beijing","berlin","tokyo"];
 
 console.log("\nforEach...\n");
@@ -69,7 +62,7 @@ console.log("\nfilter...\n");
 var filteredCapitals = capitals.filter(longerThan);
 filteredCapitals.forEach(print);
 
-
+/**************************************************************************************/
 //1st object!
 var p1 = {
     name: "max",
@@ -100,7 +93,7 @@ var p4 = {
 p4.name = p1.name;
 //...etc
 
-
+/**************************************************************************************/
 var pickup1 = {
     value: 25,
     ttl: 60000, //time to live is 60,000ms = 60s
@@ -140,6 +133,8 @@ var level1 = {
 level1.display();
 level1.reset();
 
+/**************************************************************************************/
+
 var person1 = {
     name: "anna",
     height: 1.9,
@@ -177,6 +172,7 @@ function filterByHeight(animal){
 //use as a cascade of filters - CPU EXSPENSIZE - COST FPS
 var callbackFiltersArr = [filterByEye, filterByHeight];
 
+
 function applyFiltersTo(array, arrayCallbackFunctions){
 
     if(array == null || array.length == 0)
@@ -196,26 +192,10 @@ function applyFiltersTo(array, arrayCallbackFunctions){
 }
 
 try{
+    //deliberately pass in an empty array to trigger the exception
     var results = applyFiltersTo(new Array(), callbackFiltersArr);
     console.log(results);
 }
 catch(err){
     console.log("recovery code..." + err);
 }
-
-
-
-
-
-
-
-
-
-
-//dynamically added vars and functions are GREAT but UNPREDICTABLE
-// person1.gender = "male";
-// console.log(person1);
-// delete person1.gender;
-
-
-
