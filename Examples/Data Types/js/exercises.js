@@ -11,9 +11,29 @@ function runExercises()
         console.log(err);
         //try to recover or degrade gracefully
     }
+
+    try{
+        console.log(arePythagorean(3, 4, 5));
+    }catch(err){
+        console.log(err);
+    }
 }
 
 /*****************************************************************************/
+function arePythagorean(opp, adj, hyp){
+    if(!isValidNumber(opp) || !isValidNumber(adj) || !isValidNumber(hyp))
+            throw "opp, adj, and hyp must all be valid integers";
+    
+    return Math.pow(opp, 2) + Math.pow(adj, 2) == Math.pow(hyp, 2);
+}
+
+function isValidNumber(value){
+    if (value != null && typeof(value) == "number" && !isNaN(value))
+        return true;
+    else
+        throw "value must be a number type";
+}
+
 function toRadians(degrees){  
     if(degrees == null || typeof(degrees) != "number" || isNaN(degrees))
             throw "degrees value provided is invalid!";
@@ -26,6 +46,13 @@ function toUpperStringArray(array){
     return 1;
 }
 
+function isPowerTwo(value){
+    isValidNumber(value);
+
+    var logValue = Math.LN2(value);
+    //to do....test if logValue is floating point?
+    return true;
+}
 
 
 
