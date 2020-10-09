@@ -8,11 +8,17 @@ var ctx = cvs.getContext("2d");
 ctx.beginPath();
 //face
 ctx.arc(320, 240, 80, 0, Math.PI * 2);
+
 //left eye
+ctx.moveTo(290, 200);
 ctx.arc(280, 200, 10, 0, Math.PI * 2);
+
 //right eye
+ctx.moveTo(320, 200);
 ctx.arc(360, 200, 10, 0, Math.PI * 2);
+
 //smile
+ctx.moveTo(320, 240);
 ctx.arc(320, 240, 60, 0, Math.PI);
 ctx.stroke();
 ctx.closePath();
