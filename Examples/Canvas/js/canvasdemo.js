@@ -5,7 +5,34 @@ var cvs = document.getElementById("main_canvas");
 //get a handle to the 2D context of the canvas
 var ctx = cvs.getContext("2d");
 
+var r1 = new Rect(50, 50, 100, 200);
+r1.draw(ctx, 2, "red");
+
+var r2 = new Rect(150, 50, 60, 200);
+r2.draw(ctx, 2, "yellow");
+
+var r3 = r1.clone();
+r3.x = 320;
+r3.draw(ctx, 1, "green");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /******************************************************/
+/*
 ctx.beginPath();
 //face
 ctx.arc(320, 240, 80, 0, Math.PI * 2);
@@ -20,8 +47,10 @@ ctx.moveTo(380, 240);
 ctx.arc(320, 240, 60, 0, Math.PI);
 ctx.stroke();
 ctx.closePath();
+*/
 /******************************************************/
 
+/*
 ctx.beginPath();
 ctx.lineWidth = 2;
 ctx.strokeStyle = "black";
@@ -53,13 +82,31 @@ ctx.closePath();
 ctx.beginPath();
 ctx.lineWidth = 1;
 ctx.strokeStyle = "black";
-ctx.arc(500, 245, 25, 0, Math.PI);
-ctx.stroke();
+ctx.fillStyle = "white";
+ctx.arc(500, 245, 25, toRadians(20), toRadians(170));
 ctx.closePath();
+ctx.stroke();
+ctx.fill();
+
+//draw outer rectangle
+ctx.lineWidth = 5;
+ctx.strokeStyle = "green";
+ctx.strokeRect(80, 200, 100, 80);
+
+//draw inner rectangle
+ctx.fillStyle = "black";
+ctx.fillRect(100, 220, 60, 40);
+//clear color?
+ctx.clearRect(80, 160, 60, 60);
 
 
 
-
+function toRadians(degrees){  
+    if(degrees == undefined || degrees == null || typeof(degrees) != "number" || isNaN(degrees))
+            throw "degrees value provided is invalid!";
+    return degrees * Math.PI/180;
+}
+*/
 
 
 /*
