@@ -5,6 +5,18 @@ var cvs = document.getElementById("main_canvas");
 //get a handle to the 2D context of the canvas
 var ctx = cvs.getContext("2d");
 
+var a1 = new Arc(320, 240, 50, toRadians(45), toRadians(270));
+a1.draw(ctx, 1, null, "red", true);
+
+
+function toRadians(degrees){  
+    if(degrees == undefined || degrees == null || typeof(degrees) != "number" || isNaN(degrees))
+            throw "degrees value provided is invalid!";
+    return degrees * Math.PI/180;
+}
+
+
+/*
 var r1 = new Rect(50, 50, 100, 200);
 r1.draw(ctx, 2, "red");
 
@@ -14,6 +26,8 @@ r2.draw(ctx, 2, "yellow");
 var r3 = r1.clone();
 r3.x = 320;
 r3.draw(ctx, 1, "green");
+*/
+
 
 
 
