@@ -1,34 +1,38 @@
-//create a class to draw a rect
-class Rect{
-    //get/set
-    get x(){
-        return this.x;
-    }
-    set x(value){
-        this.x = value > 0 ? value : 0; //ternary operator (3 operands)
-    }
-    //to do - add y, width, height get/set pairs
+/**
+ * Primitive to support drawing rectangles
+ */
+class Rect {
 
-    constructor(x, y, width, height){
+    constructor(x, y, width, height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
     }
-
-    draw(ctx, lineWidth, strokeStyle){
-        //begin()
+    /**
+     * Method to render the rect to the canvas referenced by the context, ctx
+     *
+     * @param {*} ctx
+     * @param {*} lineWidth
+     * @param {*} strokeStyle
+     * @memberof Rect
+     */
+    draw(ctx, lineWidth, strokeStyle) {
         ctx.lineWidth = lineWidth;
         ctx.strokeStyle = strokeStyle;
         ctx.strokeRect(this.x, this.y, this.width, this.height);
-        //close()
     }
 
-    //clone
-    clone(){
+    /**
+     * Provides a copy of the current object
+     *
+     * @returns Rect object (deep-copy)
+     * @memberof Rect
+     */
+    clone() {
         //deep-copy
         return new Rect(this.x, this.y, this.width, this.height);
     }
 
-    //to do - toString, equals
+    //to do...add equals
 }

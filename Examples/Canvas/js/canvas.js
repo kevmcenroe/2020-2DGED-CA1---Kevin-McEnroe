@@ -6,7 +6,7 @@ var cvs = document.getElementById("main_canvas");
 var ctx = cvs.getContext("2d");
 
 var a1 = new Arc(320, 240, 50, toRadians(45), toRadians(270));
-a1.draw(ctx, 1, null, "red", true);
+a1.draw(ctx, 5, "green", "red", true);
 
 
 function toRadians(degrees){  
@@ -16,17 +16,17 @@ function toRadians(degrees){
 }
 
 
-/*
-var r1 = new Rect(50, 50, 100, 200);
+
+var r1 = new Rect(50, 50, 100, 50);
 r1.draw(ctx, 2, "red");
 
-var r2 = new Rect(150, 50, 60, 200);
+var r2 = new Rect(200, 50, 60, 50);
 r2.draw(ctx, 2, "yellow");
 
 var r3 = r1.clone();
-r3.x = 320;
+r3.x = 350;
 r3.draw(ctx, 1, "green");
-*/
+
 
 
 
