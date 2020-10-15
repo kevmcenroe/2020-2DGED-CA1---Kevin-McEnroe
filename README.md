@@ -20,5 +20,6 @@
 - [ ] Add simple collision detection/collision response between window perimeter and sprite
 - [ ] Add keyboard input to control sprite
 - [ ] Add comments to all non-trivial methods and classes
+- [ ] Add score on-screen
 
 
