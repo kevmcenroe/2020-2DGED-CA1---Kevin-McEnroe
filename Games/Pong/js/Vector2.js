@@ -22,6 +22,34 @@ class Vector2{
         this.Y = y;
     }
 
+    normalize(){
+        var length = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+
+        if(length != 0){
+            this.x /= length;
+            this.y /= length;
+        }
+    }
+
+    //0.8923234, 2 => 0.89
+    round(precision){
+
+        if(precision == 0){
+            this.x = Math.ceil(this.x);
+            this.y = Math.ceil(this.y);
+        }
+        else{
+            var multiplier = Math.pow(10, precision);
+            this.x = Math.floor(this.x * Math.pow(10, precision))/multiplier;
+            this.y = Math.floor(this.y * Math.pow(10, precision))/multiplier;
+        }
+
+    }
+
+
+
+
+
     /**
      * Returns a deep-copy of a Vector2 object
      */
