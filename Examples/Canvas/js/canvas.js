@@ -1,4 +1,3 @@
-
 //get a handle to the canvas
 var cvs = document.getElementById("main_canvas");
 
@@ -9,22 +8,22 @@ var a1 = new Arc(320, 240, 50, toRadians(45), toRadians(270));
 a1.draw(ctx, 5, "green", "red", true);
 
 
-function toRadians(degrees){  
-    if(degrees == undefined || degrees == null || typeof(degrees) != "number" || isNaN(degrees))
-            throw "degrees value provided is invalid!";
-    return degrees * Math.PI/180;
+function toRadians(degrees) {
+    if (degrees == undefined || degrees == null || typeof (degrees) != "number" || isNaN(degrees))
+        throw "degrees value provided is invalid!";
+    return degrees * Math.PI / 180;
 }
 
 
 
-var r1 = new Rect(50, 50, 100, 50);
+var r1 = new Rect(new Vector2(50, 50), new Vector2(100, 50));
 r1.draw(ctx, 2, "red");
 
-var r2 = new Rect(200, 50, 60, 50);
+var r2 = new Rect(new Vector2(200, 50), new Vector2(60, 50));
 r2.draw(ctx, 2, "yellow");
 
 var r3 = r1.clone();
-r3.x = 350;
+r3.Position.x = 350;
 r3.draw(ctx, 1, "green");
 
 
@@ -149,9 +148,3 @@ ctx.stroke();
 ctx.fill();
 ctx.closePath();
 */
-
-
-
-
-
-

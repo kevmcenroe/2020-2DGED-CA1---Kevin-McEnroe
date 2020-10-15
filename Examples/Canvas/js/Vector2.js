@@ -11,15 +11,15 @@ class Vector2{
     }
 
     get Y(){
-        return this.x;
+        return this.y;
     }
     set Y(value){
-        this.x = value >= 0 ? value : 0; 
+        this.y = value >= 0 ? value : 0; 
     }
 
     constructor(x, y){
-        this.X(x);
-        this.Y(y);
+        this.X = x;
+        this.Y = y;
     }
 
     /**

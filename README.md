@@ -6,7 +6,8 @@
 - [ ] Vector2
 
 ### Code to Refactor
-- [ ] Re-factor Arc and Rect to use Vector2
+- [x] Re-factor Rect to use Vector2
+- [ ] Re-factor Arc to use Vector2
 
 ### Tasks - Week 2 
 - [x] Add Arc and Rect classes

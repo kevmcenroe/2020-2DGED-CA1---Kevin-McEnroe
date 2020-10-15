@@ -48,4 +48,15 @@ class Arc {
     }
 
     //to do...add equals
+
+    equals(other){
+        if(other == null || other == undefined || 
+            other.constructor.name != this.constructor.name)
+            return false;
+
+        return this.x == other.x && this.y == other.y
+        && this.radius == other.radius
+            && this.startAngle == other.startAngle
+                && this.endAngleInRads == other.endAngleInRads;
+    }
 }
