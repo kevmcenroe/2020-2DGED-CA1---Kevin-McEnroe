@@ -14,6 +14,15 @@ class GDUtilities{
      */
     static getRandomInRangeExcl(lo, hi, exclValues){
         
+        //failure tests
+        if(lo == undefined || hi == undefined 
+            || exclValues == undefined || exclValues == null)
+                //    || typeof(exclValues[0]) == "number")
+            throw "One or more parameters is undefined";
+
+        if(lo > hi)
+            throw "Lo value cannot be greater than value!";
+
         var numArray = new Array();
         var bCollision = false;
         
@@ -30,8 +39,15 @@ class GDUtilities{
         //now I have an array with values lo->hi and excluding exclValues
         //[-5,-4,-3,-1, 0, 2, 3, 4]
         //shuffle
+        
 
         return numArray[0];
+    }
+
+
+    //to do...https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
+    static shuffle(array){
+        return array;
     }
 
 

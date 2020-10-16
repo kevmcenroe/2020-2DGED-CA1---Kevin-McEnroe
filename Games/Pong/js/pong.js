@@ -14,7 +14,7 @@ var hitColor = hitColorA;
 function loadGame(){
 
     /** DEMO **/
-    var x = GDUtilities.getRandomInRangeExcl(1, 10, 0);
+    var x = GDUtilities.getRandomInRangeExcl(1, 10, [2,3,4]);
 
 
     //add game primitive
