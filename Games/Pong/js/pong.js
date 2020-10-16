@@ -15,7 +15,7 @@ function loadGame(){
 
     /** DEMO **/
     try{
-        var x = GDUtilities.getRandomInRangeExcl(-2, 2, [0]);
+        var x = GDUtilities.getRandomInRangeExcl(1, 10, [2, 3, 4]);
     }
     catch(err){
         console.log(err);
