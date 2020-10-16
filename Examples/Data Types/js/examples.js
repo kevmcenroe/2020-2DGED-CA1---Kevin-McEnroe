@@ -1,3 +1,5 @@
+document.writeln("Open the Inspect/Console pane in Chrome to see the output...");
+
 /*
 1. Functions
 2. Invoke functions (function, function expression)

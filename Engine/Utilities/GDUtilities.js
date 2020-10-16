@@ -1,0 +1,1 @@
+//add a new class with static methods to provide useful functionality for use in our engine
