@@ -1,15 +1,33 @@
+window.addEventListener("load", loadGame);
+
+var keysDown = {}; //new Array();
+
+window.addEventListener("keydown", function(evt){
+  //  console.log(evt.key);
+    keysDown[evt.key] = true;
+});
+
+window.addEventListener("keyup", function(evt){
+   // console.log(evt.key);
+    delete keysDown[evt.key];
+});
+
 //get a handle to the canvas
 var cvs = document.getElementById("main_canvas");
 
 //get a handle to the 2D context of the canvas
 var ctx = cvs.getContext("2d");
 
-window.addEventListener("load", loadGame);
-
+//game variables
 var pongBall, pongPaddleL, pongPaddleR;
 var ballSpeed = 5;
 var hitColorA = "yellow", hitColorB = "green";
 var hitColor = hitColorA;
+var paddleMoveSpeed = 15;
+
+let height = 80;
+let width = 10;
+let margin = 5;
 
 function demos(){
     /** DEMO **/
@@ -33,10 +51,6 @@ function loadGame(){
 }
 
 function initializeControls(){
-    let height = 80;
-    let width = 10;
-    let margin = 5;
-
     pongPaddleL = new Rect(new Vector2(margin, (cvs.clientHeight - height)/2), 
     new Vector2(width, height));
 
@@ -56,15 +70,24 @@ function initializeGame(){
 }
 
 function animate(){
-
-    checkCollisions();
-
     update();
     draw();  
     window.requestAnimationFrame(animate);
 }
 
+function update(){
+    
+  //  console.log('keysDown :>> ', keysDown);
+
+    checkCollisions();
+    updateBall();
+    updatePaddles();
+    updateScore();
+}
+
 function checkCollisions(){
+
+    //ball
     if(this.pongBall.x >= cvs.clientWidth - 20){
         this.ballVector.x *= -1;
         hitColor = hitColorA;
@@ -78,18 +101,36 @@ function checkCollisions(){
         this.ballVector.y *= -1;
     else if(this.pongBall.y <= 20)
         this.ballVector.y *= -1;
+
+    //paddle collision with world 
+
+    //paddle collision with ball
 }
 
-
-
-function update(){
-    //first time in, set the ball in a random direction
-    //Math.random();
-    //Math.floor();
-
+function updateBall(){
     this.pongBall.x += ballSpeed * ballVector.x;
     this.pongBall.y += ballSpeed * ballVector.y;
 }
+
+function updatePaddles(){
+    for(var key in this.keysDown){
+        if(key == "w"){
+            this.pongPaddleL.move(0, -paddleMoveSpeed);
+        }
+        else if(key == "s"){
+            this.pongPaddleL.move(0, paddleMoveSpeed);
+        }
+
+        //right paddle
+    }
+}
+
+function updateScore(){
+
+}
+
+
+
 function draw(){
     clearCanvas("rgb(255, 255, 241)");
 

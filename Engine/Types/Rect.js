@@ -34,6 +34,12 @@ class Rect {
             this.dimension.X, this.dimension.Y);
     }
 
+    //move, rotate, scale
+    move(x, y){
+        this.position.x += x;
+        this.position.y += y;
+    }
+
     /**
      * Provides a copy of the current object
      *
