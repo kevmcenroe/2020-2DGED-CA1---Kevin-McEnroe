@@ -12,8 +12,14 @@ var hitColorA = "yellow", hitColorB = "green";
 var hitColor = hitColorA;
 
 function loadGame(){
+
+    /** DEMO **/
+    var x = GDUtilities.getRandomInRangeExcl(1, 10, 0);
+
+
     //add game primitive
     initializeGame();
+
     //start update/draw cycle
     window.requestAnimationFrame(animate);
 }
@@ -24,7 +30,7 @@ function initializeGame(){
             Math.floor(Math.random() * 10 - 5),
             Math.floor(Math.random() * 10 - 5));
     ballVector.normalize();
- //   ballVector.round();
+ //   ballVector.round();  //BUG????
 }
 
 function animate(){
@@ -72,9 +78,4 @@ function clearCanvas(color){
     ctx.fillStyle = color;
     ctx.fillRect(0, 0, cvs.clientWidth, cvs.clientHeight);
     ctx.restore();
-}
-
-//-10, 10, 0
-function getRandomInRangeExcl(lo, hi, excl){
-
 }
