@@ -28,8 +28,10 @@ class GDUtilities{
         
         for(let i = lo; i <= hi; i++){
             for(let j = 0; j < exclValues.length; j++){
-                if(i == exclValues[j])
+                if(i == exclValues[j]){
                     bCollision = true;
+                    break;
+                }
             }
             if(!bCollision)
                 numArray.push(i);
@@ -40,7 +42,6 @@ class GDUtilities{
         //[-5,-4,-3,-1, 0, 2, 3, 4]
         //shuffle
         
-
         return numArray[0];
     }
 
