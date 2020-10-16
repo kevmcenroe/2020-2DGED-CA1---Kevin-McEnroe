@@ -25,7 +25,7 @@ class GDUtilities{
 
         var numArray = new Array();
         var bCollision = false;
-        
+
         for(let i = lo; i <= hi; i++){
             for(let j = 0; j < exclValues.length; j++){
                 if(i == exclValues[j]){
@@ -41,8 +41,9 @@ class GDUtilities{
         //now I have an array with values lo->hi and excluding exclValues and I shuffle
         GDUtilities.shuffle(numArray);
 
+        var randPos = Math.round(Math.random() * numArray.length-1);
         //return the first shuffled value
-        return numArray[0];
+        return numArray[randPos];
     }
 
     /**
@@ -54,6 +55,7 @@ class GDUtilities{
      * @memberof GDUtilities
      * @see https://www.geeksforgeeks.org/how-to-shuffle-an-array-using-javascript/
      * @author Geeksforgeeks
+     * @since October 2020
      */
     static shuffle(array){
         for (var i = array.length - 1; i > 0; i--) {  
@@ -65,7 +67,6 @@ class GDUtilities{
         } 
         return array; 
      } 
-
 }
 
 class GDMath{

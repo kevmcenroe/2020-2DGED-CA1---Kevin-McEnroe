@@ -11,8 +11,7 @@ var ballSpeed = 5;
 var hitColorA = "yellow", hitColorB = "green";
 var hitColor = hitColorA;
 
-function loadGame(){
-
+function demos(){
     /** DEMO **/
     try{
         var x = GDUtilities.getRandomInRangeExcl(1, 10, [2, 3, 4]);
@@ -20,6 +19,11 @@ function loadGame(){
     catch(err){
         console.log(err);
     }
+}
+
+function loadGame(){
+
+    //demos();
 
     //add game primitive
     initializeGame();
@@ -28,13 +32,27 @@ function loadGame(){
     window.requestAnimationFrame(animate);
 }
 
-function initializeGame(){
+function initializeControls(){
+    let height = 80;
+    let width = 10;
+    let margin = 5;
+
+    pongPaddleL = new Rect(new Vector2(margin, (cvs.clientHeight - height)/2), 
+    new Vector2(width, height));
+
+    pongPaddleR = new Rect(new Vector2(cvs.clientWidth - margin - width, 
+            (cvs.clientHeight - height)/2), 
+    new Vector2(width, height));
+}
+function initializeBall(){
     pongBall = new Arc(320, 240, 20, 0, Math.PI * 2);
-    ballVector = new Vector2(
-            Math.floor(Math.random() * 10 - 5),
-            Math.floor(Math.random() * 10 - 5));
+    ballVector = new Vector2(Math.floor(Math.random() * 10 - 5), Math.floor(Math.random() * 10 - 5));
     ballVector.normalize();
- //   ballVector.round();  //BUG????
+}
+
+function initializeGame(){
+    initializeControls();
+    initializeBall();
 }
 
 function animate(){
@@ -74,7 +92,10 @@ function update(){
 }
 function draw(){
     clearCanvas("rgb(255, 255, 241)");
+
     pongBall.draw(ctx, 2, "red", hitColor, false);
+    pongPaddleL.draw(ctx, 2, "blue");
+    pongPaddleR.draw(ctx, 2, "orange");
 }
 
 function clearCanvas(color){
