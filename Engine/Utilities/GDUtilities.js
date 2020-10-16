@@ -38,19 +38,33 @@ class GDUtilities{
             bCollision = false;
         }
 
-        //now I have an array with values lo->hi and excluding exclValues
-        //[-5,-4,-3,-1, 0, 2, 3, 4]
-        //shuffle
-        
+        //now I have an array with values lo->hi and excluding exclValues and I shuffle
+        GDUtilities.shuffle(numArray);
+
+        //return the first shuffled value
         return numArray[0];
     }
 
-
-    //to do...https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
+    /**
+     * Randomly shuffles the elements in an array of any type (e.g. number, string)
+     *
+     * @static
+     * @param {Array} array An array of values of any type
+     * @returns Array of shuffled values
+     * @memberof GDUtilities
+     * @see https://www.geeksforgeeks.org/how-to-shuffle-an-array-using-javascript/
+     * @author Geeksforgeeks
+     */
     static shuffle(array){
-        return array;
-    }
-
+        for (var i = array.length - 1; i > 0; i--) {  
+            // Generate random number  
+            var j = Math.floor(Math.random() * (i + 1));    
+            var temp = array[i]; 
+            array[i] = array[j]; 
+            array[j] = temp; 
+        } 
+        return array; 
+     } 
 
 }
 
