@@ -46,10 +46,6 @@ class Vector2{
 
     }
 
-
-
-
-
     /**
      * Returns a deep-copy of a Vector2 object
      */

@@ -113,6 +113,31 @@ function checkBallToWorldCollision() {
  * Paddle collision with ball
  */
 function checkBallToPaddleCollision() {
+
+    var projectedBallPosition = new Vector2(this.pongBall.x, this.pongBall.y);
+    //new Vector2(this.ballVector.x + this.pongBall.x,
+   //     this.ballVector.y + this.pongBall.y);
+
+    //left paddle
+    if(projectedBallPosition.y >= this.paddleLeft.position.y && 
+        projectedBallPosition.y <= this.paddleLeft.position.y + this.paddleLeft.dimension.y){
+           
+            if(projectedBallPosition.x == this.paddleLeft.position.x + this.paddleLeft.dimension.x + 
+                this.pongBall.radius){
+                    this.ballVector.x *= -1;
+                }
+        }
+
+    //right paddle
+    if(projectedBallPosition.y >= this.paddleRight.position.y && 
+        projectedBallPosition.y <= this.paddleRight.position.y + this.paddleRight.dimension.y){
+           
+            if(projectedBallPosition.x == this.paddleRight.position.x - this.pongBall.radius){
+                    this.ballVector.x *= -1;
+                }
+        }
+
+
     //check for ball CD/CR against the left paddle
     //remember that CD/CR is projected/predictive
 
