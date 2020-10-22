@@ -38,21 +38,29 @@ function update() {
 var sx = 0, sy = 0;
 var sWidth = 22;
 var sHeight = 17;
+var timeSinceLastFrameChangeInMs = 0;
+var bActiveFrameOne = true;
 function draw() {
     clearCanvas("rgb(255, 0, 0)");
 
-   // ctx.drawImage(this.backgroundSpriteSheet, 0, 0, 480, 640);
-    //ctx.drawImage(this.backgroundSpriteSheet, 400, 700, 100, 100, 0, 0, 480, 640);
+    //background
+    ctx.drawImage(this.backgroundSpriteSheet, 0, 0, 480, 640);
 
-    //
-
-    //1st frame
-    sy=0;
+    if(bActiveFrameOne){
+        sy=0;
+    }
+    else{
+        sy=18;
+    }
     ctx.drawImage(this.spriteSheet, sx, sy, sWidth, sHeight, 0, 0, 50, 50);
 
-    sy=18;
-    ctx.drawImage(this.spriteSheet, sx, sy, sWidth, sHeight, 0, 0, 50, 50);
-
+    timeSinceLastFrameChangeInMs += 16;
+    if(timeSinceLastFrameChangeInMs > 50){
+        bActiveFrameOne = !bActiveFrameOne;
+        timeSinceLastFrameChangeInMs = 0;
+    }
+    
+    
 }
 
 function clearCanvas(color) {
