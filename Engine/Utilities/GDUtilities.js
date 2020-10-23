@@ -2,6 +2,36 @@
 
 class GDUtilities {
 
+     /**
+     * Returns true if "other" is non-null, not undefined and of type "target".
+     *
+     * @static
+     * @param {JS/user-defined data type} target
+     * @param {JS/user-defined data type} other
+     * @returns True if target and other are the same data type, otherwise false
+     * @memberof GDUtility
+     */
+    static IsSameTypeAsTarget(target, other) {
+
+        if (other == null || other == undefined)
+            throw "Error: Other object is null or undefined";
+
+        if (other.constructor.name != target.constructor.name)
+            throw "Error: Other object is type " + other.constructor.name + " and should be type " + target.constructor.name;
+
+        //returns false if both point to the same object in RAM i.e. a shallow copy
+        return target != other;
+    }
+
+    /**
+     * Returns a random integer in the range lo - hi
+     *
+     * @static
+     * @param {number} lo Integer
+     * @param {number} hi Integer
+     * @returns Random integer
+     * @memberof GDUtilities
+     */
     static getRandomInRange(lo, hi) {
 
         //failure tests
@@ -15,13 +45,13 @@ class GDUtilities {
         return Math.round(((hi - lo) * Math.random()) + lo);
     }
     /**
-     * Method returns a random number in the range lo-hi excluding any numbers listed on the exclValues array
+     * Returns a random integer in the range lo-hi excluding any numbers listed on the exclValues array
      *
      * @static
-     * @param {*} lo
-     * @param {*} hi
-     * @param {*} exclValues
-     * @returns
+     * @param {number} lo Integer
+     * @param {number} hi Integer
+     * @param {*} exclValues Array of integer values to exclude (e.g. -10, 10, [2, 3, 4])
+     * @returns Random integer
      * @memberof GDUtilities
      */
     static getRandomInRangeExcl(lo, hi, exclValues) {
@@ -84,9 +114,62 @@ class GDUtilities {
     }
 }
 
+/************************************************************************/
+
+/**
+ * Provides common math related functions.
+ * @author niall mcguinness
+ * @version 1.0
+ * @class GDMath
+ */
 class GDMath {
 
+    /**
+     * Returns degrees value in radians
+     *
+     * @static
+     * @param {number} degrees Degrees value 
+     * @returns Radians value
+     * @memberof GDMath
+     */
+    static ToRadians(degrees) {
+        degrees %= 360;
+        return degrees * (Math.PI / 180);
+    }
+
+    /**
+     * Returns radians value in degrees
+     *
+     * @static
+     * @param {number} radians Radians value 
+     * @returns Degrees value
+     * @memberof GDMath
+     */
+    static ToDegrees(radians) {
+        return Math.fround(radians * (180 / Math.PI));
+    }
+
+    /**
+     * Converts a floating-point value to a fixed based precision in a specified base (e.g. 8, 16, 10)
+     *
+     * @static
+     * @param {number} value Floating-point value to be converted
+     * @param {number} precision Integer precision (e.g. 0, 1, 2)
+     * @param {number} base Number base (e.g. 8,16,10)
+     * @returns
+     * @memberof GDMath
+     */
+    static ToFixed(value, precision, base) {
+        if (value == 0)
+            return 0;
+
+        let pow = Math.pow(base || 10, precision);
+        return Math.round(value * pow) / pow;
+    }
 }
+
+
+/************************************************************************/
 
 class GDString {
 

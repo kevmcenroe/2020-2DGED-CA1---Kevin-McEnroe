@@ -1,29 +1,98 @@
 <html>
-    <head>
-        <title>
-            2D Game Engine Development Examples and Games - 2020
-        </title>
-    </head>
-    <body>
-        <h1>2D Game Engine Development Examples and Games</h1>
-        
-        <p>
-        <h2>Exercises</h2>
-        <a href="./Exercises/Data Types/index.html">Data Types [DONE]</a>
-        
-        <p>
-        <h2>Examples</h2>
-        <a href="./Examples/Data Types/index.html">Data Types Examples</a>
-        <br>
-        <a href="./Examples/Canvas/index.html">Canvas Examples</a>
-        <br>
-        <a href="./Examples/Timers/index.html">Timers Examples</a>
-        
-        <p>
-        <h2>Games</h2>
-        <a href="./Games/Pong/pong.html">Pong</a>
-        <br>
-        <a href="./Games/Space Invaders/spaceinvaders.html">Space Invaders</a>
+  <head>
+    <title>2D Game Engine Development Examples and Games - 2020</title>
+  </head>
+  <style>
+    /* styling taken from https://www.w3schools.com/html/html_tables.asp */
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-    </body>
+    td,
+    th {
+      text-align: left;
+      padding: 12px;
+    }
+
+    th {
+      background-color: #f5b7b1;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #fdedec;
+    }
+
+    th.demo {
+      background-color: #a2d9ce;
+    }
+
+    tr.demo:nth-child(odd) {
+      background-color: #d0ece7;
+    }
+
+    th.exercise {
+      background-color: #aed6f1;
+    }
+
+    tr.exercise:nth-child(odd) {
+      background-color: #d6eaf8;
+    }
+  </style>
+
+  <body>
+    <h1>2D Game Engine Development Examples and Games</h1>
+
+    <p>
+      <br />
+    </p>
+
+    <h2>Games</h2>
+    <table>
+      <tr>
+        <th>Link</th>
+        <th>Version</th>
+        <th>Last Updated</th>
+        <th>Keywords</th>
+        <th>Description</th>
+        <th>Instructions</th>
+        <th>Bugs</th>
+      </tr>
+      <tr>
+        <td><a href="./Games/Pong/pong.html">Pong</a></td>
+        <td>1.0</td>
+        <td>22/10/20</td>
+        <td>CD/CR, keyboard input</td>
+        <td>Demonstrates simple CD/CR and keyboard input.</td>
+        <td>Move - W/S, O/L</td>
+        <td>See <a href="https://github.com/nmcguinness/2DGED.git">GitHub</a> README</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="./Games/Space Invaders/spaceinvaders.html">Space Invaders</a>
+        </td>
+        <td>1.0</td>
+        <td>23/10/20</td>
+        <td>
+          Core Game Engine Classes, Sprite, Artist, Animation, CD/CR, Sound
+        </td>
+        <td>Demonstrates most of the core game engine classes.</td>
+        <td>TBD</td>
+        <td>See <a href="https://github.com/nmcguinness/2DGED.git">GitHub</a> README</td>
+      </tr>
+    </table>
+
+    <p></p>
+    <h2>Exercises</h2>
+    <a href="./Exercises/Data Types/index.html">Data Types [DONE]</a>
+
+    <p></p>
+    <h2>Examples</h2>
+    <a href="./Examples/Data Types/index.html">Data Types Examples</a>
+    <br />
+    <a href="./Examples/Canvas/index.html">Canvas Examples</a>
+    <br />
+    <a href="./Examples/Timers/index.html">Timers Examples</a>
+  </body>
 </html>
