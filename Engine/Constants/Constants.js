@@ -10,17 +10,30 @@ const ActorType = Object.freeze({
   Background: 0,
   NPC: 1,
   Player: 2,
+  Projectile: 3
   //add as many actor types as your game needs here BUT remember that the assigned number will determine drawn sort order...
 });
 
-//e.g. StatusType.IsDrawn | Status.IsUpdated = 3
+//e.g. StatusType.Drawn | Status.Updated = 3
+//0001
+//0010
+//----
+//0011 (3)
+
+//0011
+//0010
+//----
+//0010 (2) != 0 => this value contains/has Updated set
+//0000 0010
+//0000 1000
+//0010 0000
 const StatusType = Object.freeze({
   Off: 0,
-  IsDrawn: 2, //0010
-  IsUpdated: 4, //0100
+  Drawn: 1, //0001
+  Updated: 2, //0010
   //add more here as required but ENSURE they are 2^N values
   //its important that the values are powers of two because we combine them using a bitwise-OR
-  //e.g. StatusType.IsUpdated | StatusType.IsDrawn
+  //e.g. StatusType.Updated | StatusType.Drawn
   //if we dont need to ever combine the values then we just use a number of Symbol() as in the types below.
 });
 //#endregion
@@ -97,3 +110,18 @@ const Keys = Object.freeze({
 });
 
 //#endregion
+
+/*
+//enumerate different types of audio (genre/theme/application) within our game
+//AudioType.Win set volume to 0
+const AudioType = Object.freeze({
+  Background: Symbol("Background"),
+  Menu: Symbol("Menu"),
+  Explosion: Symbol("Explosion"),
+  Move: Symbol("Move"),
+  Win: Symbol("Win"),
+  Lose: Symbol("Lose"),
+  Weapon: Symbol("Weapon"),
+  Other: Symbol("Other"),
+});
+*/

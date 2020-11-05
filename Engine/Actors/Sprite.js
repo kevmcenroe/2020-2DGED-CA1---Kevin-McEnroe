@@ -4,18 +4,16 @@
  * @version 1.0
  * @class Sprite
  */
-class Sprite {
+class Sprite extends Actor2D {
   //#region  Fields
-  behaviours = new Array();
   //#endregion
 
   //#region  Properties
   //#endregion
 
   //#region Constructors and Core methods
-  constructor(id, transform2D, artist) {
-    this.id = id;
-    this.transform2D = transform2D;
+  constructor(id, actorType, statusType, transform2D, artist) {
+    super(id, actorType, statusType, transform2D);
     this.artist = artist;
   }
 
@@ -33,7 +31,11 @@ class Sprite {
   
   //deep-copy
   Clone(){
-    return new Sprite(this.id + " - clone", this.transform2D.Clone(), this.artist.Clone());
+    return new Sprite(this.ID + " - clone", 
+    this.ActorType,
+    this.StatusType,
+    this.Transform2D.Clone(), 
+    this.artist.Clone());
   }
   //#endregion
 }

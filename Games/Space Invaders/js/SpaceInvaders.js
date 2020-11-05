@@ -8,6 +8,10 @@ var ctx = cvs.getContext("2d");
 //game variables
 var gameTime = null;
 var clearColor = "rgb(15, 0, 0)";
+var objectManager = null;
+
+
+
 var backgroundSprite = null;
 var enemyThreeSprite = null;
 var cloneEnemySprite = null;
@@ -40,8 +44,15 @@ function Initialize(){
     //images and sound
     LoadAssets();
 
+    //load object manager, camera manager, sound manager, collision manager
+    LoadManagers();
+
     //initialize all the drawn sprites of all types (background, PC, nonPC, pickups)
     InitializeSprites();
+}
+
+function LoadManagers(){
+    this.objectManager = new ObjectManager(this.ctx);
 }
 
 function InitializeSprites(){
@@ -52,9 +63,16 @@ function InitializeSprites(){
     //#region background
     transform2D = new Transform2D(Vector2.Zero, 0, Vector2.One,  Vector2.Zero,
                             new Vector2(cvs.clientWidth, cvs.clientHeight));
+
     artist = new SpriteArtist(ctx, backgroundSpriteSheet, new Vector2(0,0),
-                            new Vector2(backgroundSpriteSheet.width, backgroundSpriteSheet.height), 1);
-    backgroundSprite = new Sprite("background", transform2D, artist);
+    new Vector2(backgroundSpriteSheet.width, backgroundSpriteSheet.height), 1);
+
+    backgroundSprite = new Sprite("background", 
+            ActorType.Background, StatusType.Drawn, transform2D, artist);
+
+    //add to the object manager
+    this.objectManager.Add(backgroundSprite);
+
     //#endregion
 
     //#region enemy 
@@ -63,12 +81,21 @@ function InitializeSprites(){
                                                                                                      
     artist = new SpriteArtist(ctx, spriteSheet, new Vector2(39,0),
                                                             new Vector2(22, 15), 1);
-    enemyThreeSprite = new Sprite("enemy 3", transform2D, artist);       
+    enemyThreeSprite = new Sprite("enemy 3", 
+                ActorType.NPC, StatusType.Updated | StatusType.Drawn,
+                    transform2D, artist); 
+                    
+    //add to the object manager
+    this.objectManager.Add(enemyThreeSprite);
+
     //#endregion
 
     //#region Cloned enemies
     cloneEnemySprite = enemyThreeSprite.Clone();
     cloneEnemySprite.transform2D.TranslateBy(new Vector2(100, 0));
+
+    //add to the object manager
+    this.objectManager.Add(cloneEnemySprite);
     //#endregion
 
 }
@@ -91,34 +118,13 @@ function animate(now) {
 }
 
 function update(gameTime) {
-    console.log(gameTime.TotalElapsedTimeInMs);
+   this.objectManager.Update(gameTime);
 }
 
 function draw(gameTime) {
     clearCanvas(clearColor);
 
-    backgroundSprite.Draw(gameTime);
-    enemyThreeSprite.Draw(gameTime);
-    cloneEnemySprite.Draw(gameTime);
-    /*
-    //background
-    ctx.drawImage(this.backgroundSpriteSheet, 0, 0, 480, 640);
-
-    if(bActiveFrameOne){
-        sy=0;
-    }
-    else{
-        sy=18;
-    }
-    ctx.drawImage(this.spriteSheet, sx, sy, sWidth, sHeight, 0, 0, 50, 50);
-
-    timeSinceLastFrameChangeInMs += gameTime.ElapsedTimeInMs;
-    if(timeSinceLastFrameChangeInMs > 1000){
-        bActiveFrameOne = !bActiveFrameOne;
-        timeSinceLastFrameChangeInMs = 0;
-    }
-    */
-    
+    this.objectManager.Draw(gameTime);
 }
 
 function clearCanvas(color) {

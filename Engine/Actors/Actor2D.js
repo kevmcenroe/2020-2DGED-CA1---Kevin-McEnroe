@@ -45,24 +45,24 @@ class Actor2D {
     }
     //#endregion
   
-    constructor(id, actorType, transform2D, statusType) {
+    constructor(id, actorType, statusType, transform2D) {
       this.id = id;
       this.actorType = actorType;
-      this.transform2D = transform2D;
       this.statusType = statusType;
+      this.transform2D = transform2D; 
     }
   
     /**
-     * Use to add a behavior instance to the array of behaviors executed for this actor.
+     * Use to add a controller instance to the array of behaviors executed for this actor.
      *
-     * @param {*} behavior
+     * @param {*} controller
      * @memberof Actor2D
      */
-    AttachBehavior(behavior) {
-      if(this.behaviors == undefined)
-        this.behaviors = [];
+    AttachController(behavior) {
+      if(this.controllers == undefined)
+        this.controllers = [];
   
-      this.behaviors.push(behavior);
+      this.controllers.push(behavior);
     }
   
     /**
@@ -91,7 +91,7 @@ class Actor2D {
       if(this.behaviors != undefined)
       {
         for (let i = 0; i < this.behaviors.length; i++)
-          this.behaviors[i].Execute(gameTime, this);
+          this.behaviors[i].Update(gameTime, this);
       }
     }
   

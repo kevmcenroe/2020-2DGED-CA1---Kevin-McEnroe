@@ -7,7 +7,6 @@
 
 class ObjectManager {
   //#region Fields
-  id = "";
   context;
   sprites = [];
   //#endregion
@@ -15,13 +14,13 @@ class ObjectManager {
   //#region Properties
   //#endregion
 
-  constructor(id, statusType) {
-    this.id = id;
-    this.statusType = statusType;
+  constructor(context) {
+    this.context = context;
   }
 
   //#region Add, Remove, Find, Clear
-  Add() {
+  Add(sprite) {
+    this.sprites.push(sprite);
     //to do...
   }
 
@@ -66,9 +65,19 @@ class ObjectManager {
   }
   //#endregion
 
-  //#region Update
+  //#region Update & Draw
   Update(gameTime) {
-    //to do...
+    for(let sprite of this.sprites){
+      if(sprite.StatusType & StatusType.Updated != StatusType.Off)
+        sprite.Update(gameTime);
+    }
+  }
+
+  Draw(gameTime) {
+    for(let sprite of this.sprites){
+      if(sprite.StatusType & StatusType.Drawn != StatusType.Off)
+          sprite.Draw(gameTime);
+    }
   }
   //#endregion
 }
