@@ -12,7 +12,14 @@ class SpriteArtist {
   //#endregion
 
   //#region Constructors and Core methods
-  constructor(spritesheet, sourcePosition, sourceDimensions, alpha = 1) {
+  constructor(
+    context,
+    spritesheet,
+    sourcePosition,
+    sourceDimensions,
+    alpha = 1
+  ) {
+    this.context = context;
     this.alpha = alpha;
     this.spritesheet = spritesheet;
     this.sourcePosition = sourcePosition;
@@ -36,10 +43,49 @@ class SpriteArtist {
    * @param {Camera2D} activeCamera
    * @memberof SpriteArtist
    */
-  Draw(gameTime, parent) {}
+  Draw(gameTime, parent) {
+    //draw the sprite!!!
+    // this.context.drawImage(this.spritesheet, this.sourcePosition.x, this.sourcePosition.y,
+    //     this.sourceDimensions.x, this.sourceDimensions.y,
+    //       parent.transform2D.translation.x, parent.transform2D.translation.y,
+    //         parent.transform2D.drawnDimensions.x, parent.transform2D.drawnDimensions.y);
+
+    //save whatever context settings were used before this (color, line, text styles)
+    this.context.save();
+
+    //access the transform for the parent that this artist is attached to
+    let transform = parent.transform2D;
+
+    //set transparency
+    this.context.globalAlpha = this.alpha;
+
+    //draw image
+    this.context.drawImage(
+      this.spritesheet,
+      this.sourcePosition.x,
+      this.sourcePosition.y,
+      this.sourceDimensions.x,
+      this.sourceDimensions.y,
+      transform.translation.x - transform.origin.x,
+      transform.translation.y - transform.origin.y,
+      transform.dimensions.x,
+      transform.dimensions.y
+    );
+
+    this.context.restore();
+  }
   //#endregion
 
   //#region Equals, Clone, ToString
-  //to do...
+
+  //hybrid
+  Clone() {
+    return new SpriteArtist(
+      this.context, //shallow
+      this.spritesheet, //shallow
+      this.sourcePosition.Clone(), //deep
+      this.sourceDimensions.Clone() //deep
+    );
+  }
   //#endregion
 }

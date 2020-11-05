@@ -16,6 +16,47 @@ class Transform2D {
   //#endregion
 
   //#region Properties
+  get Translation() {
+    return this.translation;
+  }
+  get RotationInRadians() {
+    return this.rotationInRadians;
+  }
+  get Scale() {
+    return this.scale;
+  }
+  get Origin() {
+    return this.origin;
+  }
+  get Dimensions() {
+    return this.dimensions;
+  }
+  set Dimensions(dimensions) {
+    this.dimensions = dimensions.Clone();
+    this.isDirty = true;
+  }
+  set Translation(translation) {
+    this.translation = translation.Clone();
+    this.isDirty = true;
+  }
+  set RotationInRadians(rotationInRadians) {
+    this.rotationInRadians = rotationInRadians;
+    this.isDirty = true;
+  }
+  set Scale(scale) {
+    this.scale = scale.Clone();
+    this.isDirty = true;
+  }
+  set Origin(origin) {
+    this.origin = origin.Clone();
+    this.isDirty = true;
+  }
+  get IsDirty() {
+    return this.isDirty;
+  }
+  set IsDirty(isDirty) {
+    this.isDirty = isDirty;
+  }
   //#endregion
 
   //#region Constructors and Core methods
@@ -26,12 +67,16 @@ class Transform2D {
    * @param {Vector2} translation Vector2 with the position of the sprite on the screen
    * @param {number} rotationInRadians Floating-point angle in radians to rotate the sprite (+ve = CW, -ve=CCW)
    * @param {Vector2} scale Vector2 with the scale of the sprite on the screen
+   * @param {Vector2} origin Vector2 centre of rotation for the image between (0,0) and (w,h) of the original image
+   * @param {Vector2} dimensions Vector2 original dimensions of the sprite in the image
    * @memberof Transform2D
    */
-  constructor(translation, rotationInRadians, scale) {
+  constructor(translation, rotationInRadians, scale, origin, dimensions) {
     this.translation = translation;
     this.rotationInRadians = rotationInRadians;
     this.scale = scale;
+    this.origin = origin;
+    this.dimensions = dimensions;
   }
 
   /**
@@ -108,15 +153,20 @@ class Transform2D {
       GDUtility.IsSameTypeAsTarget(this, other) &&
       this.translation.Equals(other.translation) &&
       this.rotationInRadians === other.rotationInRadians &&
-      this.scale.Equals(other.scale)
+      this.scale.Equals(other.Scale) &&
+      this.origin.Equals(other.Origin) &&
+      this.dimensions.Equals(other.Dimensions)
     );
   }
 
+  //deep-copy
   Clone() {
     return new Transform2D(
-      this.translation.Clone(),
-      this.rotationInRadians,
-      this.scale.Clone()
+      this.translation.Clone(), //ref
+      this.rotationInRadians,   //value
+      this.scale.Clone(),        //ref
+      this.origin.Clone(),        //ref
+      this.dimensions.Clone()    //ref
     );
   }
 
@@ -128,6 +178,10 @@ class Transform2D {
       this.rotationInRadians +
       "," +
       this.scale.ToString() +
+      "," +
+      this.origin.ToString() +
+      "," +
+      this.dimensions.ToString() +
       "]"
     );
   }

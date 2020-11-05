@@ -6,6 +6,7 @@
  */
 class Sprite {
   //#region  Fields
+  behaviours = new Array();
   //#endregion
 
   //#region  Properties
@@ -18,12 +19,21 @@ class Sprite {
     this.artist = artist;
   }
 
-  Update(gameTime) {}
+  Update(gameTime) {
 
-  Draw(gameTime) {}
+  }
+
+  Draw(gameTime) {
+    this.artist.Draw(gameTime, this);
+  }
   //#endregion
 
   //#region Equals, Clone, ToString
   //to do...
+  
+  //deep-copy
+  Clone(){
+    return new Sprite(this.id + " - clone", this.transform2D.Clone(), this.artist.Clone());
+  }
   //#endregion
 }

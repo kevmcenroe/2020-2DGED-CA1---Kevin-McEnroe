@@ -6,6 +6,7 @@
  */
 class Vector2 {
   //#region Fields
+  isDirty = true;
   //#endregion
 
   //#region Properties
@@ -29,11 +30,11 @@ class Vector2 {
   }
   set X(x) {
     this.x = x;
-    this.isDirty = true;
+    //this.isDirty = true;
   }
   set Y(y) {
     this.y = y;
-    this.isDirty = true;
+   // this.isDirty = true;
   }
   //#endregion
 
@@ -41,7 +42,7 @@ class Vector2 {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.isDirty = true;
+   // this.isDirty = true;
   }
 
   Add(otherVector) {
@@ -65,11 +66,13 @@ class Vector2 {
   }
 
   Divide(otherVector) {
+    //divide by 0!!!
     this.x /= otherVector.x;
     this.y /= otherVector.y;
   }
 
   DivideScalar(s) {
+     //divide by 0!!!
     this.x /= s;
     this.y /= s;
   }
@@ -111,11 +114,11 @@ class Vector2 {
   Normalize() {
     var len = this.Length();
 
-    if (len == 0) {
+    if (len == 0) 
+      throw "Error: Divide by zero error on Normalize()! Is the vector non-zero?";
+
       this.x /= len;
       this.y /= len;
-    } else
-      throw "Error: Divide by zero error on Normalize()! Is the vector non-zero?";
   }
   //#endregion
 
@@ -128,6 +131,7 @@ class Vector2 {
     );
   }
 
+  //deep-copy => (x,y) => 
   Clone() {
     return new Vector2(this.x, this.y);
   }

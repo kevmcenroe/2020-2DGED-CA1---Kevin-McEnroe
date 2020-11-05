@@ -2,25 +2,33 @@
 
 ## 2D Game Engine Development
 
+### Further Reading
+- Using the *jsconfig.json* in your project to enable Intellisense - https://code.visualstudio.com/docs/nodejs/working-with-javascript
+
 ### Code to Explain
-- [ ] Vector2
+- [x] Vector2
 
 ### Code to Refactor
 - [x] Re-factor Rect to use Vector2
-- [ ] Re-factor Arc to use Vector2
+- [x] Re-factor Arc to use Vector2
 
 ### Tasks - Week 2 
 - [x] Add Arc and Rect classes
 
 ### Tasks - Week 3
-- [ ] Add clone to Arc and Rect and test that it provides a deep-copy
+- [x] Add clone to Arc and Rect and test that it provides a deep-copy
 - [ ] Add shadowColor and shadowBlur to Arc and Rect
-- [ ] Experiment with setInterval, setTimeout and requestAnimationFrame 
-- [ ] Add main.html with game loop
+- [x] Experiment with setInterval, setTimeout and requestAnimationFrame 
+- [x] Add main.html with game loop
 - [ ] Render game sprite and animate
 - [ ] Add simple collision detection/collision response between window perimeter and sprite
 - [ ] Add keyboard input to control sprite
-- [ ] Add comments to all non-trivial methods and classes
+- [x] Add comments to all non-trivial methods and classes
 - [ ] Add score on-screen
 
-
+### Tasks - Week 5
+- [ ] Add jsconfig.json to support Intellisense 
+- [ ] Add Actor2D class as parent for all drawn objects and camera
+- [ ] Add ObjectManager to store all drawn objects
+- [ ] Add ObjectManager
+- [ ] Add Engine/Constants
