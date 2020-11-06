@@ -26,6 +26,15 @@ var bActiveFrameOne = true;
 
 function LoadGame() {
 
+    //#region Demo Array
+    sprites = new Array();
+
+    sprites[ActorType.Background] = new Array();
+    sprites[ActorType.Background].push("clouds");
+    sprites[ActorType.Background].push("mountain");
+    sprites[ActorType.Background].push("trees");
+    //#endregion
+
     //set all variables, objects, resources before start
     Initialize();
 
