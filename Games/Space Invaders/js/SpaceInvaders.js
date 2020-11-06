@@ -33,6 +33,11 @@ function LoadGame() {
     sprites[ActorType.Background].push("clouds");
     sprites[ActorType.Background].push("mountain");
     sprites[ActorType.Background].push("trees");
+
+    sprites[ActorType.Player] = new Array();
+    sprites[ActorType.Player].push("sam");
+
+
     //#endregion
 
     //set all variables, objects, resources before start

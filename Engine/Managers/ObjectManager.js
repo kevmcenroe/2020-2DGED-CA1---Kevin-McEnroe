@@ -20,43 +20,28 @@ class ObjectManager {
 
   //#region Add, Remove, Find, Clear
   Add(sprite) {
-    this.sprites.push(sprite);
+    //do we have a row for this ActorType?
+    if (!this.sprites[sprite.ActorType]) {
+      this.sprites[sprite.ActorType] = [];
+    }
+
+    this.sprites[sprite.ActorType].push(sprite);
+  }
+
+  Find(predicate) {
     //to do...
   }
 
-  FindIndex() {
+  RemoveFirstBy(predicate) {
     //to do...
   }
 
-  FindIndices() {
+  RemoveAllBy(predicate) {
     //to do...
   }
 
-  Find() {
-    //to do...
-  }
-
-  RemoveFirst() {
-    //to do...
-  }
-
-  RemoveFirstBy() {
-    //to do...
-  }
-
-  RemoveAllBy() {
-    //to do...
-  }
-
-  RemoveAllByType() {
-    //to do...
-  }
-
-  Get() {
-    //to do...
-  }
-
-  Sort() {
+  //(a, b) => { return a.ActorType - b.ActorType;}
+  Sort(comparator) {
     //to do...
   }
 
@@ -67,16 +52,18 @@ class ObjectManager {
 
   //#region Update & Draw
   Update(gameTime) {
-    for(let sprite of this.sprites){
-      if(sprite.StatusType & StatusType.Updated != StatusType.Off)
+    for (let key in this.sprites) { //[0, 2]
+      for (let sprite of this.sprites[key]) {
         sprite.Update(gameTime);
+      }
     }
   }
 
   Draw(gameTime) {
-    for(let sprite of this.sprites){
-      if(sprite.StatusType & StatusType.Drawn != StatusType.Off)
-          sprite.Draw(gameTime);
+    for (let key in this.sprites) { //[0, 2]
+      for (let sprite of this.sprites[key]) {
+        sprite.Draw(gameTime);
+      }
     }
   }
   //#endregion
