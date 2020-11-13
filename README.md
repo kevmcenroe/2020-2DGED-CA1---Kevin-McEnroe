@@ -27,8 +27,12 @@
 - [ ] Add score on-screen
 
 ### Tasks - Week 5
-- [ ] Add jsconfig.json to support Intellisense 
-- [ ] Add Actor2D class as parent for all drawn objects and camera
-- [ ] Add ObjectManager to store all drawn objects
-- [ ] Add ObjectManager
-- [ ] Add Engine/Constants
+- [x] Add jsconfig.json to support Intellisense 
+- [x] Add Actor2D class as parent for all drawn objects and camera
+- [x] Add ObjectManager to store all drawn objects
+- [x] Add ObjectManager
+- [x] Add Engine/Constants
+
+### Tasks - Week 6
+- [x] Re-order SpaceInvaders.js to separate core functions and variables from game-specific
+- [ ] Add SpaceInvaders/js/GameConstants.js file to store data related to enemy animations

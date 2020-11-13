@@ -1,12 +1,12 @@
 /**
- * Renders the pixel data from a spritesheet at a source location (x, y, width, heigth) stored in the current cell index of an array of cells.
- * The array of cells indicate the (x, y, width, height) data for each cell in the animation.
+ * Renders the pixel data from a spritesheet at a source location (x, y, width, heigth) stored in the current frame index of an array of frames.
+ * The array of frames indicate the (x, y, width, height) data for each frame in the animation.
  * @author niall mcguinness
  * @version 1.0
  * @class AnimatedSpriteArtist
  */
 
-class AnimatedSpriteArtist extends Artist {
+class AnimatedSpriteArtist {
   //#region  Fields
   //#endregion
 
@@ -14,20 +14,29 @@ class AnimatedSpriteArtist extends Artist {
   //#endregion
 
   //#region Constructors and Core methods
+
+  /**
+   *  Constructs an artist which will cycle through (animate) a set of image frames
+   * @param {Image} spriteSheet Image containing frames for the animation
+   * @param {Array} frames Array of frames (see GameConstants) defining the animation sequence
+   * @param {Number} startFrameIndex Zero-based index of first animation frame in the sequence 
+   * @param {Number} endFrameIndex Zero-based index of last animation frame in the sequence
+   * @param {Number} frameRatePerSec Integer number of frames to play per second 
+   */
   constructor(
+    context,
     spriteSheet,
-    cells,
-    frameRatePerSec,
-    frameIntervalInMs,
-    startCellIndex,
-    endCellIndex
+    frames,
+    startFrameIndex,
+    endFrameIndex,
+    frameRatePerSec
   ) {
+    this.context = context;
     this.spriteSheet = spriteSheet;
-    this.cells = cells;
-    this.frameRatePerSec = frameRatePerSec;
-    this.frameIntervalInMs = frameIntervalInMs;
-    this.startCellIndex = startCellIndex;
-    this.endCellIndex = endCellIndex;
+    this.frames = frames;
+    this.startFrameIndex = startFrameIndex;
+    this.endFrameIndex = endFrameIndex;
+    this.frameIntervalInMs = Math.ceil(1000/frameRatePerSec);
 
     //internal variables
     this.currentCellIndex = 0;
@@ -51,17 +60,17 @@ class AnimatedSpriteArtist extends Artist {
   }
 
   /**
-   * Increments the current cell index and wraps if > length
+   * Increments the current frame index and wraps if > length
    *
    * @memberof AnimatedSpriteArtist
    */
   Advance(parent) {
     //if not at end frame then advance 1
-    if (this.currentCellIndex < this.endCellIndex) 
-    this.currentCellIndex++;
+    if (this.currentCellIndex < this.endFrameIndex) 
+      this.currentCellIndex++;
     else {
       //if running infinitely then restart
-      this.currentCellIndex = this.startCellIndex;
+      this.currentCellIndex = this.startFrameIndex;
 
       //if max loop count has been reached then remove this sprite
       //to do...
@@ -86,17 +95,17 @@ class AnimatedSpriteArtist extends Artist {
     //set transparency
     this.context.globalAlpha = this.alpha;
 
-    let cell = this.cells[this.currentCellIndex];
-    activeCamera.context.drawImage(
-      this.animationData.spriteSheet,
-      cell.x,
-      cell.y,
-      cell.width,
-      cell.height,
+    let frame = this.frames[this.currentCellIndex];
+    this.context.drawImage(
+      this.spriteSheet,
+      frame.x,
+      frame.y,
+      frame.width,
+      frame.height,
       transform.translation.x - transform.origin.x,
       transform.translation.y - transform.origin.y,
-      cell.width,
-      cell.height
+      frame.width,
+      frame.height
     );
   }
   //#endregion
