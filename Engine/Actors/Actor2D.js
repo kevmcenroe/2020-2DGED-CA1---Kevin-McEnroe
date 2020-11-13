@@ -9,10 +9,14 @@
  */
 class Actor2D {
     //#region Fields
-
+    controllers = []; //new Array();
     //#endregion
   
     //#region  Properties
+    get Controllers() {
+      return this.controllers;
+    }
+
     get ID() {
       return this.id;
     }
@@ -88,10 +92,10 @@ class Actor2D {
      * @memberof Actor2D
      */
     Update(gameTime) {
-      if(this.behaviors != undefined)
+      if(this.controllers != undefined)
       {
-        for (let i = 0; i < this.behaviors.length; i++)
-          this.behaviors[i].Update(gameTime, this);
+        for (let i = 0; i < this.controllers.length; i++)
+          this.controllers[i].Update(gameTime, this);
       }
     }
   

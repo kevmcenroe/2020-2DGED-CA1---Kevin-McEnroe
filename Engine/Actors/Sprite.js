@@ -9,6 +9,9 @@ class Sprite extends Actor2D {
   //#endregion
 
   //#region  Properties
+    get Artist(){
+      return this.artist;
+    }
   //#endregion
 
   //#region Constructors and Core methods
@@ -18,11 +21,21 @@ class Sprite extends Actor2D {
   }
 
   Update(gameTime) {
-    this.artist.Update(gameTime, this);
+        //3 & 2 => 
+        //0011 
+        //0010 
+        //----
+        //0010
+
+    if((this.statusType & StatusType.Updated) != 0)
+      this.artist.Update(gameTime, this);
+
+      super.Update(gameTime);
   }
 
   Draw(gameTime) {
-    this.artist.Draw(gameTime, this);
+    if((this.statusType & StatusType.Drawn) != 0)
+      this.artist.Draw(gameTime, this);
   }
   //#endregion
 

@@ -9,6 +9,7 @@ class SpriteArtist {
   //#endregion
 
   //#region  Properties
+
   //#endregion
 
   //#region Constructors and Core methods
@@ -83,7 +84,7 @@ class SpriteArtist {
     return new SpriteArtist(
       this.context, //shallow
       this.spritesheet, //shallow
-      this.sourcePosition.Clone(), //deep
+      this.sourcePosition, //deep, if shallow then all clones will point to same Vector2 representing sourcePosition
       this.sourceDimensions.Clone() //deep
     );
   }

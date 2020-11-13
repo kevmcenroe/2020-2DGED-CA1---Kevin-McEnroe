@@ -53,6 +53,10 @@ function Update(gameTime) {
   this.objectManager.Update(gameTime);
 
   //we will add and update more managers here...
+
+    //if A key then playerSprite.Transform.TranslateBy(new Vector2(-1, 0))
+
+
 }
 
 function Draw(gameTime) {
@@ -143,7 +147,7 @@ function LoadManagers() {
  * Instanciate the Sprite objects drawn within the game
  */
 function LoadSprites() {
- // LoadBackgrounds();
+  LoadBackgrounds();
   LoadEnemies();
   LoadPlayers();
   LoadBarriers();
@@ -193,6 +197,7 @@ function LoadBackgrounds() {
 function LoadEnemies() {
   var transform2D = null;
   var artist = null;
+  var cloneEnemySprite = null;
 
   /**************** Enemy 3 ****************/
 
@@ -232,7 +237,6 @@ function LoadEnemies() {
 
   /**************** Animated Enemy 2 ****************/
 
-  //to do...
   transform2D = new Transform2D(
     new Vector2(50, 50),
     0,
@@ -245,7 +249,7 @@ function LoadEnemies() {
     spriteSheet,
     SpriteData.ENEMY_TWO_FRAMES,
     0, 1, 
-    24);
+    8);
 
     var animatedEnemyTwoSprite = new Sprite(
         "animated enemy 2",
@@ -258,6 +262,47 @@ function LoadEnemies() {
     this.objectManager.Add(animatedEnemyTwoSprite);
 
     /**************** Animated Enemy 3 ****************/
+    transform2D = new Transform2D(
+        new Vector2(cvs.clientWidth/2 - SpriteData.ENEMY_THREE_FRAMES[0].width/2, 50),
+        0,
+        Vector2.One,
+        Vector2.Zero,
+        new Vector2(75, 75));
+    
+      artist = new AnimatedSpriteArtist(
+        ctx,
+        spriteSheet,
+        SpriteData.ENEMY_THREE_FRAMES,
+        0, 1, 
+        4);
+    
+        var animatedEnemyThreeSprite = new Sprite(
+            "animated enemy 3",
+            ActorType.NPC,
+            StatusType.Updated & StatusType.Drawn,
+            transform2D,
+            artist);
+    
+        //add to the object manager
+        this.objectManager.Add(animatedEnemyThreeSprite);
+
+   /**************** Clone - Animated Enemy 3 ****************/
+
+   var fps = 1;
+
+   for(let i = -200; i <= 200; i+= 50){
+
+    cloneEnemySprite = animatedEnemyThreeSprite.Clone();
+    cloneEnemySprite.transform2D.TranslateBy(new Vector2(i, 50));
+  
+    var animatedArtist = cloneEnemySprite.Artist;
+    animatedArtist.FrameRatePerSec = fps * 2;
+    fps++;
+    //add to the object manager
+    this.objectManager.Add(cloneEnemySprite);
+   }
+  
+
 
 }
 
@@ -265,7 +310,38 @@ function LoadEnemies() {
  * Instanciate all player Sprite objects
  */
 function LoadPlayers() {
-  //to do...
+
+  transform2D = new Transform2D(
+    new Vector2(cvs.clientWidth/2 - SpriteData.PLAYER_FRAMES[0].width/2, 
+        cvs.clientHeight - 100),
+    0,
+    Vector2.One,
+    Vector2.Zero,
+    new Vector2(44, 32)
+  );
+
+  artist = new SpriteArtist(
+    ctx,
+    spriteSheet,
+    new Vector2(62, 0),
+    new Vector2(22, 16),
+    1
+  );
+
+  var playerSprite = new Sprite(
+    "player",
+    ActorType.Player,
+    StatusType.Updated | StatusType.Drawn,
+    transform2D,
+    artist
+  );
+
+  //attach a controller
+  playerSprite.Controllers.push(new PlayerMoveController());
+
+
+  //add to the object manager
+  this.objectManager.Add(playerSprite);
 }
 
 /**
