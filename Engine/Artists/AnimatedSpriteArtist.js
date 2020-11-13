@@ -17,6 +17,8 @@ class AnimatedSpriteArtist {
 
   /**
    *  Constructs an artist which will cycle through (animate) a set of image frames
+   * 
+   * @param {CanvasRenderingContext2D} context Handle to the canvas' context
    * @param {Image} spriteSheet Image containing frames for the animation
    * @param {Array} frames Array of frames (see GameConstants) defining the animation sequence
    * @param {Number} startFrameIndex Zero-based index of first animation frame in the sequence 
@@ -40,6 +42,7 @@ class AnimatedSpriteArtist {
 
     //internal variables
     this.currentCellIndex = 0;
+    this.timeSinceLastFrameInMs = 0;
   }
 
   /**
@@ -50,13 +53,11 @@ class AnimatedSpriteArtist {
    * @memberof AnimatedSpriteArtist
    */
   Update(gameTime, parent) {
-    if (!this.paused) {
       this.timeSinceLastFrameInMs += Math.round(gameTime.ElapsedTimeInMs);
-      if (this.timeSinceLastFrameInMs > this.frameIntervalInMs) {
+      if (this.timeSinceLastFrameInMs >= this.frameIntervalInMs) {
         this.Advance(parent);
         this.timeSinceLastFrameInMs = 0;
       }
-    }
   }
 
   /**
@@ -104,8 +105,8 @@ class AnimatedSpriteArtist {
       frame.height,
       transform.translation.x - transform.origin.x,
       transform.translation.y - transform.origin.y,
-      frame.width,
-      frame.height
+      frame.width, //dimensions?
+      frame.height //dimensions?
     );
   }
   //#endregion

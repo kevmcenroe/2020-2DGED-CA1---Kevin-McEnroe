@@ -18,7 +18,7 @@ class Sprite extends Actor2D {
   }
 
   Update(gameTime) {
-
+    this.artist.Update(gameTime, this);
   }
 
   Draw(gameTime) {

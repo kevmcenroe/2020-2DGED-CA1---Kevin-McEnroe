@@ -1,12 +1,31 @@
 /***************************************** Sprite Sheet Position & Animation Data ************************************************************************************************/
 
+//scope of variable is global
+// const ENEMY_ONE_FRAMES = [
+//   {
+//     //animation frame 1
+//     x: 0,
+//     y: 0,
+//     width: 22,
+//     height: 16,
+//   },
+//   {
+//     //animation frame 2
+//     x: 0,
+//     y: 16,
+//     width: 22,
+//     height: 16,
+//   },
+// ];
+
+
 /**
  * Class to store together all sprite data for space invaders
  */
 class SpriteData {
 
   //sprite positions on spritesheet
-  static ENEMY_ONE_CELLS = [
+  static ENEMY_ONE_FRAMES = [
     {
       //animation frame 1
       x: 0,
@@ -23,7 +42,8 @@ class SpriteData {
     },
   ];
 
-  static ENEMY_TWO_CELLS = [
+  //jellyfish
+  static ENEMY_TWO_FRAMES = [
     {
       //animation frame 1
       x: 22,
@@ -40,7 +60,7 @@ class SpriteData {
     },
   ];
 
-  static ENEMY_THREE_CELLS = [
+  static ENEMY_THREE_FRAMES = [
     {
       //animation frame 1
       x: 38,
