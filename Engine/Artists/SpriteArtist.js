@@ -1,5 +1,5 @@
 /**
- * Renders the pixel data from a spritesheet at a source location (x, y, width, height) stored in sourcePosition.
+ * Renders the pixel data from a spritesheet at a source location (x, y, width, height) stored in sourcePosition and sourceDimensions.
  * @author niall mcguinness
  * @version 1.0
  * @class SpriteArtist
