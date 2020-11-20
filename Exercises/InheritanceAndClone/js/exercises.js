@@ -2,7 +2,7 @@ document.writeln("Open the Inspect/Console pane in Chrome to see the output...")
 
 runExercises();
 
-/*
+/*  0. Implement principle entities as separate JS files
     1. Implement a Player
         - name, position(x,y), texture(name)
         - inventory(weapons) - array
@@ -17,6 +17,9 @@ runExercises();
     4. Populate the Player with 3-4 Weapons
     5. Clone a Weapon test using Equals (w1 === w2?)
     6. Clone a Player test using Equals (p1 === p2)
+
+    Typical class has...
+        - constructor, fields, get/set, Equals(), Clone()
  */
 
 
