@@ -31,41 +31,41 @@ class Transform2D {
   get Dimensions() {
     return this.dimensions;
   }
-  set Dimensions(dimensions) {
-    this.dimensions = dimensions.Clone();
-    this.isDirty = true;
-  }
-  set Translation(translation) {
-    this.translation = translation.Clone();
-    this.isDirty = true;
-  }
-  set RotationInRadians(rotationInRadians) {
-    this.rotationInRadians = rotationInRadians;
-    this.isDirty = true;
-  }
-  set Scale(scale) {
-    this.scale = scale.Clone();
-    this.isDirty = true;
-  }
-  set Origin(origin) {
-    this.origin = origin.Clone();
-    this.isDirty = true;
-  }
   get IsDirty() {
     return this.isDirty;
   }
-  set IsDirty(isDirty) {
-    this.isDirty = isDirty;
+  set Dimensions(value) {
+    this.dimensions = value.Clone();
+    this.isDirty = true;
+  }
+  set Translation(value) {
+    this.translation = value.Clone();
+    this.isDirty = true;
+  }
+  set RotationInRadians(value) {
+    this.rotationInRadians = value;
+    this.isDirty = true;
+  }
+  set Scale(value) {
+    this.scale = value.Clone();
+    this.isDirty = true;
+  }
+  set Origin(value) {
+    this.origin = value.Clone();
+    this.isDirty = true;
+  }
+  set IsDirty(value) {
+    this.isDirty = value;
   }
   //#endregion
 
   //#region Constructors and Core methods
   
   /**
-   * Creates an instance of Transform2D.
+   * Creates an instance of Transform2D which is used to store the translation, rotation, scale, origin and original dimensions of a draw sprite (static or animated)
    *
    * @param {Vector2} translation Vector2 with the position of the sprite on the screen
-   * @param {number} rotationInRadians Floating-point angle in radians to rotate the sprite (+ve = CW, -ve=CCW)
+   * @param {Number} rotationInRadians Floating-point angle in radians to rotate the sprite (+ve = CW, -ve=CCW)
    * @param {Vector2} scale Vector2 with the scale of the sprite on the screen
    * @param {Vector2} origin Vector2 centre of rotation for the image between (0,0) and (w,h) of the original image
    * @param {Vector2} dimensions Vector2 original dimensions of the sprite in the image

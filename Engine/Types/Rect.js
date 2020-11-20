@@ -29,17 +29,17 @@ class Rect {
     return new Vector2(this.x + this.width / 2, this.y + this.height / 2);
   }
 
-  set X(x) {
-    this.x = x;
+  set X(value) {
+    this.x = value;
   }
-  set Y(y) {
-    this.y = y;
+  set Y(value) {
+    this.y = value;
   }
-  set Width(width) {
-    this.width = width;
+  set Width(value) {
+    this.width = value;
   }
-  set Height(height) {
-    this.height = height;
+  set Height(value) {
+    this.height = value;
   }
   //#endregion
 

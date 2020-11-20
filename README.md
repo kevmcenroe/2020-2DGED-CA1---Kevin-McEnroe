@@ -36,3 +36,6 @@
 ### Tasks - Week 6
 - [x] Re-order SpaceInvaders.js to separate core functions and variables from game-specific
 - [ ] Add SpaceInvaders/js/GameConstants.js file to store data related to enemy animations
+### Tasks - Week 7
+- [x] Re-factored SpriteArtist and AnimatedSpriteArtist to extend Artist
+- [ ] Add use of Transform2D::Scale to Draw() of SpriteArtist and AnimatedSpriteArtist

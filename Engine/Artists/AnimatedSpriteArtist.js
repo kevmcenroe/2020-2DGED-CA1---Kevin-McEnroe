@@ -6,17 +6,17 @@
  * @class AnimatedSpriteArtist
  */
 
-class AnimatedSpriteArtist {
+class AnimatedSpriteArtist extends Artist {
   //#region  Fields
   //#endregion
 
   //#region  Properties
-  get FrameRatePerSec(){
+  get FrameRatePerSec() {
     return this.frameRatePerSec;
   }
-  set FrameRatePerSec(frameRatePerSec){
+  set FrameRatePerSec(frameRatePerSec) {
     this.frameRatePerSec = frameRatePerSec;
-    this.frameIntervalInMs = 1000/frameRatePerSec; //2fps => 1/2 =? 0.5 secs/frame =? 500ms/frame
+    this.frameIntervalInMs = 1000 / frameRatePerSec; //2fps => 1/2 =? 0.5 secs/frame =? 500ms/frame
   }
   //#endregion
 
@@ -25,8 +25,9 @@ class AnimatedSpriteArtist {
   /**
    *  Constructs an artist which will cycle through (animate) a set of image frames
    *
-   * @param {CanvasRenderingContext2D} context Handle to the canvas' context
-   * @param {Image} spriteSheet Image containing frames for the animation
+   * @param {CanvasRenderingContext2D} context Handle to draw context
+   * @param {HTMLImageElement} spriteSheet Handle to the image data
+   * @param {Number} alpha Floating point value (0-1) indicating sprite transparency
    * @param {Array} frames Array of frames (see GameConstants) defining the animation sequence
    * @param {Number} startFrameIndex Zero-based index of first animation frame in the sequence
    * @param {Number} endFrameIndex Zero-based index of last animation frame in the sequence
@@ -35,21 +36,21 @@ class AnimatedSpriteArtist {
   constructor(
     context,
     spriteSheet,
+    alpha,
     frames,
     startFrameIndex,
     endFrameIndex,
     frameRatePerSec
   ) {
-    this.context = context;
-    this.spriteSheet = spriteSheet;
+    super(context, spriteSheet, alpha);
+
     this.frames = frames;
     this.startFrameIndex = startFrameIndex;
     this.endFrameIndex = endFrameIndex;
-
     this.frameRatePerSec = frameRatePerSec;
-    this.frameIntervalInMs = Math.ceil(1000 / frameRatePerSec);
 
     //internal variables
+    this.frameIntervalInMs = Math.ceil(1000 / frameRatePerSec);
     this.currentCellIndex = 0;
     this.timeSinceLastFrameInMs = 0;
   }
@@ -95,26 +96,29 @@ class AnimatedSpriteArtist {
    */
   Draw(gameTime, parent) {
     //save whatever context settings were used before this (color, line, text styles)
-    this.context.save();
+    this.Context.save();
 
     //access the transform for the parent that this artist is attached to
-    let transform = parent.transform2D;
+    let transform2D = parent.Transform2D;
 
     //set transparency
-    this.context.globalAlpha = this.alpha;
+    this.Context.globalAlpha = this.Alpha;
 
     let frame = this.frames[this.currentCellIndex];
-    this.context.drawImage(
-      this.spriteSheet,
+    this.Context.drawImage(
+      this.SpriteSheet,
       frame.x,
       frame.y,
       frame.width,
       frame.height,
-      transform.translation.x - transform.origin.x,
-      transform.translation.y - transform.origin.y,
-      frame.width, //dimensions?
-      frame.height //dimensions?
+      transform2D.Translation.x - transform2D.Origin.x,
+      transform2D.Translation.y - transform2D.Origin.y,
+      frame.width, //scale?
+      frame.height //scale?
     );
+
+    //restore whatever context settings were used before save() was called above
+    this.Context.restore();
   }
   //#endregion
 
@@ -124,15 +128,13 @@ class AnimatedSpriteArtist {
   //hybrid
   Clone() {
     return new AnimatedSpriteArtist(
-      ///////////////////////////////////
-      this.context, //shallow
-      this.spriteSheet, //shallow
-      this.frames, //shallow
-      ///////////////////////////////////
-      this.startFrameIndex, //deep
-      this.endFrameIndex, //deep 
-      this.frameRatePerSec //deep
-
+      this.Context,           //shallow
+      this.SpriteSheet,       //shallow
+      this.Alpha,             //deep
+      this.frames,            //shallow
+      this.startFrameIndex,   //deep
+      this.endFrameIndex,     //deep
+      this.frameRatePerSec    //deep
     );
   }
 

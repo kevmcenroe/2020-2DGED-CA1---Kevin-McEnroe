@@ -9,7 +9,7 @@
  */
 class Actor2D {
     //#region Fields
-    controllers = []; //new Array();
+    controllers = []; //or we could instanciate using... = new Array();
     //#endregion
   
     //#region  Properties
@@ -19,9 +19,6 @@ class Actor2D {
 
     get ID() {
       return this.id;
-    }
-    get CollisionType() {
-      return this.collisionType;
     }
     get ActorType() {
       return this.actorType;
@@ -35,9 +32,6 @@ class Actor2D {
     set ID(id) {
       this.id = id;
     }
-    set CollisionType(collisionType) {
-      this.collisionType = collisionType;
-    }
     set ActorType(actorType) {
       this.actorType = actorType;
     }
@@ -48,7 +42,7 @@ class Actor2D {
       this.statusType = statusType;
     }
     //#endregion
-  
+
     constructor(id, actorType, statusType, transform2D) {
       this.id = id;
       this.actorType = actorType;
@@ -57,7 +51,7 @@ class Actor2D {
     }
   
     /**
-     * Use to add a controller instance to the array of behaviors executed for this actor.
+     * Use to add a controller instance to the array of controllers executed for this actor.
      *
      * @param {*} controller
      * @memberof Actor2D
@@ -70,22 +64,22 @@ class Actor2D {
     }
   
     /**
-     * Use to remove a behavior instance, by id, from the array of behaviors executed for this actor.
+     * Use to remove a controller instance, by id, from the array of controllers executed for this actor.
      *
      * @param {string} id
      * @memberof Actor2D
      */
-    DetachBehaviorByID(id) {
-      for (let i = 0; i < this.behaviors.length; i++) {
-        if (this.behaviors[i].ID.Equals(id)) {
-          this.behaviors.splice(i, 1);
+    DetachControllerByID(id) {
+      for (let i = 0; i < this.controllers.length; i++) {
+        if (this.controllers[i].ID.Equals(id)) {
+          this.controllers.splice(i, 1);
           i--;
         }
       }
     }
   
     /**
-     * Updates state information and executes attached behavior(s)
+     * Updates state information and executes attached controller(s)
      *
      * @param {GameTime} gameTime
      * @see ObjectManager::Update()
@@ -119,7 +113,8 @@ class Actor2D {
       );
   
       //now clone all the actors attached behaviors
-      for (let behavior of this.behaviors) clone.AttachBehavior(behavior.Clone());
+      for (let controller of this.controllers) 
+        clone.AttachController(controller.Clone());
   
       //lastly return the actor
       return clone;

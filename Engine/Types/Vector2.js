@@ -28,12 +28,12 @@ class Vector2 {
   get Y() {
     return this.y;
   }
-  set X(x) {
-    this.x = x;
+  set X(value) {
+    this.x = value;
     //this.isDirty = true;
   }
-  set Y(y) {
-    this.y = y;
+  set Y(value) {
+    this.y = value;
    // this.isDirty = true;
   }
   //#endregion

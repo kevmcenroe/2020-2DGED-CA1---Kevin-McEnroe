@@ -15,18 +15,21 @@ class Sprite extends Actor2D {
   //#endregion
 
   //#region Constructors and Core methods
+
+  /**
+   * Constructs a Sprite object which represents a static or animated image rendered to the canvas
+   * @param {String} id Identifier for the sprite, does not necessarily need to be unique 
+   * @param {ActorType} actorType An "enum" used to indicate the type of the actor (e.g Player, Pickup)
+   * @param {StatusType} statusType An "enum" used to set if the sprite is Drawn and/or Updated, or Off
+   * @param {Transform2D} transform2D Transform2D holding the position-related information used to render the image
+   * @param {Artist} artist Used to draw the image to the canvas (can be either a SpriteArtist or AnimatedSpriteArtist) 
+   */
   constructor(id, actorType, statusType, transform2D, artist) {
     super(id, actorType, statusType, transform2D);
     this.artist = artist;
   }
 
   Update(gameTime) {
-        //3 & 2 => 
-        //0011 
-        //0010 
-        //----
-        //0010
-
     if((this.statusType & StatusType.Updated) != 0)
       this.artist.Update(gameTime, this);
 

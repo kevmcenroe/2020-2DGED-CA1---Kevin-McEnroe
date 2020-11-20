@@ -1,28 +1,43 @@
 /**
- * Renders the pixel data from a spritesheet at a source location (x, y, width, heigth) stored in sourcePosition.
+ * Renders the pixel data from a spritesheet at a source location (x, y, width, height) stored in sourcePosition.
  * @author niall mcguinness
  * @version 1.0
  * @class SpriteArtist
  */
-class SpriteArtist {
+class SpriteArtist extends Artist {
   //#region  Fields
+  //#endregion
+  sourcePosition;
+  sourceDimensions;
   //#endregion
 
   //#region  Properties
-
+  get SourcePosition() {
+    return this.sourcePosition;
+  }
+  set SourcePosition(value) {
+    this.sourcePosition = value;
+  }
+  get SourceDimensions() {
+    return this.sourceDimensions;
+  }
+  set SourceDimensions(value) {
+    this.sourceDimensions = value;
+  }
   //#endregion
 
   //#region Constructors and Core methods
-  constructor(
-    context,
-    spritesheet,
-    sourcePosition,
-    sourceDimensions,
-    alpha = 1
-  ) {
-    this.context = context;
-    this.alpha = alpha;
-    this.spritesheet = spritesheet;
+
+  /**
+   * Constructs a SpriteArtist to render a static image
+   * @param {CanvasRenderingContext2D} context Handle to draw context
+   * @param {HTMLImageElement} spriteSheet Handle to the image data
+   * @param {Number} alpha Floating point value (0-1) indicating sprite transparency
+   * @param {Vector2} sourcePosition position (x,y) of the source image to use as top left corner
+   * @param {Vector2} sourceDimensions dimensions (w,h) of the portion of the source image to be drawn, in pixels
+   */
+  constructor(context, spriteSheet, alpha, sourcePosition, sourceDimensions) {
+    super(context, spriteSheet, alpha);
     this.sourcePosition = sourcePosition;
     this.sourceDimensions = sourceDimensions;
   }
@@ -45,35 +60,30 @@ class SpriteArtist {
    * @memberof SpriteArtist
    */
   Draw(gameTime, parent) {
-    //draw the sprite!!!
-    // this.context.drawImage(this.spritesheet, this.sourcePosition.x, this.sourcePosition.y,
-    //     this.sourceDimensions.x, this.sourceDimensions.y,
-    //       parent.transform2D.translation.x, parent.transform2D.translation.y,
-    //         parent.transform2D.drawnDimensions.x, parent.transform2D.drawnDimensions.y);
-
-    //save whatever context settings were used before this (color, line, text styles)
-    this.context.save();
+     //save whatever context settings were used before this (color, line, text styles)
+    this.Context.save();
 
     //access the transform for the parent that this artist is attached to
-    let transform = parent.transform2D;
+    let transform2D = parent.Transform2D;
 
     //set transparency
-    this.context.globalAlpha = this.alpha;
+    this.Context.globalAlpha = this.Alpha;
 
     //draw image
-    this.context.drawImage(
-      this.spritesheet,
+    this.Context.drawImage(
+      this.SpriteSheet,
       this.sourcePosition.x,
       this.sourcePosition.y,
       this.sourceDimensions.x,
       this.sourceDimensions.y,
-      transform.translation.x - transform.origin.x,
-      transform.translation.y - transform.origin.y,
-      transform.dimensions.x,
-      transform.dimensions.y
+      transform2D.Translation.x - transform2D.Origin.x,
+      transform2D.Translation.y - transform2D.Origin.y,
+      transform2D.Dimensions.x, //scale?
+      transform2D.Dimensions.y //scale?
     );
 
-    this.context.restore();
+    //restore whatever context settings were used before save() was called above
+    this.Context.restore();
   }
   //#endregion
 
@@ -82,9 +92,10 @@ class SpriteArtist {
   //hybrid
   Clone() {
     return new SpriteArtist(
-      this.context, //shallow
-      this.spritesheet, //shallow
-      this.sourcePosition, //deep, if shallow then all clones will point to same Vector2 representing sourcePosition
+      this.context,         //shallow
+      this.spritesheet,     //shallow
+      this.alpha,           //deep
+      this.sourcePosition.Clone(),  //deep, if shallow then all clones will point to same Vector2 representing sourcePosition
       this.sourceDimensions.Clone() //deep
     );
   }
