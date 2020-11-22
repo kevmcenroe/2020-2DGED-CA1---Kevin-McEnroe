@@ -84,8 +84,9 @@ class Vector2 {
 
   /**
    * Returns a Vector2 object
-   * @param {Number} x 
-   * @param {Number} y 
+   * @param {Number} x
+   * @param {Number} y
+   * @memberof Vector2
    */
   constructor(x, y) {
     this.x = x;
@@ -95,6 +96,7 @@ class Vector2 {
   /**
    * Modifies the Vector2 by adding the individual (x,y) values of a second Vector2 object to the object
    * @param {Rect} other A Vector2 object
+   * @memberof Vector2
    */
   Add(other) {
     this.x += other.x;
@@ -104,6 +106,7 @@ class Vector2 {
   /**
    * Modifies the Vector2 by subtracting the individual (x,y) values of a second Vector2 object from the object
    * @param {Rect} other A Vector2 object
+   * @memberof Vector2
    */
   Subtract(other) {
     this.x -= other.x;
@@ -113,6 +116,7 @@ class Vector2 {
   /**
    * Modifies the Vector2 by multiplying the (x,y) values by the individual (x,y) values of a second Vector2 object
    * @param {Rect} other A Vector2 object
+   * @memberof Vector2
    */
   Multiply(other) {
     this.x *= other.x;
@@ -121,7 +125,8 @@ class Vector2 {
 
   /**
    * Modifies the Vector2 by multiplying the (x,y) values by a scalar quantity
-   * @param {Number} s A scalar quantity 
+   * @param {Number} s A scalar quantity
+   * @memberof Vector2
    */
   MultiplyScalar(s) {
     this.x *= s;
@@ -130,13 +135,13 @@ class Vector2 {
 
   /**
    * Modifies the Vector2 by dividing the (x,y) values by the individual (x,y) values of a second Vector2 object
-   * @param {Number} s A scalar quantity 
+   * @param {Number} s A scalar quantity
    * @throws Exception if either x or y value of the other vector == 0
+   * @memberof Vector2
    */
   Divide(other) {
     //divide by 0!
-    if(other.x == 0 || other.y == 0)
-      throw "Cannot divide by Zero!";
+    if (other.x == 0 || other.y == 0) throw "Error: Cannot divide by zero!";
 
     this.x /= other.x;
     this.y /= other.y;
@@ -144,13 +149,13 @@ class Vector2 {
 
   /**
    * Modifies the Vector2 by dividing the (x,y) values by a scalar quantity
-   * @param {Number} s A scalar quantity 
+   * @param {Number} s A scalar quantity
    * @throws Exception if either x or y value of the other vector == 0
+   * @memberof Vector2
    */
   DivideScalar(s) {
     //divide by 0!
-    if(s == 0)
-    throw "Cannot divide by Zero!";
+    if (s == 0) throw "Error: Cannot divide by zero!";
 
     this.x /= s;
     this.y /= s;
@@ -159,24 +164,27 @@ class Vector2 {
   /**
    * Returns the dot product (A.B) of two Vector2 objects, where dot = |A|.|B|.Cos(x) and x is angle between A and B in radians
    * @param {Vector2} other A Vector2 object
-   * @returns {Number} Dot product 
+   * @returns {Number} Dot product
+   * @memberof Vector2
    */
   Dot(other) {
     return this.x * other.x + this.y * other.y;
   }
 
-   /**
+  /**
    * Returns the angle in radians between to Vector2 objects which is calculated using the Dot() method
    * @param {Vector2} other A Vector2 object
-   * @returns {Number} Angle in radians 
+   * @returns {Number} Angle in radians
+   * @memberof Vector2
    */
   AngleInRadiansBetween(other) {
     return Math.acos(this.Dot(other) / (this.Length() * other.Length()));
   }
 
-   /**
+  /**
    * Returns the length of a Vector2 object
    * @returns {Number} Length of the Vector2
+   * @memberof Vector2
    */
   Length() {
     if (this.isDirty) {
@@ -186,10 +194,11 @@ class Vector2 {
     return this.length;
   }
 
-   /**
+  /**
    * Returns the Euclidean (i.e. straight line) distance between two points in 2D space
    * @param {Vector2} other A Vector2 object
    * @returns {Number} Distance between the two vectors
+   * @memberof Vector2
    */
   Distance(other) {
     return Math.sqrt(
@@ -197,16 +206,18 @@ class Vector2 {
     );
   }
 
-   /**
+  /**
    * Modifies the Vector2 object where the (x,y) values have had the Math.abs() method applied.
+   * @memberof Vector2
    */
   Abs() {
     this.x = Math.abs(this.x);
     this.y = Math.abs(this.y);
   }
 
-   /**
+  /**
    * Modifies the Vector2 object where the (x,y) values have had the Math.abs() method applied.
+   * @memberof Vector2
    */
   Round(precision) {
     this.x = GDMath.ToFixed(this.x, precision, 10);
@@ -216,6 +227,7 @@ class Vector2 {
   /**
    * Modifies the Vector2 object by normalising its length (i.e. == 1)
    * @throws Throws an exception if length == 0
+   * @memberof Vector2
    */
   Normalize() {
     var len = this.Length();
@@ -271,12 +283,6 @@ class Vector2 {
 
   static Abs(vector) {
     return new Vector2(Math.abs(vector.x), Math.abs(vector.y));
-  }
-
-  static Transform(vector, matrix) {
-    let x = vector.x * matrix.a11 + vector.y * matrix.a21 + matrix.a31;
-    let y = vector.x * matrix.a12 + vector.y * matrix.a22 + matrix.a32;
-    return new Vector2(x, y);
   }
 
   static Round(vector, precision) {

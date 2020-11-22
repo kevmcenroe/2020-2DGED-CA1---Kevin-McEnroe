@@ -9,6 +9,7 @@ class GDUtilities {
      * @param {JS/user-defined data type} target
      * @param {JS/user-defined data type} other
      * @returns True if target and other are the same data type, otherwise false
+     * @throws Exception if other object is null or undefined
      * @memberof GDUtility
      */
     static IsSameTypeAsTarget(target, other) {
@@ -30,6 +31,7 @@ class GDUtilities {
      * @param {number} lo Integer
      * @param {number} hi Integer
      * @returns Random integer
+     * @throws Exception if lo or hi are undefined or lo > hi
      * @memberof GDUtilities
      */
     static getRandomInRange(lo, hi) {
@@ -52,6 +54,7 @@ class GDUtilities {
      * @param {number} hi Integer
      * @param {*} exclValues Array of integer values to exclude (e.g. -10, 10, [2, 3, 4])
      * @returns Random integer
+     * @throws Exception if lo or hi are undefined, or lo > hi, or exclValues is null or undefined
      * @memberof GDUtilities
      */
     static getRandomInRangeExcl(lo, hi, exclValues) {
@@ -59,7 +62,6 @@ class GDUtilities {
         //failure tests
         if (lo == undefined || hi == undefined ||
             exclValues == undefined || exclValues == null)
-            //    || typeof(exclValues[0]) == "number")
             throw "One or more parameters is undefined";
 
         if (exclValues.length == 0)

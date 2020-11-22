@@ -1,5 +1,10 @@
 //#region Actor related
-//defines the actors we find in the game
+/**
+ * Defines the actors we find in the game. We assign each new actor with a unique number.
+ * The numbers will be used to set the draw order for the actors (i.e. Background first, then NPC etc)
+ * 
+ * @see Actor2D::Actor2D
+ */
 const ActorType = Object.freeze({
   /*
    * VERY IMPORTANT - The order of the actors below DEFINES the draw order
@@ -10,36 +15,54 @@ const ActorType = Object.freeze({
   Background: 0,
   NPC: 1,
   Player: 2,
-  Projectile: 3
+  Projectile: 3,
   //add as many actor types as your game needs here BUT remember that the assigned number will determine drawn sort order...
 });
 
-//e.g. StatusType.Drawn | Status.Updated = 3
-//0001
-//0010
-//----
-//0011 (3)
-
-//0011
-//0010
-//----
-//0010 (2) != 0 => this value contains/has Updated set
-//0000 0010
-//0000 1000
-//0010 0000
+/**
+ * Defines whether a Sprite is Drawn and/or Updated by the ObjectManager Draw and Update methods
+ *
+ * Usage:
+ * 
+ * A Sprite that is Drawn and Updated (i.e. visible on screen and needing to have its
+ * controllers updated) will have statusType set to StatusType.Drawn | Status.Updated 
+ * which, when we perform a bitwise OR gives us the following:
+ * 
+ *    0001
+ *    0010
+ *    ----
+ *  | 0011 (3)
+ * 
+ * When we want to check if this Sprite should be Drawn or Updated then we perform a bitwise AND
+ * with the Sprites' statusType and the field we want to check. For example the statusType below (0011)
+ * when AND'ed with the value for Updated (0010) gives a NON-ZERO value, which indicates that the
+ * Updated field was set.
+ * 
+ *    0011
+ *    0010
+ *    ----
+ *  & 0010 (2) != 0 => this value contains/has Updated set
+ * 
+ * It's important that each value (e.g. Drawn, Updated) is a power of 2 value (e.g. 2^1, 2^2),
+ * otherwise the bitwise operations (AND, OR) would not work correctly.
+ * 
+ * @see ObjectManager::Draw()
+ * @see ObjectManager::Update()
+ */
 const StatusType = Object.freeze({
   Off: 0,
   Drawn: 1, //0001
   Updated: 2, //0010
-  //add more here as required but ENSURE they are 2^N values
-  //its important that the values are powers of two because we combine them using a bitwise-OR
-  //e.g. StatusType.Updated | StatusType.Drawn
-  //if we dont need to ever combine the values then we just use a number of Symbol() as in the types below.
+
 });
 //#endregion
 
 //#region Keyboard, Color related
-//used to draw color to the screen e.g. ClearScreen(Color.Black)
+
+/**
+ * Used to draw color to the screen e.g. ClearScreen(Color.Black)
+ * @see Draw() method in your main game JS file (e.g. SpaceInvaders.js)
+ */
 const Color = Object.freeze({
   Black: "#000000",
   White: "#FFFFFF",
@@ -51,7 +74,10 @@ const Color = Object.freeze({
   //Use https://html-color-codes.info/colors-from-image/ to determine hex codes for colors that you use in free 3rd party images/sprites that you find online
 });
 
-//used by any entity which listens for key input
+/**
+ * Used by the KeyboardManager to map key codes (e.g. 65 for A) to a human-readable symbol (e.g. A)
+ * @see KeyboardManager
+ */
 const Keys = Object.freeze({
   Space: 32,
   Enter: 13,
@@ -111,17 +137,3 @@ const Keys = Object.freeze({
 
 //#endregion
 
-/*
-//enumerate different types of audio (genre/theme/application) within our game
-//AudioType.Win set volume to 0
-const AudioType = Object.freeze({
-  Background: Symbol("Background"),
-  Menu: Symbol("Menu"),
-  Explosion: Symbol("Explosion"),
-  Move: Symbol("Move"),
-  Win: Symbol("Win"),
-  Lose: Symbol("Lose"),
-  Weapon: Symbol("Weapon"),
-  Other: Symbol("Other"),
-});
-*/
