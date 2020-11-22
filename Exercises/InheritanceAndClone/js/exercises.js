@@ -4,21 +4,22 @@ document.writeln(
 
 runExercises();
 
-/*  0. Implement principle entities as separate JS files
-    1. Implement a Player (inherits from Sprite)
+/*  
+    0. Implement (i.e. develop) principle entities as separate JS files
+    1. Implement (i.e. develop) a Player (inherits from Sprite) class which contains the following fields:
         - name, position(x,y), texture(name)
         - inventory(weapons) - array
-    2. Implement a Weapon (inherits from Sprite)
+    2. Implement (i.e. develop) a Weapon (inherits from Sprite) class which contains the following fields:
         - name, texture(name)
         - clipSize (2MW)
         - damageRate (1200)
         - clipCount (10MW)
-    3. Implement a Sprite
+    3. Implement (i.e. develop) a Sprite class which contains the following fields:
         - name
         - texture(name)
     4. Populate the Player with 3-4 Weapons
-    5. Clone a Weapon test using Equals (w1 === w2?)
-    6. Clone a Player test using Equals (p1 === p2)
+    5. Clone a Weapon and test using Equals (w1 === w2?) Is this a deep copy?
+    6. Clone a Player and test using Equals (p1 === p2)  Is this a deep copy?
 
     Typical class has...
         - constructor, fields, get/set, Equals(), Clone()

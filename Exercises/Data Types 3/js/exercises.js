@@ -131,10 +131,6 @@ const bikePredicate = Object.freeze({
     make: function(bike){ return bike.make === "carrera";}
 });
 
-
-
-
-
 function filter(array, filterFn, displayFn){
     for(let i = 0; i < array.length; i++){
         if(filterFn(array[i]))
