@@ -3,13 +3,15 @@
 class GDUtilities {
 
      /**
-     * Returns true if "other" is non-null, not undefined and of type "target".
+     * Returns true if "other" is non-null, defined and same as type "target".
+     * For example we can use this method to see if two Sprite objects are the same type.
      *
      * @static
-     * @param {JS/user-defined data type} target
-     * @param {JS/user-defined data type} other
-     * @returns True if target and other are the same data type, otherwise false
+     * @param {Object} target
+     * @param {Object} other
+     * @returns {Boolean} True if target and other are the same data type, otherwise false
      * @throws Exception if other object is null or undefined
+     * @see Actor2D::Equals()
      * @memberof GDUtility
      */
     static IsSameTypeAsTarget(target, other) {
@@ -30,7 +32,7 @@ class GDUtilities {
      * @static
      * @param {number} lo Integer
      * @param {number} hi Integer
-     * @returns Random integer
+     * @returns {Number} Random integer
      * @throws Exception if lo or hi are undefined or lo > hi
      * @memberof GDUtilities
      */
@@ -53,7 +55,7 @@ class GDUtilities {
      * @param {number} lo Integer
      * @param {number} hi Integer
      * @param {*} exclValues Array of integer values to exclude (e.g. -10, 10, [2, 3, 4])
-     * @returns Random integer
+     * @returns {Number} Random integer
      * @throws Exception if lo or hi are undefined, or lo > hi, or exclValues is null or undefined
      * @memberof GDUtilities
      */
@@ -98,7 +100,7 @@ class GDUtilities {
      *
      * @static
      * @param {Array} array An array of values of any type
-     * @returns Array of shuffled values
+     * @returns {Array} Array of shuffled values
      * @memberof GDUtilities
      * @see https://www.geeksforgeeks.org/how-to-shuffle-an-array-using-javascript/
      * @author Geeksforgeeks
@@ -130,8 +132,8 @@ class GDMath {
      * Returns degrees value in radians
      *
      * @static
-     * @param {number} degrees Degrees value 
-     * @returns Radians value
+     * @param {Number} degrees Degrees value 
+     * @returns {Number} Radians value
      * @memberof GDMath
      */
     static ToRadians(degrees) {
@@ -143,8 +145,8 @@ class GDMath {
      * Returns radians value in degrees
      *
      * @static
-     * @param {number} radians Radians value 
-     * @returns Degrees value
+     * @param {Number} radians Radians value 
+     * @returns {Number} Degrees value
      * @memberof GDMath
      */
     static ToDegrees(radians) {
@@ -155,9 +157,9 @@ class GDMath {
      * Converts a floating-point value to a fixed based precision in a specified base (e.g. 8, 16, 10)
      *
      * @static
-     * @param {number} value Floating-point value to be converted
-     * @param {number} precision Integer precision (e.g. 0, 1, 2)
-     * @param {number} base Number base (e.g. 8,16,10)
+     * @param {Number} value Floating-point value to be converted
+     * @param {Number} precision Integer precision (e.g. 0, 1, 2)
+     * @param {Number} base Number base (e.g. 8,16,10)
      * @returns
      * @memberof GDMath
      */
@@ -172,7 +174,7 @@ class GDMath {
 
 
 /************************************************************************/
-
+//to do...
 class GDString {
 
 }

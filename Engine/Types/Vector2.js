@@ -14,8 +14,8 @@ class Vector2 {
   /**
    *
    * Returns an instance of a Vector2 object with x,y of (0,0).
-   * Usage:
-   *      let v = Vector2.Zero;
+   * @example
+   * let v = Vector2.Zero;
    *
    * @readonly
    * @static
@@ -28,8 +28,8 @@ class Vector2 {
   /**
    *
    * Returns an instance of a Vector2 object with x,y of (1,1).
-   * Usage:
-   *      let v = Vector2.One;
+   * @example
+   * let v = Vector2.One;
    *
    * @readonly
    * @static
@@ -42,8 +42,8 @@ class Vector2 {
   /**
    *
    * Returns an instance of a Vector2 object with x,y of (1,0).
-   * Usage:
-   *      let v = Vector2.UnitX;
+   * @example
+   * let v = Vector2.UnitX;
    *
    * @readonly
    * @static
@@ -56,8 +56,8 @@ class Vector2 {
   /**
    *
    * Returns an instance of a Vector2 object with x,y of (0, 1).
-   * Usage:
-   *      let v = Vector2.UnitY;
+   * @example
+   * let v = Vector2.UnitY;
    *
    * @readonly
    * @static
