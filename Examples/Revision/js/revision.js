@@ -63,7 +63,11 @@ const entityType = {
     Props: Symbol("sdfsdf"),
 }
 
+//nasty because who knows what 1 means!
 initializeEntity(1);
+
+//easier to read because the entityType allows us to replace 1 or N with a symbolic representation e.g. entityType.Player
+initializeEntity(entityType.Player);
 
 function initializeEntity(entityType){
     if(entityType == entityType.Player)
