@@ -1,3 +1,4 @@
+/*
 function doSomething(a, b){
 
 }
@@ -73,5 +74,108 @@ function initializeEntity(entityType){
     if(entityType == entityType.Player)
         makePlayer();
 }
+*/
 
 //clone
+class Account{
+    name;
+    id;
+
+    constructor(id, name){
+        this.name = name;
+        this.id = id;
+    }
+
+    //value-type e.g. Number, String, Boolean (pass-by-copy) - deep
+    //reference-type e.g. Array, Object  (pass-by-reference) - shallow
+    Clone(){
+        return new Account(
+            this.name, //deep
+            this.id    //deep
+            );
+    }
+}
+
+// var a1 = new Account("1234", "jane smith");
+// var cloneA1 = a1.Clone();
+// cloneA1.name = "john doe";
+// console.log('a1.name :>> ', a1.name);
+// console.log('a1.id :>> ', a1.id);
+
+class Person{ //"has-a"
+    email;
+    account;
+
+    constructor(email, account){
+        this.email = email;
+        this.account = account;
+    }
+
+    Clone(){
+        return new Person(this.email, //deep of value-type
+         //   this.account //shallow of reference-type
+            this.account.Clone() //deep copy 
+           );
+    }
+}
+
+var p1 = new Person("jane@dkit.ie", new Account("123456", "jane smith"));
+var cloneP1 = p1.Clone();
+
+// cloneP1.email = "jane@ucd.ie";
+// console.log('p1.email :>> ', p1.name);
+
+cloneP1.account.name = "jeanice p smith";
+console.log('cloneP1.account.name :>> ', cloneP1.account.name);
+
+console.log('p1.account.name :>> ', p1.account.name);
+
+
+class Car{
+    doorFrontLeft;
+    doorFrontRight;
+    engine;
+
+    //constructor
+    //clone - deep or shallow?
+}
+
+class Door{
+    weight;
+    dimension;
+    //constructor
+    //clone - deep or shallow?
+}
+
+class Vector3{
+    w;
+    h;
+    d;
+}
+
+class Engine{
+    pistonA;
+    pistonB;
+     //constructor
+    //clone - deep or shallow?
+}
+
+class Piston{
+    length;
+    material;
+    //constructor
+    //clone - deep or shallow?
+}
+
+var carArray = [];
+
+
+
+
+
+
+
+
+
+
+
