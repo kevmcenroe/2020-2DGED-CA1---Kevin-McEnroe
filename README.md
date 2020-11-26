@@ -39,3 +39,6 @@
 ### Tasks - Week 7
 - [x] Re-factored SpriteArtist and AnimatedSpriteArtist to extend Artist
 - [ ] Add use of Transform2D::Scale to Draw() of SpriteArtist and AnimatedSpriteArtist
+
+### Tasks - Week 8
+- [ ] Added revision and canvas examples

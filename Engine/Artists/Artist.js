@@ -1,5 +1,6 @@
 /**
- * Base class for all artists.
+ * Base class for all artists. An artist will be used by a Sprite to draw either
+ * a static image (using SpriteArtist), or a dynamic image (using AnimatedSpriteArtist).
  * @author niall mcguinness
  * @version 1.0
  * @class Artist

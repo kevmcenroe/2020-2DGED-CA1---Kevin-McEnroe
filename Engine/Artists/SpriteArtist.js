@@ -55,8 +55,7 @@ class SpriteArtist extends Artist {
    * Renders pixel data from spritesheet to canvas
    *
    * @param {GameTime} gameTime (unused)
-   * @param {Sprite} parent
-   * @param {Camera2D} activeCamera
+   * @param {Sprite} parent Sprite object to which this artist is attached
    * @memberof SpriteArtist
    */
   Draw(gameTime, parent) {

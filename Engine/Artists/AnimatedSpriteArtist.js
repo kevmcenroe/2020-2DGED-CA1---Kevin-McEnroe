@@ -65,7 +65,7 @@ class AnimatedSpriteArtist extends Artist {
   Update(gameTime, parent) {
     this.timeSinceLastFrameInMs += Math.round(gameTime.ElapsedTimeInMs);
     if (this.timeSinceLastFrameInMs >= this.frameIntervalInMs) {
-      this.Advance(parent);
+      this.Advance();
       this.timeSinceLastFrameInMs = 0;
     }
   }
@@ -75,7 +75,7 @@ class AnimatedSpriteArtist extends Artist {
    *
    * @memberof AnimatedSpriteArtist
    */
-  Advance(parent) {
+  Advance() {
     //if not at end frame then advance 1
     if (this.currentCellIndex < this.endFrameIndex) this.currentCellIndex++;
     else {
