@@ -9,7 +9,7 @@ var cvs = document.getElementById("main_canvas");
 var ctx = cvs.getContext("2d");
 
 var posX = 20, posY = 20;
-var moveIncrement = 1;
+var moveIncrement = 4;
 
 //start the loop
 function Start() {
@@ -36,6 +36,13 @@ function Animate(currentTimeInMs) {
 
 function Update(currentTimeInMs) {
   posX += moveIncrement;
+
+  //make decisions about state of objects here...
+  if(posX > cvs.clientWidth - 150)
+    moveIncrement *= -1;
+  else if(posX < 0)
+    moveIncrement *= -1;
+
 }
 
 function Draw(currentTimeInMs) {
