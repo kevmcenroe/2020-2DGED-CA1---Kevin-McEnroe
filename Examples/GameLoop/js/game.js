@@ -1,5 +1,3 @@
-'use strict'
-
 window.addEventListener("load", Start);
 
 /********************************* Game Engine Core Variables & Functions (Do Not Change in Your Game) *********************************/
