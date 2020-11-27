@@ -9,7 +9,7 @@ var cvs = document.getElementById("main_canvas");
 var ctx = cvs.getContext("2d");
 
 var posX = 20, posY = 20;
-
+var moveIncrement = 1;
 
 //start the loop
 function Start() {
@@ -35,7 +35,7 @@ function Animate(currentTimeInMs) {
 }
 
 function Update(currentTimeInMs) {
-  posX += 1;
+  posX += moveIncrement;
 }
 
 function Draw(currentTimeInMs) {
