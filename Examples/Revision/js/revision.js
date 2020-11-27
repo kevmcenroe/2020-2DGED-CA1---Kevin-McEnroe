@@ -130,52 +130,102 @@ console.log('cloneP1.account.name :>> ', cloneP1.account.name);
 
 console.log('p1.account.name :>> ', p1.account.name);
 
-
-class Car{
-    doorFrontLeft;
-    doorFrontRight;
-    engine;
-
-    //constructor
-    //clone - deep or shallow?
-}
-
-class Door{
-    weight;
-    dimension;
-    //constructor
-    //clone - deep or shallow?
-}
-
-class Vector3{
-    w;
-    h;
-    d;
-}
-
 class Engine{
-    pistonA;
-    pistonB;
-     //constructor
-    //clone - deep or shallow?
+    model;
+    pistonArray;
+
+    constructor(model){
+        this.model = model;
+        this.pistonArray = [];
+    }
+    addPiston(piston){
+        this.pistonArray.push(piston);
+    }
+
+    Clone(){
+        var cloneEngine = new Engine(this.model);
+        for(let i = 0; i < this.pistonArray.length; i++){
+                let piston = this.pistonArray[i];
+                cloneEngine.addPiston(piston.Clone());
+        }
+        return cloneEngine;
+    }
+
+    ToString(){
+        var str = "Model:" + this.model;
+        for(let i = 0; i < this.pistonArray.length; i++){
+            let piston = this.pistonArray[i];
+            str += piston.ToString();
+        }
+        return str;
+    }
 }
 
 class Piston{
-    length;
+    dimensions;
     material;
-    //constructor
-    //clone - deep or shallow?
+
+    constructor(dimensions, material){
+        this.dimensions = dimensions;
+        this.material = material;
+    }
+
+    ToString(){
+        return "\n\tDimensions: " + this.dimensions.ToString() + "\n\tMaterial: " + this.material;
+    }
+
+    //deep
+    Clone(){
+        return new Piston(this.dimensions.Clone(), //reference-type but we call Clone = deep
+            this.material);                 //value-type = deep
+    }
 }
 
-var carArray = [];
+class Vector3{
+    x;
+    y;
+    z;
 
+    constructor(x,y,z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 
+    ToString(){
+        return "x: " + this.x + ", x: " + this.y + ", z: " + this.z;
+    }
 
+    //deep
+    Clone(){
+        return new Vector3(this.x, this.y, this.z); //pass-by-copy = deep
+    }
 
+}
 
+var engine = new Engine("toyota");
+var p1 = new Piston(new Vector3(12, 14, 3), "palladium");
+engine.addPiston(p1);
+engine.addPiston(new Piston(new Vector3(12, 14, 3), "titanium"));
 
+var str = engine.ToString();
+console.log(str);
 
+console.log("\n******************************************************************\n");
 
+//means cloneEngine is a SHALLOW copy
+var cloneEngineShallow = engine;
+cloneEngineShallow.addPiston(new Piston(new Vector3(18, 10, 1), "aluminium"));
+console.log('engine.ToString() :>> ', engine.ToString());
+console.log("\n\n\n");
+console.log('cloneEngineShallow.ToString() :>> ', cloneEngineShallow.ToString());
 
+console.log("\n******************************************************************\n");
+//how do I make a deep copy?
+var cloneEngineDeep = engine.Clone();
+cloneEngineDeep.addPiston(new Piston(new Vector3(18, 10, 1), "aluminium"));
 
+console.log('engine.ToString() :>> ', engine.ToString());
+console.log("\n\n\n");
+console.log('cloneEngineDeep.ToString() :>> ', cloneEngineDeep.ToString());
 
