@@ -11,6 +11,8 @@ var ctx = cvs.getContext("2d");
 var movingRectXPos = 20, movingRectYPos = 20;
 var moveIncrement = 4;
 
+var rectA = new Rect(100, 100, 200, 200);
+
 //start the loop
 function Start() {
   //start Update/Draw cycle i.e. start the game
@@ -31,14 +33,15 @@ function Animate(currentTimeInMs) {
 }
 
 function Update(currentTimeInMs) {
-
   UpdateMovingRect(currentTimeInMs);
+  
 }
 
 function UpdateMovingRect(currentTimeInMs){
   movingRectXPos += moveIncrement;
+
   //make decisions about state of objects here...
-  if(movingRectXPos > cvs.clientWidth - 150)
+  if(movingRectXPos > cvs.clientWidth - 50)
     moveIncrement *= -1;
   else if(movingRectXPos < 0)
     moveIncrement *= -1;
@@ -46,15 +49,26 @@ function UpdateMovingRect(currentTimeInMs){
 
 
 function Draw(currentTimeInMs) {
+
   ClearCanvas("rgb(187, 251, 209)");
   DrawMovingRect(currentTimeInMs);
+
+  ctx.strokeRect(rectA.x, rectA.y, rectA.width, rectA.height);
 
 }
 
 function DrawMovingRect(currentTimeInMs){
-  ctx.lineWidth = 5;
-  ctx.strokeStyle = "yellow";
-  ctx.strokeRect(movingRectXPos, movingRectYPos, 150, 100);
+
+  if(moveIncrement >= 0)
+    ctx.strokeStyle = "red";
+  else
+    ctx.strokeStyle = "yellow";
+
+    ctx.lineWidth = 12;
+    ctx.fillStyle = "blue";
+
+  ctx.strokeRect(movingRectXPos, movingRectYPos, 50, 50);
+  ctx.fillRect(movingRectXPos, movingRectYPos, 50, 50);
 }
 
 function ClearCanvas(color) {
