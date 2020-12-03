@@ -10,11 +10,27 @@ var cvs = document.getElementById("main_canvas");
 //get a handle to the 2D context of the canvas
 var ctx = cvs.getContext("2d");
 
+var spriteSheet = null;
+
 //start the loop
 function Start() {
+
+  LoadAssets();
+
+
   //start Update/Draw cycle i.e. start the game
   window.requestAnimationFrame(Animate);
 }
+
+function LoadAssets(){
+  LoadTextures();
+}
+
+
+function LoadTextures(){
+  spriteSheet = document.getElementById("rasputin");
+}
+
 
 function Animate(now) {
 
@@ -33,7 +49,9 @@ function Update() {
 }
 
 function Draw() {
- 
+
+  ctx.globalAlpha = 0.9;
+  ctx.drawImage(spriteSheet, 140, 30, 62, 52, 0, 0, 100, 200);
 }
 
 function ClearCanvas(color) {

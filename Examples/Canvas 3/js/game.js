@@ -10,14 +10,14 @@ window.addEventListener("keydown", evt =>{
       rectA.Move(0, -4);
     }
     else if(evt.key == "ArrowDown"){ //"down"
-    rectA.Move(0, 4);
+      rectA.Move(0, 4);
     }
 
     if(evt.key == "ArrowLeft"){ //"up"
       rectA.Move(-4, 0);
     }
     else if(evt.key == "ArrowRight"){ //"down"
-    rectA.Move(4, 0);
+      rectA.Move(4, 0);
     }
 });
 
@@ -35,8 +35,10 @@ var cvs = document.getElementById("main_canvas");
 //get a handle to the 2D context of the canvas
 var ctx = cvs.getContext("2d");
 
-var rectA = new Rect(10, 10, 100, 50);
-var rectB = new Rect(200, 10, 80, 80);
+var bOverlap = false;
+
+var rectA = new Rect(10, 50, 50, 50);
+var rectB = new Rect(50, 50, 540, 380);
 
 //start the loop
 function Start() {
@@ -57,7 +59,16 @@ function Animate(now) {
 }
 
 function Update() {
- 
+//  if(rectA.Intersects(rectB))
+//   bOverlap = true;
+//  else
+//   bOverlap = false;
+
+  if(rectB.Contains(rectA))
+  bOverlap = true;
+ else
+  bOverlap = false;
+
 }
 
 function Draw() {
@@ -65,7 +76,10 @@ function Draw() {
 
   ctx.save();
  // ctx.globalAlpha = 0.2;
-  ctx.strokeStyle = "red";
+ if(!bOverlap)
+    ctx.strokeStyle = "green";
+ else
+    ctx.strokeStyle = "red";    
   ctx.strokeRect(rectA.x, rectA.y, rectA.width, rectA.height);
   ctx.restore();
 
