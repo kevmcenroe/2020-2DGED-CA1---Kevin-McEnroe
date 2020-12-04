@@ -14,6 +14,8 @@ var spriteSheet = null;
 var scoreSprite = null;
 var scoreSprite2 = null;
 
+var clonePlatform1 = null, clonePlatform2 = null, clonePlatform3 = null;
+
 //start the loop
 function Start() {
 
@@ -25,17 +27,40 @@ function Start() {
 }
 
 function LoadUI(){
-//  var artist = new TextArtist("10/20", "18px Arial");
-  var artist = new RectangleArtist(100, 10, 4, "blue");
-  
-  scoreSprite = new Sprite("platform 1", ActorType.Platform, 
-                        ctx, 320, 30, artist);
 
-  var artist2 = new RectangleArtist(50, 10, 4, "red");
-  
-  scoreSprite2 = new Sprite("platform 2", ActorType.Platform, 
-                                              ctx, 260, 60, artist2);
+  var archetypalPlatformSprite = new Sprite("platform", ActorType.Platform, 
+                        ctx, 120, 240, new RectangleArtist(20, 5, 2, "red"));
+
+   clonePlatform1 = archetypalPlatformSprite.Clone();
+   clonePlatform1.x += 25;
+   clonePlatform1.y -= 20;
+
+   clonePlatform2 = archetypalPlatformSprite.Clone();
+   clonePlatform2.artist.strokeStyle = "green";
+   clonePlatform2.x += 50;
+   clonePlatform2.y -= 40;
+
+   clonePlatform3 = archetypalPlatformSprite.Clone();
+   clonePlatform3.artist.strokeStyle = "blue";
+   clonePlatform3.x += 75;
+   clonePlatform3.y -= 60;
+
+
+
 }
+
+// function LoadUI(){
+//   //  var artist = new TextArtist("10/20", "18px Arial");
+//     var artist = new RectangleArtist(100, 10, 4, "blue");
+    
+//     scoreSprite = new Sprite("platform 1", ActorType.Platform, 
+//                           ctx, 320, 30, artist);
+  
+//     var artist2 = new RectangleArtist(50, 10, 4, "red");
+    
+//     scoreSprite2 = new Sprite("platform 2", ActorType.Platform, 
+//                                                 ctx, 260, 60, artist2);
+//   }
 
 function LoadGameObject(){
 
@@ -60,8 +85,10 @@ function Update() {
 function Draw() {
 
   ctx.save();
-  scoreSprite.Draw();
-  scoreSprite2.Draw();
+  clonePlatform1.Draw();
+  clonePlatform2.Draw();
+  clonePlatform3.Draw();
+
   ctx.restore();
 }
 

@@ -29,11 +29,36 @@ class Sprite{
     }
 
     //value = Number, Boolean, String
+    //hybrid
     Clone(){
-        return new Sprite(this.id, this.actorType, this.context, this.x, this.y, this.artist);
+        return new Sprite(this.id, this.actorType, 
+            this.context, //ref
+            this.x, this.y, 
+            this.artist.Clone());  //ref
     }
 }
 
+class SpriteArtist{
+
+    constructor(spriteSheet, sx, sy, sw, sh){
+        this.spriteSheet = spriteSheet;
+        this.sx = sx;
+        this.sy = sy;
+        this.sw = sw;
+        this.sh = sh;
+    }
+    Draw(context, x, y){
+        context.save();
+        ctx.drawImage(this.spriteSheet, this.sx, this.sy, this.sw, this.sh, 
+            x, y, 100, 100);
+        context.restore();
+    }
+
+    Clone(){
+        //deep
+     //   new TextureArtist(this.text, this.font);
+    }
+}
 
 class TextArtist{
 
@@ -49,7 +74,8 @@ class TextArtist{
     }
 
     Clone(){
-
+        //deep
+        new TextArtist(this.text, this.font);
     }
 }
 
@@ -70,7 +96,9 @@ class RectangleArtist{
     }
 
     Clone(){
-
+        //deep
+        return new RectangleArtist(this.w, this.h, this.lineWidth, 
+            this.strokeStyle);
     }
 }
 
