@@ -41,4 +41,12 @@
 - [ ] Add use of Transform2D::Scale to Draw() of SpriteArtist and AnimatedSpriteArtist
 
 ### Tasks - Week 8
-- [ ] Added revision and canvas examples
+- [ ] Add revision and canvas examples
+
+### Tasks - Week 9
+- [ ] Add Canvas 3 (drawing with Rect and detecting collisions)
+- [ ] Add Canvas 4 (drawing sprites and object manager)
+- [ ] Add Canvas 5 (keyboard manager)
+- [ ] Add simple Sprite class with Clone
+- [ ] Add simple ObjectManager to draw multiple sprites
+- [ ] Add a controller to the Sprite to move with keyboard input

@@ -18,43 +18,6 @@ const ActorType = Object.freeze({
   Projectile: 3,
   //add as many actor types as your game needs here BUT remember that the assigned number will determine drawn sort order...
 });
-
-/**
- * Defines whether a Sprite is Drawn and/or Updated by the ObjectManager Draw and Update methods
- *
- * Usage:
- * 
- * A Sprite that is Drawn and Updated (i.e. visible on screen and needing to have its
- * controllers updated) will have statusType set to StatusType.Drawn | Status.Updated 
- * which, when we perform a bitwise OR gives us the following:
- * 
- *    0001
- *    0010
- *    ----
- *  | 0011 (3)
- * 
- * When we want to check if this Sprite should be Drawn or Updated then we perform a bitwise AND
- * with the Sprites' statusType and the field we want to check. For example the statusType below (0011)
- * when AND'ed with the value for Updated (0010) gives a NON-ZERO value, which indicates that the
- * Updated field was set.
- * 
- *    0011
- *    0010
- *    ----
- *  & 0010 (2) != 0 => this value contains/has Updated set
- * 
- * It's important that each value (e.g. Drawn, Updated) is a power of 2 value (e.g. 2^1, 2^2),
- * otherwise the bitwise operations (AND, OR) would not work correctly.
- * 
- * @see ObjectManager::Draw()
- * @see ObjectManager::Update()
- */
-const StatusType = Object.freeze({
-  Off: 0,
-  Drawn: 1, //0001
-  Updated: 2, //0010
-
-});
 //#endregion
 
 //#region Keyboard, Color related

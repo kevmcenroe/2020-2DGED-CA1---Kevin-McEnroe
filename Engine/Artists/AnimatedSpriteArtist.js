@@ -8,15 +8,28 @@
 
 class AnimatedSpriteArtist extends Artist {
   //#region  Fields
+  frames;
+  startFrameIndex;
+  endFrameIndex;
+  frameRatePerSec;
+  frameIntervalInMs;
+  currentCellIndex;
+  timeSinceLastFrameInMs;
   //#endregion
 
   //#region  Properties
   get FrameRatePerSec() {
     return this.frameRatePerSec;
   }
-  set FrameRatePerSec(frameRatePerSec) {
-    this.frameRatePerSec = frameRatePerSec;
-    this.frameIntervalInMs = 1000 / frameRatePerSec; //2fps => 1/2 =? 0.5 secs/frame =? 500ms/frame
+  set FrameRatePerSec(value) {
+    this.frameRatePerSec = value;
+    this.frameIntervalInMs = 1000 / value; //2fps => 1/2 =? 0.5 secs/frame =? 500ms/frame
+  }
+  get SpriteSheet() {
+    return this.spriteSheet;
+  }
+  set SpriteSheet(value) {
+    this.spriteSheet = value;
   }
   //#endregion
 
@@ -26,8 +39,8 @@ class AnimatedSpriteArtist extends Artist {
    *  Constructs an artist which will cycle through (animate) a set of image frames
    *
    * @param {CanvasRenderingContext2D} context Handle to draw context
-   * @param {HTMLImageElement} spriteSheet Handle to the image data
    * @param {Number} alpha Floating point value (0-1) indicating sprite transparency
+   * @param {HTMLImageElement} spriteSheet Handle to the image data
    * @param {Array} frames Array of frames (see GameConstants) defining the animation sequence
    * @param {Number} startFrameIndex Zero-based index of first animation frame in the sequence
    * @param {Number} endFrameIndex Zero-based index of last animation frame in the sequence
@@ -35,15 +48,15 @@ class AnimatedSpriteArtist extends Artist {
    */
   constructor(
     context,
-    spriteSheet,
     alpha,
+    spriteSheet,
     frames,
     startFrameIndex,
     endFrameIndex,
     frameRatePerSec
   ) {
-    super(context, spriteSheet, alpha);
-
+    super(context, alpha);
+    this.spriteSheet = spriteSheet;
     this.frames = frames;
     this.startFrameIndex = startFrameIndex;
     this.endFrameIndex = endFrameIndex;
@@ -129,8 +142,8 @@ class AnimatedSpriteArtist extends Artist {
   Clone() {
     return new AnimatedSpriteArtist(
       this.Context,           //shallow
-      this.SpriteSheet,       //shallow
       this.Alpha,             //deep
+      this.SpriteSheet,       //shallow
       this.frames,            //shallow
       this.startFrameIndex,   //deep
       this.endFrameIndex,     //deep

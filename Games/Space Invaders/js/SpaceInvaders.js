@@ -1,3 +1,5 @@
+//'use strict' //throw an exception if a variable is used without being declared
+
 window.addEventListener("load", Start);
 
 /********************************* Game Engine Core Variables & Functions (Do Not Change in Your Game) *********************************/
@@ -14,7 +16,8 @@ var gameTime = null;
 
 //stores object manager which holds all sprites
 var objectManager = null;
-//add more here...
+var backgroundSpriteSheet;
+var spriteSheet;
 
 //#endregion
 
@@ -171,8 +174,8 @@ function LoadBackgrounds() {
 
   artist = new SpriteArtist(
     ctx,
-    backgroundSpriteSheet,
     1,
+    backgroundSpriteSheet,
     new Vector2(0, 0),
     new Vector2(backgroundSpriteSheet.width, backgroundSpriteSheet.height)
   );
@@ -195,7 +198,6 @@ function LoadBackgrounds() {
 function LoadEnemies() {
   var transform2D = null;
   var artist = null;
-  var cloneEnemySprite = null;
 
   /**************** Pink Animated Enemy ****************/
 
@@ -209,8 +211,8 @@ function LoadEnemies() {
 
   artist = new AnimatedSpriteArtist(
     ctx,
-    spriteSheet,
     1,
+    spriteSheet,
     SpriteData.ENEMY_TWO_ANIMATED_SPRITE,
     0,
     1,
@@ -242,8 +244,8 @@ function LoadEnemies() {
 
   artist = new AnimatedSpriteArtist(
     ctx,
-    spriteSheet,
     1,
+    spriteSheet,
     SpriteData.ENEMY_THREE_ANIMATED_SPRITE,
     0,
     1,
@@ -260,21 +262,6 @@ function LoadEnemies() {
 
   //add to the object manager
   this.objectManager.Add(animatedEnemyThreeSprite);
-
-  // /**************** Clone - Animated Enemy 3 ****************/
-
-  // var fps = 1;
-
-  // for (let i = -200; i <= 200; i += 50) {
-  //   cloneEnemySprite = animatedEnemyThreeSprite.Clone();
-  //   cloneEnemySprite.transform2D.TranslateBy(new Vector2(i, 50));
-
-  //   var animatedArtist = cloneEnemySprite.Artist;
-  //   animatedArtist.FrameRatePerSec = fps * 2;
-  //   fps++;
-  //   //add to the object manager
-  //   this.objectManager.Add(cloneEnemySprite);
-  // }
 }
 
 /**
@@ -294,6 +281,7 @@ function LoadPlayers() {
 
   artist = new SpriteArtist(
     ctx,
+    1,
     spriteSheet,
     new Vector2(62, 0),
     new Vector2(22, 16),

@@ -7,6 +7,7 @@
 class SpriteArtist extends Artist {
   //#region  Fields
   //#endregion
+  spriteSheet;
   sourcePosition;
   sourceDimensions;
   //#endregion
@@ -24,6 +25,12 @@ class SpriteArtist extends Artist {
   set SourceDimensions(value) {
     this.sourceDimensions = value;
   }
+  get SpriteSheet() {
+    return this.spriteSheet;
+  }
+  set SpriteSheet(value) {
+    this.spriteSheet = value;
+  }
   //#endregion
 
   //#region Constructors and Core methods
@@ -31,13 +38,14 @@ class SpriteArtist extends Artist {
   /**
    * Constructs a SpriteArtist to render a static image
    * @param {CanvasRenderingContext2D} context Handle to draw context
-   * @param {HTMLImageElement} spriteSheet Handle to the image data
    * @param {Number} alpha Floating point value (0-1) indicating sprite transparency
+   * @param {HTMLImageElement} spriteSheet Handle to the image data
    * @param {Vector2} sourcePosition position (x,y) of the source image to use as top left corner
    * @param {Vector2} sourceDimensions dimensions (w,h) of the portion of the source image to be drawn, in pixels
    */
-  constructor(context, spriteSheet, alpha, sourcePosition, sourceDimensions) {
-    super(context, spriteSheet, alpha);
+  constructor(context, alpha, spriteSheet, sourcePosition, sourceDimensions) {
+    super(context, alpha);
+    this.spriteSheet = spriteSheet;
     this.sourcePosition = sourcePosition;
     this.sourceDimensions = sourceDimensions;
   }
@@ -59,7 +67,7 @@ class SpriteArtist extends Artist {
    * @memberof SpriteArtist
    */
   Draw(gameTime, parent) {
-     //save whatever context settings were used before this (color, line, text styles)
+    //save whatever context settings were used before this (color, line, text styles)
     this.Context.save();
 
     //access the transform for the parent that this artist is attached to
@@ -70,7 +78,7 @@ class SpriteArtist extends Artist {
 
     //draw image
     this.Context.drawImage(
-      this.SpriteSheet,
+      this.spriteSheet,
       this.sourcePosition.x,
       this.sourcePosition.y,
       this.sourceDimensions.x,
@@ -91,10 +99,10 @@ class SpriteArtist extends Artist {
   //hybrid
   Clone() {
     return new SpriteArtist(
-      this.context,         //shallow
-      this.spritesheet,     //shallow
-      this.alpha,           //deep
-      this.sourcePosition.Clone(),  //deep, if shallow then all clones will point to same Vector2 representing sourcePosition
+      this.context, //shallow
+      this.alpha, //deep
+      this.spritesheet, //shallow
+      this.sourcePosition.Clone(), //deep, if shallow then all clones will point to same Vector2 representing sourcePosition
       this.sourceDimensions.Clone() //deep
     );
   }
