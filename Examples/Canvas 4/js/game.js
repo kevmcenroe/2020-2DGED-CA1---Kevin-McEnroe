@@ -11,25 +11,35 @@ var ctx = cvs.getContext("2d");
 
 //variables used by the game
 var spriteSheet = null;
+var scoreSprite = null;
+var scoreSprite2 = null;
 
 //start the loop
 function Start() {
 
-  LoadAssets();
-
+  LoadUI();
+  LoadGameObject();
 
   //start Update/Draw cycle i.e. start the game
   window.requestAnimationFrame(Animate);
 }
 
-function LoadAssets(){
-  LoadTextures();
+function LoadUI(){
+//  var artist = new TextArtist("10/20", "18px Arial");
+  var artist = new RectangleArtist(100, 10, 4, "blue");
+  
+  scoreSprite = new Sprite("platform 1", ActorType.Platform, 
+                        ctx, 320, 30, artist);
+
+  var artist2 = new RectangleArtist(50, 10, 4, "red");
+  
+  scoreSprite2 = new Sprite("platform 2", ActorType.Platform, 
+                                              ctx, 260, 60, artist2);
 }
 
-function LoadTextures(){
-  spriteSheet = document.getElementById("rasputin");
-}
+function LoadGameObject(){
 
+}
 
 function Animate(now) {
 
@@ -50,17 +60,34 @@ function Update() {
 function Draw() {
 
   ctx.save();
-  //draw image
-  ctx.drawImage(spriteSheet, 140, 30, 62, 52, 0, 0, 100, 200);
+  scoreSprite.Draw();
+  scoreSprite2.Draw();
   ctx.restore();
-
-  //draw text?
-
-  //draw arc?
-
-  //draw rect?
-
 }
+
+
+// function Draw() {
+
+//   ctx.save();
+//   //draw image
+//   ctx.drawImage(spriteSheet, 140, 30, 62, 52, 0, 0, 100, 200);
+//   ctx.restore();
+
+//   //draw text?
+//   ctx.font = "30px Arial";
+//   ctx.fillText("Hello World", 320, 240);
+
+//   //draw arc?
+//   ctx.beginPath();
+//   ctx.arc(400, 400, 50, 0, 2 * Math.PI);
+//   ctx.stroke();
+
+
+//   //draw rect?
+//   ctx.strokeRect(200, 200, 150, 100);
+
+
+// }
 
 function ClearCanvas(color) {
   ctx.save();
