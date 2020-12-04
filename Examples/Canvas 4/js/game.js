@@ -14,11 +14,12 @@ var spriteSheet = null;
 var scoreSprite = null;
 var scoreSprite2 = null;
 
-var clonePlatform1 = null, clonePlatform2 = null, clonePlatform3 = null;
+var objectManager = null;
 
 //start the loop
 function Start() {
 
+  LoadManagers();
   LoadUI();
   LoadGameObject();
 
@@ -26,30 +27,27 @@ function Start() {
   window.requestAnimationFrame(Animate);
 }
 
-function LoadUI(){
-
-  var archetypalPlatformSprite = new Sprite("platform", ActorType.Platform, 
-                        ctx, 120, 240, new RectangleArtist(20, 5, 2, "red"));
-
-   clonePlatform1 = archetypalPlatformSprite.Clone();
-   clonePlatform1.x += 25;
-   clonePlatform1.y -= 20;
-
-   clonePlatform2 = archetypalPlatformSprite.Clone();
-   clonePlatform2.artist.strokeStyle = "green";
-   clonePlatform2.x += 50;
-   clonePlatform2.y -= 40;
-
-   clonePlatform3 = archetypalPlatformSprite.Clone();
-   clonePlatform3.artist.strokeStyle = "blue";
-   clonePlatform3.x += 75;
-   clonePlatform3.y -= 60;
-
-
-
+function LoadManagers(){
+  objectManager = new ObjectManager(ctx);
 }
 
-// function LoadUI(){
+function LoadGameObject(){
+
+  var clonePlatform = null;
+
+  var archetypalPlatformSprite = new Sprite("platform", ActorType.Platform, 
+                        ctx, 120, 240, new RectangleArtist(25, 5, 2, "red"));
+
+  for(let i = 1; i <= 15; i++){
+      clonePlatform = archetypalPlatformSprite.Clone();
+      //clonePlatform.artist.strokeStyle = "green";
+      clonePlatform.x += 30 * i;
+      clonePlatform.y -= 15 * i;
+      objectManager.Add(clonePlatform);
+  }
+}
+
+// function LoadGameObject(){
 //   //  var artist = new TextArtist("10/20", "18px Arial");
 //     var artist = new RectangleArtist(100, 10, 4, "blue");
     
@@ -62,7 +60,7 @@ function LoadUI(){
 //                                                 ctx, 260, 60, artist2);
 //   }
 
-function LoadGameObject(){
+function LoadUI(){
 
 }
 
@@ -84,13 +82,22 @@ function Update() {
 
 function Draw() {
 
-  ctx.save();
-  clonePlatform1.Draw();
-  clonePlatform2.Draw();
-  clonePlatform3.Draw();
-
-  ctx.restore();
+    objectManager.Draw();
 }
+
+// function Draw() {
+
+//   ctx.save();
+//   for(let i = 0; i < sprites.length; i++){
+//     var sprite = sprites[i];
+//       sprite.Draw();
+//   }
+
+//   // for(let sprite of sprites){
+//   //   sprite.Draw();
+//   // }
+//   ctx.restore();
+// }
 
 
 // function Draw() {
