@@ -1,0 +1,32 @@
+canvas {
+  border: 1px dotted black;
+  margin: 10px 10px 10px 10px;
+  background-color: rgb(255, 255, 231);
+}
+
+#parent-container {
+    position: absolute;
+    margin: auto;
+    width: 640px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+@font-face {
+    font-family: 'Orbitron';
+    src: url('assets/fonts/orbitron/orbitron-black-webfont.eot');
+    src: url('assets/fonts/orbitron/orbitron-black-webfont.woff') format('woff'),
+      url('assets/fonts/orbitron/orbitron-black-webfont.ttf') format('truetype'),
+      url('assets/fonts/orbitron/orbitron-black-webfont.svg') format('svg');
+  }
+  
+  @font-face {
+    font-family: 'Ostrich';
+    src: url('assets/fonts/ostrich/ostrich-sans-black.eot');
+    src: url('assets/fonts/ostrich/ostrich-sans-black.woff') format('woff'),
+      url('assets/fonts/ostrich/ostrich-sans-black.ttf') format('truetype'),
+      url('assets/fonts/ostrich/ostrich-sans-black.svg') format('svg');
+  }
