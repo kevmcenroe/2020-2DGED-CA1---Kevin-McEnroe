@@ -45,31 +45,6 @@ function Start() {
   for(var key in pickupArray)
   console.log('pickupArray[key] :>> ', pickupArray[key]);
 
-
-
-
-
-
-  // var cities = new Array();
-
-  // cities["tokyo"] = 1234;
-  // cities["dublin"] = 12;
-  // cities["london"] = 567;
-
-  // for(var key in cities){
-  //   console.log(key);
-  // }
-
-  // for(var key in cities){
-  //   console.log(cities[key]);
-  // }
-
-
-
-
-
-
-
   LoadManagers();
   LoadUI();
   LoadGameObject();
@@ -98,19 +73,6 @@ function LoadGameObject(){
   }
 }
 
-// function LoadGameObject(){
-//   //  var artist = new TextArtist("10/20", "18px Arial");
-//     var artist = new RectangleArtist(100, 10, 4, "blue");
-    
-//     scoreSprite = new Sprite("platform 1", ActorType.Platform, 
-//                           ctx, 320, 30, artist);
-  
-//     var artist2 = new RectangleArtist(50, 10, 4, "red");
-    
-//     scoreSprite2 = new Sprite("platform 2", ActorType.Platform, 
-//                                                 ctx, 260, 60, artist2);
-//   }
-
 function LoadUI(){
 
 }
@@ -135,44 +97,6 @@ function Draw() {
 
     objectManager.Draw();
 }
-
-// function Draw() {
-
-//   ctx.save();
-//   for(let i = 0; i < sprites.length; i++){
-//     var sprite = sprites[i];
-//       sprite.Draw();
-//   }
-
-//   // for(let sprite of sprites){
-//   //   sprite.Draw();
-//   // }
-//   ctx.restore();
-// }
-
-
-// function Draw() {
-
-//   ctx.save();
-//   //draw image
-//   ctx.drawImage(spriteSheet, 140, 30, 62, 52, 0, 0, 100, 200);
-//   ctx.restore();
-
-//   //draw text?
-//   ctx.font = "30px Arial";
-//   ctx.fillText("Hello World", 320, 240);
-
-//   //draw arc?
-//   ctx.beginPath();
-//   ctx.arc(400, 400, 50, 0, 2 * Math.PI);
-//   ctx.stroke();
-
-
-//   //draw rect?
-//   ctx.strokeRect(200, 200, 150, 100);
-
-
-// }
 
 function ClearCanvas(color) {
   ctx.save();
