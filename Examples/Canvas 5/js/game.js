@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 window.addEventListener("load", Start);
 
 /********************************* Game Engine Core Variables & Functions (Do Not Change in Your Game) *********************************/
@@ -9,6 +9,11 @@ var cvs = document.getElementById("main_canvas");
 //get a handle to the 2D context of the canvas
 var ctx = cvs.getContext("2d");
 
+const cueArray = [
+  new AudioCue("coin_pickup", 1, 0.25, false, 0),
+  new AudioCue("gameover", 1, 1, false, 0),
+  //add more cues here but make sure you load in the HTML!
+];
 
 //start the loop
 function Start() {
@@ -18,7 +23,6 @@ function Start() {
 }
 
 function Animate(now) {
-
   //update all sprites whose state can change over time
   Update();
 
@@ -30,12 +34,10 @@ function Animate(now) {
 }
 
 function Update() {
- 
-}
-
-function Draw() {
 
 }
+
+function Draw() {}
 
 function ClearCanvas(color) {
   ctx.save();

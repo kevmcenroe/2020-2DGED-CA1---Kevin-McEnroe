@@ -6,17 +6,20 @@
 </head>
 
 <body>
+     <!-- 1. Create the canvas -->
+     <canvas id="main_canvas" width="640" height="480"></canvas>
 
-    <img id="rasputin" src="assets/images/rasputin.png" style="display:none;"/>
+     <!-- 2. Load the audio assets -->
+ 
+     <!-- 3. Load the image assets -->
+     <img id="rasputin" src="assets/images/rasputin.png" style="display:none;"/>
 
+     <!-- 4. Load the core game JS files -->
+     <script src="js/ObjectManager.js"></script>
+     <script src="js/Sprite.js"></script>
+ 
+     <!-- 5. Load the main game JS file -->
+     <script src=" js/game.js"> </script>
 
-    <canvas id="main_canvas" width="640" height="480"></canvas>
-    <!-- Add LOAD/IMPORT statements here...-->
-    <script src="js/ObjectManager.js"></script>
-    <script src="js/Sprite.js"></script>
-
-
-    <!-- Load the main game/demo JS file -->
-    <script src=" js/game.js"> </script>
 </body>
 </html>

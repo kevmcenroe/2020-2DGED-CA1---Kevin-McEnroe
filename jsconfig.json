@@ -6,7 +6,8 @@
     /*added to support Intellisense for JS files outside current file*/
     "include": [
         "Engine/**/*", //glob pattern e.g. Results/*.txt, ?p?.*
-        "Games/Space Invaders/**/*", 
+        "Games/Space Invaders/**/*",
+        "Games/MyGame/**/*",
         ], 
     /*we can also exclude folders from the current project*/
     "exclude": [

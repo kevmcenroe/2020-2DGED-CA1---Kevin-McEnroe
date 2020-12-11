@@ -38,15 +38,19 @@
 - [ ] Add SpaceInvaders/js/GameConstants.js file to store data related to enemy animations
 ### Tasks - Week 7
 - [x] Re-factored SpriteArtist and AnimatedSpriteArtist to extend Artist
-- [ ] Add use of Transform2D::Scale to Draw() of SpriteArtist and AnimatedSpriteArtist
+- [x] Add use of Transform2D::Scale to Draw() of SpriteArtist and AnimatedSpriteArtist
 
 ### Tasks - Week 8
-- [ ] Add revision and canvas examples
+- [x] Add revision and canvas examples
 
 ### Tasks - Week 9
-- [ ] Add Canvas 3 (drawing with Rect and detecting collisions)
-- [ ] Add Canvas 4 (drawing sprites and object manager)
-- [ ] Add Canvas 5 (keyboard manager)
-- [ ] Add simple Sprite class with Clone
-- [ ] Add simple ObjectManager to draw multiple sprites
+- [x] Add Canvas 3 (drawing with Rect and detecting collisions)
+- [x] Add Canvas 4 (drawing sprites and object manager)
+- [x] Add Canvas 5 (keyboard manager)
+- [x] Add simple Sprite class with Clone
+- [x] Add simple ObjectManager to draw multiple sprites
+
+### Tasks - Week 10
+- [ ] Develop ObjectManager to use a 2D array of Sprites with ActorType
+- [ ] Demo KeyboardManager and SoundManager
 - [ ] Add a controller to the Sprite to move with keyboard input
