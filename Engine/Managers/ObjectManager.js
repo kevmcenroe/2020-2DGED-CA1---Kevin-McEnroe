@@ -4,13 +4,27 @@
  * @version 2.0
  * @class ObjectManager
  */
+
+var StatusType = {
+  Off: 0,
+  Drawn: 1,
+  Updated: 2,
+};
+
 class ObjectManager {
   //#region Fields
   context;
   sprites = [];
+  statusType;
   //#endregion
 
   //#region Properties
+  get StatusType() {
+    return this.statusType;
+  }
+  set StatusType(value) {
+    this.statusType = value;
+  }
   //#endregion
 
   /**
@@ -18,8 +32,9 @@ class ObjectManager {
    *
    * @param {CanvasRenderingContext2D} context Handle to draw context
    */
-  constructor(context) {
+  constructor(context, statusType) {
     this.context = context;
+    this.statusType = statusType;
   }
 
   //#region Add, Remove, Find, Clear
@@ -149,9 +164,11 @@ class ObjectManager {
    * @param {GameTime} gameTime GameTime object
    */
   Update(gameTime) {
-    for (let key in this.sprites) {
-      for (let sprite of this.sprites[key]) {
-        sprite.Update(gameTime);
+    if ((this.statusType & StatusType.Updated) != 0) {
+      for (let key in this.sprites) {
+        for (let sprite of this.sprites[key]) {
+          sprite.Update(gameTime);
+        }
       }
     }
   }
@@ -163,11 +180,15 @@ class ObjectManager {
    * @param {GameTime} gameTime GameTime object
    */
   Draw(gameTime) {
-    for (let key in this.sprites) {
-      for (let sprite of this.sprites[key]) {
-        sprite.Draw(gameTime);
-      }
+
+    if((this.statusType & StatusType.Drawn) != 0){
+        for (let key in this.sprites) {
+        for (let sprite of this.sprites[key]) {
+            sprite.Draw(gameTime);
+        }
+        }
     }
   }
   //#endregion
 }
+

@@ -19,31 +19,33 @@ var objectManager = null;
 //start the loop
 function Start() {
 
-//   var sprites = new Array();
+  var x = StatusType.Off;
+  var y = StatusType.Updated;
+  var z = StatusType.Drawn;
 
-// //  sprites[110] = "niall";
+  // | is a bitwise OR 1 | 2 
+  //0001
+  //0010
+  //0011 (3)
 
-//   sprites[ActorType.Player] = new Array();
-//   sprites[ActorType.Pickup] = new Array();
+  //0101 (5)
+  //1001 (9)
+  //1101 (13) OR
 
-//   sprites[ActorType.Player].push("max");
-//   sprites[ActorType.Player].push("anna");
-//   sprites[ActorType.Player].push("bob");
+  //0101 (5)
+  //1001 (9)
+  //0001 (1)
 
-//   sprites[ActorType.Pickup].push("ammo 10");
-//   sprites[ActorType.Pickup].push("heart 50");
-//   sprites[ActorType.Pickup].push("plasma rifle 1000");
+  //0011 (3)
+  //0010 (2)
+  //0010 (>0)
 
-//   for(var outerKey in sprites){
-//     let arr = sprites[outerKey];
-//     for(var innerKey in arr){
-//         console.log(arr[innerKey]);
-//     }
-//   }
+  var yz = StatusType.Updated | StatusType.Drawn;
 
-//   let pickupArray = sprites[ActorType.Enemies];
-//   for(var key in pickupArray)
-//   console.log('pickupArray[key] :>> ', pickupArray[key]);
+
+
+
+
 
   LoadManagers();
   LoadUI();
@@ -54,7 +56,8 @@ function Start() {
 }
 
 function LoadManagers(){
-  objectManager = new ObjectManager(ctx);
+  objectManager = new ObjectManager(ctx, 
+    StatusType.Drawn | StatusType.Updated);
 }
 
 function LoadGameObject(){
@@ -90,12 +93,12 @@ function Animate(now) {
 }
 
 function Update() {
-  objectManager.Update(null);
+ objectManager.Update(null);
 }
 
 function Draw() {
 
-    objectManager.Draw(null);
+  objectManager.Draw(null);
 }
 
 function ClearCanvas(color) {

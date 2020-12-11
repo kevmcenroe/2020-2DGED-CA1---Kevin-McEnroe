@@ -50,7 +50,9 @@ const Keys = Object.freeze({
   E : "KeyE",
   F : "KeyF",
   G : "KeyG",
+
   //add keys...
+  Numpad1 : "Numpad1",
   ArrowUp: "ArrowUp",
   ArrowDown: "ArrowDown",
   ArrowLeft: "ArrowLeft",
