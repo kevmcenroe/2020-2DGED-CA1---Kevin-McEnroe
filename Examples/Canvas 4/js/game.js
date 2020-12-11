@@ -19,6 +19,57 @@ var objectManager = null;
 //start the loop
 function Start() {
 
+  var sprites = new Array();
+
+//  sprites[110] = "niall";
+
+  sprites[ActorType.Player] = new Array();
+  sprites[ActorType.Pickup] = new Array();
+
+  sprites[ActorType.Player].push("max");
+  sprites[ActorType.Player].push("anna");
+  sprites[ActorType.Player].push("bob");
+
+  sprites[ActorType.Pickup].push("ammo 10");
+  sprites[ActorType.Pickup].push("heart 50");
+  sprites[ActorType.Pickup].push("plasma rifle 1000");
+
+  for(var outerKey in sprites){
+    let arr = sprites[outerKey];
+    for(var innerKey in arr){
+        console.log(arr[innerKey]);
+    }
+  }
+
+  let pickupArray = sprites[ActorType.Enemies];
+  for(var key in pickupArray)
+  console.log('pickupArray[key] :>> ', pickupArray[key]);
+
+
+
+
+
+
+  // var cities = new Array();
+
+  // cities["tokyo"] = 1234;
+  // cities["dublin"] = 12;
+  // cities["london"] = 567;
+
+  // for(var key in cities){
+  //   console.log(key);
+  // }
+
+  // for(var key in cities){
+  //   console.log(cities[key]);
+  // }
+
+
+
+
+
+
+
   LoadManagers();
   LoadUI();
   LoadGameObject();
