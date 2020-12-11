@@ -11,6 +11,10 @@ const ActorType = {
 
 class Sprite{
 
+    get ActorType(){
+        return this.actorType;
+    }
+
     constructor(id, actorType, context, x, y, artist){
         this.id = id;
         this.actorType = actorType;
