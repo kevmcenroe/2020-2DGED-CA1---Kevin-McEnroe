@@ -5,12 +5,6 @@
  * @class ObjectManager
  */
 
-var StatusType = {
-  Off: 0,
-  Drawn: 1,
-  Updated: 2,
-};
-
 class ObjectManager {
   //#region Fields
   context;

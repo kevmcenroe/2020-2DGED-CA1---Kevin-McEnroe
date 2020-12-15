@@ -1,0 +1,50 @@
+
+/*
+* See Margin and centering - https://www.w3schools.com/css/css_margin.asp#:~:text=The%20auto%20Value,the%20left%20and%20right%20margins.
+*/
+#parent_container{
+  position: relative;
+  width: 1024px;
+  height:768px;
+  margin: auto;
+  
+}
+
+canvas {
+  border: 1px solid black;
+}
+
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('assets/fonts/orbitron/orbitron-black-webfont.eot');
+  src: url('assets/fonts/orbitron/orbitron-black-webfont.woff') format('woff'),
+    url('assets/fonts/orbitron/orbitron-black-webfont.ttf') format('truetype'),
+    url('assets/fonts/orbitron/orbitron-black-webfont.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'Ostrich';
+  src: url('assets/fonts/ostrich/ostrich-sans-black.eot');
+  src: url('assets/fonts/ostrich/ostrich-sans-black.woff') format('woff'),
+    url('assets/fonts/ostrich/ostrich-sans-black.ttf') format('truetype'),
+    url('assets/fonts/ostrich/ostrich-sans-black.svg') format('svg');
+}
+
+.ui#score, .ui#lives{
+  font-family: Orbitron, Impact, Charcoal, sans-serif;
+  letter-spacing: 1px;
+  font-size: 24px;
+}
+.ui#score{
+  position: absolute;
+  left: 20;
+  top: 20;
+}
+
+.ui#lives{
+  position: absolute;
+  left: 20;
+  bottom: 20;
+}
+

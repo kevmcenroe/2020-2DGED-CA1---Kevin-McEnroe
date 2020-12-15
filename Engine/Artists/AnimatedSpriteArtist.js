@@ -76,10 +76,12 @@ class AnimatedSpriteArtist extends Artist {
    * @memberof AnimatedSpriteArtist
    */
   Update(gameTime, parent) {
-    this.timeSinceLastFrameInMs += Math.round(gameTime.ElapsedTimeInMs);
-    if (this.timeSinceLastFrameInMs >= this.frameIntervalInMs) {
-      this.Advance();
-      this.timeSinceLastFrameInMs = 0;
+    if(!this.paused){
+      this.timeSinceLastFrameInMs += Math.round(gameTime.ElapsedTimeInMs);
+      if (this.timeSinceLastFrameInMs >= this.frameIntervalInMs) {
+        this.Advance();
+        this.timeSinceLastFrameInMs = 0;
+      }
     }
   }
 
@@ -133,6 +135,27 @@ class AnimatedSpriteArtist extends Artist {
     //restore whatever context settings were used before save() was called above
     this.Context.restore();
   }
+
+  /**
+   * Pauses/unpauses animation
+   *
+   * @memberof AnimatedSpriteArtist
+   */
+  SetPause(pause) {
+    this.paused = pause;
+  }
+
+  /**
+   * Resets animation
+   *
+   * @memberof AnimatedSpriteArtist
+   */
+  Reset() {
+    this.paused = false;
+    this.currentTakeIndex = -1;
+    this.currentCellIndex = this.startCellIndex;
+    this.timeSinceLastFrameInMs = 0;
+  }
   //#endregion
 
   //#region Equals, Clone, ToString
@@ -141,13 +164,13 @@ class AnimatedSpriteArtist extends Artist {
   //hybrid
   Clone() {
     return new AnimatedSpriteArtist(
-      this.Context,           //shallow
-      this.Alpha,             //deep
-      this.SpriteSheet,       //shallow
-      this.frames,            //shallow
-      this.startFrameIndex,   //deep
-      this.endFrameIndex,     //deep
-      this.frameRatePerSec    //deep
+      this.Context, //shallow
+      this.Alpha, //deep
+      this.SpriteSheet, //shallow
+      this.frames, //shallow
+      this.startFrameIndex, //deep
+      this.endFrameIndex, //deep
+      this.frameRatePerSec //deep
     );
   }
 

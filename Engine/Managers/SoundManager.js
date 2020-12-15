@@ -63,7 +63,8 @@ class SoundManager {
       if (audioObject) {
         if (audioObject.paused) {
           //not already playing
-          audioObject.currentTime = audioCue.CurrentTime;
+          audioObject.currentTime = audioCue.CurrentTimeInSecs;
+          audioObject.loop = audioCue.Loop;
           audioObject.volume = audioCue.Volume; //0 - 1
           audioObject.playbackRate = audioCue.PlaybackRate; //0 ->
           audioObject.play();
@@ -141,7 +142,8 @@ class AudioCue {
   volume;
   playbackRate;
   loop;
-  currentTime;
+  currentTimeInSecs;
+  
   //#endregion
 
   //#region Properties
@@ -158,20 +160,44 @@ class AudioCue {
   get Loop() {
     return this.loop;
   }
-  get CurrentTime() {
-    return this.currentTime;
+  get CurrentTimeInSecs() {
+    return this.currentTimeInSecs;
   }
   get AudioObject() {
     return this.audioObject;
   }
+
+  set Name(name) {
+    this.name = name;
+  }
+  set Volume(volume) {
+    this.volume =
+      volume == (volume >= 0 && volume <= 1) ? volume : 1;
+  }
+  set PlaybackRate(playbackRate) {
+    this.playbackRate =
+      playbackRate == (playbackRate > 0 && playbackRate <= MAX_PLAYBACK_RATE)
+        ? playbackRate
+        : 1;
+  }
+  set Loop(loop) {
+    this.loop = loop;
+  }
+  set CurrentTimeInSecs(currentTimeInSecs) {
+    this.currentTimeInSecs =
+    currentTime == (currentTimeInSecs >= 0) ? currentTimeInSecs : 1;
+  }
+  set AudioObject(audioObject) {
+    this.audioObject = audioObject;
+  }
   //#endregion
 
-  constructor(name, volume, playbackRate, loop, currentTime) {
+  constructor(name, volume, playbackRate, loop, currentTimeInSecs) {
     this.name = name;
     this.originalVolume = this.volume = volume || 1;
     this.playbackRate = playbackRate || 1;
     this.loop = loop || false;
-    this.currentTime = currentTime || 0;
+    this.currentTimeInSecs = currentTimeInSecs || 0;
     this.audioObject = null;
   }
 }
