@@ -65,23 +65,21 @@ function Update(gameTime) {
   //call object manager to update all sprites
   objectManager.Update(gameTime);
 
-  if(keyboardManager.IsKeyDown("KeyA")){
+  if(keyboardManager.IsKeyDown(Keys.A)){
     console.log("A was pressed!");
     soundManager.Play("coin_pickup");
   }
 
-  if(keyboardManager.IsKeyDown(Keys.Numpad1)){
+  if(keyboardManager.IsKeyDown(Keys.D)){
     console.log("B was pressed!");
     soundManager.Play("gameover");
   }
 
-
-  //if A key then playerSprite.Transform.TranslateBy(new Vector2(-1, 0))
 }
 
 function Draw(gameTime) {
   //clear previous draw
-//  ClearCanvas(Color.PaleYellow);
+  ClearCanvas(Color.White);
 
   //call object manager to draw all sprites
   objectManager.Draw(gameTime);

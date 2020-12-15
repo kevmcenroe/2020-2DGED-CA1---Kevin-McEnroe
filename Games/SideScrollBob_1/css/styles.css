@@ -1,65 +1,106 @@
+/*********************** Containers ****************************/
 
 /*
-* See Margin and centering - https://www.w3schools.com/css/css_margin.asp#:~:text=The%20auto%20Value,the%20left%20and%20right%20margins.
+* See Margin - https://www.w3schools.com/css/css_margin.asp
+* See Position - https://www.w3schools.com/css/css_positioning.asp
 */
-#parent_container{
+#parent_container {
   position: relative;
   width: 1024px;
-  height:768px;
+  height: 768px;
   margin: auto;
-  
 }
 
+/*********************** Canvas ****************************/
+
 canvas {
+  position: absolute;
   border: 1px solid black;
 }
 
+/*********************** Fonts ****************************/
 
 @font-face {
-  font-family: 'Orbitron';
-  src: url('assets/fonts/orbitron/orbitron-black-webfont.eot');
-  src: url('assets/fonts/orbitron/orbitron-black-webfont.woff') format('woff'),
-    url('assets/fonts/orbitron/orbitron-black-webfont.ttf') format('truetype'),
-    url('assets/fonts/orbitron/orbitron-black-webfont.svg') format('svg');
+  font-family: "Orbitron";
+  src: url("../assets/fonts/orbitron/orbitron-black-webfont.ttf")
+      format("truetype"),
+    url("../assets/fonts/orbitron/orbitron-black-webfont.svg") format("svg");
 }
 
 @font-face {
-  font-family: 'Ostrich';
-  src: url('assets/fonts/ostrich/ostrich-sans-black.eot');
-  src: url('assets/fonts/ostrich/ostrich-sans-black.woff') format('woff'),
-    url('assets/fonts/ostrich/ostrich-sans-black.ttf') format('truetype'),
-    url('assets/fonts/ostrich/ostrich-sans-black.svg') format('svg');
+  font-family: "Ostrich";
+  src: url("../assets/fonts/ostrich/ostrich-sans-black.ttf") format("truetype"),
+    url("../assets/fonts/ostrich/ostrich-sans-black.svg") format("svg");
 }
 
-.ui#score, .ui#lives{
+/*********************** UI Text ****************************/
+
+.ui#score,
+.ui#lives,
+.ui#toast,
+.ui#countdown {
+  position: absolute;
   font-family: Orbitron, Impact, Charcoal, sans-serif;
   letter-spacing: 1px;
   font-size: 24px;
+  text-align: center;
   z-index: 1;
 }
-.ui#score{
-  position: absolute;
+.ui#score {
   left: 20;
   top: 20;
 }
 
-.ui#lives{
-  position: absolute;
+.ui#lives {
   left: 20;
   bottom: 20;
 }
 
 .ui#toast {
-  position: absolute;
+  margin-left: 312px;
+  margin-top: 344px;
+  width: 400px;
+  height: 40px;
+  font-size: 32px;
+  /* display: none;*/ /*https://www.w3schools.com/css/css_display_visibility.asp*/
+}
+
+.ui#countdown {
   margin-left: 412px;
   margin-top: 344px;
   width: 200px;
   height: 40px;
-  font-family: Orbitron, Impact, Charcoal, sans-serif;
-  letter-spacing: 1px;
-  font-size: 32px;
-  text-align: center;
- /* display: none;*/
-  z-index: 1;
+  font-size: 28px;
+  display: none;
+  /*https://css-tricks.com/almanac/properties/a/animation/*/
+  animation-name: expandfade;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out; /*https://www.w3schools.com/cssref/css3_pr_animation-timing-function.asp*/
+  animation-delay: 0s;
+  animation-direction: normal; /*https://www.w3schools.com/cssref/css3_pr_animation-direction.asp*/
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards; /*https://www.w3schools.com/cssref/css3_pr_animation-fill-mode.asp*/
 }
 
+/*https://css-tricks.com/almanac/properties/t/transform/*/
+@keyframes expandfade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  /*we could add intermediate frames with a rotation*/
+/*
+  25% {
+    transform: scale(3) rotate(-2deg);
+  }
+
+  75% {
+    transform: scale(4) rotate(2deg);
+  }
+*/
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
