@@ -33,6 +33,13 @@ canvas {
     url("../assets/fonts/ostrich/ostrich-sans-black.svg") format("svg");
 }
 
+body {
+  font-family: Orbitron, Impact, Charcoal, sans-serif;
+  letter-spacing: 1px;
+  font-size: 18px;
+  background-color: rgb(64, 143, 103);
+}
+
 /*********************** UI Text ****************************/
 
 .ui#score,
@@ -103,4 +110,36 @@ canvas {
     transform: scale(4);
     opacity: 0;
   }
+}
+
+/*********************** UI Pickups ****************************/
+
+.ui#pickup-value{
+  position: absolute;
+  color: white;
+  text-shadow: 2px 2px black;
+  font-size: 1em;  /*100% of the font size specified for the body tag*/
+  z-index: 4;
+
+ /*https://css-tricks.com/almanac/properties/a/animation/*/
+ animation-name: fade-out-and-float-up;
+ animation-duration: 1s;
+ animation-timing-function: ease-in-out;          /*https://www.w3schools.com/cssref/css3_pr_animation-timing-function.asp*/
+ animation-delay: 0s;
+ animation-direction: normal;                     /*https://www.w3schools.com/cssref/css3_pr_animation-direction.asp*/
+ animation-iteration-count: 1;
+ animation-fill-mode: forwards;                   /*https://www.w3schools.com/cssref/css3_pr_animation-fill-mode.asp*/
+}
+
+/*https://css-tricks.com/almanac/properties/t/transform/*/
+@keyframes  fade-out-and-float-up {
+ 0% { 
+   opacity: 1;
+   transform: scale(1) translate(0px, 0px);
+ }
+
+ 100% {
+   opacity: 0;
+   transform: scale(0.2) translate(0px, -60px);
+ }
 }
