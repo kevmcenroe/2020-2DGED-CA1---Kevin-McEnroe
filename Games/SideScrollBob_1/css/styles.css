@@ -35,6 +35,7 @@ canvas {
   font-family: Orbitron, Impact, Charcoal, sans-serif;
   letter-spacing: 1px;
   font-size: 24px;
+  z-index: 1;
 }
 .ui#score{
   position: absolute;
@@ -46,5 +47,19 @@ canvas {
   position: absolute;
   left: 20;
   bottom: 20;
+}
+
+.ui#toast {
+  position: absolute;
+  margin-left: 412px;
+  margin-top: 344px;
+  width: 200px;
+  height: 40px;
+  font-family: Orbitron, Impact, Charcoal, sans-serif;
+  letter-spacing: 1px;
+  font-size: 32px;
+  text-align: center;
+ /* display: none;*/
+  z-index: 1;
 }
 
