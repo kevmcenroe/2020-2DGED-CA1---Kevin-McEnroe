@@ -10,8 +10,8 @@ var cvs = document.getElementById("main_canvas");
 var ctx = cvs.getContext("2d");
 
 const cueArray = [
-  new AudioCue("coin_pickup", 1, 4, true, 1),
-  new AudioCue("gameover", 1, 1, false, 1),
+  new AudioCue("coin_pickup", 1, 1, false, 0),
+  new AudioCue("gameover", 1, 1, false, 0),
   new AudioCue("gunshot", 1, 1, false, 0),
   //add more cues here but make sure you load in the HTML!
 ];

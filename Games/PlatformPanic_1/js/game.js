@@ -75,6 +75,25 @@ function Update(gameTime) {
     soundManager.Play("gameover");
   }
 
+
+  if(keyboardManager.IsKeyDown(Keys.Enter)){
+    let element = document.getElementById("toast");
+   element.style.display = "none";
+
+   element = document.getElementById("countdown");
+   element.style.display = "block";
+   element.innerHTML = "Whatever we want!";
+  }
+
+  if(keyboardManager.IsKeyDown(Keys.S)){
+    HTMLDom.RevealToast("lives", "Objectives....", 3000);
+  }
+
+
+
+
+
+
 }
 
 function Draw(gameTime) {
