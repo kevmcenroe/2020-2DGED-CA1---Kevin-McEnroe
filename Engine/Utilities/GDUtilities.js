@@ -1,6 +1,5 @@
 //add a new class with static methods to provide useful functionality for use in our engine
 class GDUtilities {
- 
   /**
    * Returns true if "other" is non-null, defined and same as type "target".
    * For example we can use this method to see if two Sprite objects are the same type.
@@ -174,15 +173,45 @@ class GDMath {
 
 /************************************************************************/
 //to do...
-class GDString {}
+class GDString {
+
+/**
+ * Returns a string with the leading/trailing whitespace removed and converted to lowercase
+ *
+ * @static
+ * @param {string} str User-defined string
+ * @returns Converted string
+ * @throws Exception if null, undefined or not a String
+ * @memberof GDString
+ */
+static TrimToLower(str) {
+    //if invalid then throw exception
+    if (this.IsValidString(str)) throw "Variable does not hold a valid string!";
+
+    return str.trim().toLowerCase();
+  }
+
+  /**
+ * Returns true if a valid string, otherwise false
+ *
+ * @static
+ * @param {string} str User-defined string
+ * @returns True if valid, otherwise false
+ * @throws Exception if null, undefined or not a String
+ * @memberof GDString
+ */
+  static IsValidString(str) {
+    return str == null && str == undefined && new String(str) instanceof String;
+  }
+}
 
 /**
  * Provides methods to manipulate the DOM
  *
  * @class HTMLDom
  */
-class HTMLDom{
-     /**
+class HTMLDom {
+  /**
    * Sets text and shows a toast for a period of time in ms
    *
    * @static
@@ -202,7 +231,7 @@ class HTMLDom{
   }
 
   /**
-   * Hides a toast element  
+   * Hides a toast element
    *
    * @static
    * @param {String} elementID Valid div element ID
@@ -212,5 +241,4 @@ class HTMLDom{
     let element = document.getElementById(elementID);
     element.style.display = "none";
   }
-
 }

@@ -6,7 +6,7 @@ window.addEventListener("load", Start);
 
 //#region Variables
 //get a handle to the canvas
-var cvs = document.getElementById("main_canvas");
+var cvs = document.getElementById("canvas");
 
 //get a handle to the 2D context of the canvas
 var ctx = cvs.getContext("2d");
@@ -26,6 +26,11 @@ const cueArray = [
   new AudioCue("background", 1, 1, false, 0),
   //add more cues here but make sure you load in the HTML!
 ];
+
+//create an asset dictionary (basically an array) to load and store the image data
+var textureDictionary = new AssetDictionary("textures");
+
+
 
 //#endregion
 
@@ -75,7 +80,6 @@ function Update(gameTime) {
     soundManager.Play("gameover");
   }
 
-
   if(keyboardManager.IsKeyDown(Keys.Enter)){
     let element = document.getElementById("toast");
    element.style.display = "none";
@@ -88,17 +92,11 @@ function Update(gameTime) {
   if(keyboardManager.IsKeyDown(Keys.S)){
     HTMLDom.RevealToast("lives", "Objectives....", 3000);
   }
-
-
-
-
-
-
 }
 
 function Draw(gameTime) {
-  //clear previous draw
-  ClearCanvas(Color.White);
+  //if we add a pattern or animate the canvas then we shouldnt clear the background
+  //ClearCanvas(Color.White);
 
   //call object manager to draw all sprites
   objectManager.Draw(gameTime);
@@ -117,17 +115,74 @@ function ClearCanvas(color) {
 /********************************* Game-Specific Variables & Functions (Change in Your Game) *********************************/
 function Initialize() {
 
+  //sets any variables we created in CSS e.g. canvas scroll speed
+  SetAnyCSSVariables();
+
   //load managers
+  LoadManagers();
+
+  //load multiple images
+  LoadImages();
+
+  //load sprites
+  LoadSprites();
+}
+
+function SetAnyCSSVariables(){
+  let width = "1024px";
+  let height = "768px";
+
+  //parent container - dimensions
+  let parent = document.getElementById("parent_container");
+  parent.style.width = width;
+  parent.style.height = height;
+  
+  //canvas - dimensions, animation speed
+  let duration = 8;
+  cvs.style.animationDuration = duration + "s";
+  cvs.style.width = width;
+  cvs.style.height = height;
+
+  cvs.style.backgroundImage = "url('assets/images/background/forest-5.png')";
+
+
+
+
+}
+
+function LoadManagers(){
   objectManager = new ObjectManager();
   keyboardManager = new KeyboardManager();
   soundManager = new SoundManager(cueArray);
-
-  //load texture assets
-
-  //load sprites
-
-  //add controller(s)
-  
 }
 
+function LoadImages(){
+  textureDictionary.AddArray(["background_brown","platform_brown"]);
+  //add more here...
+}
 
+function LoadSprites(){
+  LoadBackgroundSprites();
+  LoadTerrainSprites();
+  LoadObstacleSprites();
+  LoadEnemySprites();
+  LoadPlayerSprite();
+  //add controller(s)
+}
+
+function LoadBackgroundSprites(){
+  //since we are creating background in CSS we dont need to add anything here
+}
+
+function LoadTerrainSprites(){
+
+}
+function LoadObstacleSprites(){
+
+}
+function LoadEnemySprites(){
+
+}
+function LoadPlayerSprite(){
+
+}

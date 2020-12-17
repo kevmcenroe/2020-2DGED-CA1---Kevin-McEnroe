@@ -9,9 +9,10 @@ var cvs = document.getElementById("main_canvas");
 //get a handle to the 2D context of the canvas
 var ctx = cvs.getContext("2d");
 
+var keyboardManager = new KeyboardManager();
 
 //start the loop
-function Start() {
+function Start() { 
 
   //start Update/Draw cycle i.e. start the game
   window.requestAnimationFrame(Animate);
@@ -28,11 +29,44 @@ function Animate(now) {
   window.requestAnimationFrame(Animate);
 }
 
+var menuIndex = -1;
+
 function Update() {
+
+ if(keyboardManager.IsKeyDown(Keys.Q)){
+        document.getElementById("menu_opening").style.display = "block";
+        document.getElementById("menu_instructions").style.display = "none";
+        document.getElementById("menu_winlose").style.display = "none";
+        document.getElementById("main_game").style.display = "none";
+      } 
+ 
+ if(keyboardManager.IsKeyDown(Keys.W)){
+    document.getElementById("menu_opening").style.display = "none";
+    document.getElementById("menu_instructions").style.display = "block";
+    document.getElementById("menu_winlose").style.display = "none";
+    document.getElementById("main_game").style.display = "none";
+  } 
+
+  if(keyboardManager.IsKeyDown(Keys.E)){
+    document.getElementById("menu_opening").style.display = "none";
+    document.getElementById("menu_instructions").style.display = "none";
+    document.getElementById("menu_winlose").style.display = "none";
+    document.getElementById("main_game").style.display = "block";
+  } 
+  if(keyboardManager.IsKeyDown(Keys.R)){
+    document.getElementById("menu_opening").style.display = "none";
+    document.getElementById("menu_instructions").style.display = "none";
+    document.getElementById("menu_winlose").style.display = "block";
+    document.getElementById("main_game").style.display = "none";
+  } 
+
 
 }
 
-function Draw() {}
+function Draw() {
+  ClearCanvas("rgb(255,255,255)");
+
+}
 
 function ClearCanvas(color) {
   ctx.save();
