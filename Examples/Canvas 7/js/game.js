@@ -13,6 +13,11 @@ var ctx = cvs.getContext("2d");
 //start the loop
 function Start() {
 
+  var e = document.getElementById("main_canvas");
+  e.style.animationDuration = 0 + "s";
+  e.style.width = 1024;
+  e.style.height = 768;
+
   //start Update/Draw cycle i.e. start the game
   window.requestAnimationFrame(Animate);
 }

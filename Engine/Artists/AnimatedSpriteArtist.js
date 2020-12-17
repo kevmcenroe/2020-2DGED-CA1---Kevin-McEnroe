@@ -15,6 +15,7 @@ class AnimatedSpriteArtist extends Artist {
   frameIntervalInMs;
   currentCellIndex;
   timeSinceLastFrameInMs;
+  paused = false;
   //#endregion
 
   //#region  Properties
@@ -24,12 +25,6 @@ class AnimatedSpriteArtist extends Artist {
   set FrameRatePerSec(value) {
     this.frameRatePerSec = value;
     this.frameIntervalInMs = 1000 / value; //2fps => 1/2 =? 0.5 secs/frame =? 500ms/frame
-  }
-  get SpriteSheet() {
-    return this.spriteSheet;
-  }
-  set SpriteSheet(value) {
-    this.spriteSheet = value;
   }
   //#endregion
 
@@ -55,8 +50,7 @@ class AnimatedSpriteArtist extends Artist {
     endFrameIndex,
     frameRatePerSec
   ) {
-    super(context, alpha);
-    this.spriteSheet = spriteSheet;
+    super(context, spriteSheet, alpha);
     this.frames = frames;
     this.startFrameIndex = startFrameIndex;
     this.endFrameIndex = endFrameIndex;

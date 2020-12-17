@@ -57,9 +57,9 @@ body {
 #menu_instructions,
 #menu_winlose{
   margin-left: 0px;
-  margin-top: 354px;
+  margin-top: 364px;
   width: 1024px;
-  height: 768px;
+  height: 60px;
 }
 
 #ui_score{

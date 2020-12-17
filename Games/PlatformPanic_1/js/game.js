@@ -6,7 +6,7 @@ window.addEventListener("load", Start);
 
 //#region Variables
 //get a handle to the canvas
-var cvs = document.getElementById("canvas");
+var cvs = document.getElementById("main_canvas");
 
 //get a handle to the 2D context of the canvas
 var ctx = cvs.getContext("2d");
@@ -69,7 +69,7 @@ function Update(gameTime) {
 
   //call object manager to update all sprites
   objectManager.Update(gameTime);
-
+/*
   if(keyboardManager.IsKeyDown(Keys.A)){
     console.log("A was pressed!");
     soundManager.Play("coin_pickup");
@@ -92,11 +92,12 @@ function Update(gameTime) {
   if(keyboardManager.IsKeyDown(Keys.S)){
     HTMLDom.RevealToast("lives", "Objectives....", 3000);
   }
+  */
 }
 
 function Draw(gameTime) {
   //if we add a pattern or animate the canvas then we shouldnt clear the background
-  //ClearCanvas(Color.White);
+ // ClearCanvas(Color.White);
 
   //call object manager to draw all sprites
   objectManager.Draw(gameTime);
@@ -137,27 +138,19 @@ function SetAnyCSSVariables(){
   parent.style.width = width;
   parent.style.height = height;
   
-  //canvas - dimensions, animation speed
-  let duration = 8;
-  cvs.style.animationDuration = duration + "s";
+  //canvas - dimensions
   cvs.style.width = width;
   cvs.style.height = height;
-
-  cvs.style.backgroundImage = "url('assets/images/background/forest-5.png')";
-
-
-
-
 }
 
 function LoadManagers(){
-  objectManager = new ObjectManager();
+  objectManager = new ObjectManager(ctx, StatusType.Drawn | StatusType.Updated);
   keyboardManager = new KeyboardManager();
   soundManager = new SoundManager(cueArray);
 }
 
 function LoadImages(){
-  textureDictionary.AddArray(["background_brown","platform_brown"]);
+  
   //add more here...
 }
 
@@ -171,7 +164,7 @@ function LoadSprites(){
 }
 
 function LoadBackgroundSprites(){
-  //since we are creating background in CSS we dont need to add anything here
+  
 }
 
 function LoadTerrainSprites(){
@@ -184,5 +177,24 @@ function LoadEnemySprites(){
 
 }
 function LoadPlayerSprite(){
+
+  var runnerAnimData = SpriteData.RUNNER_ANIMATION_DATA;
+
+  var boundingBoxDimensions = runnerAnimData.takes["run_right"].boundingBoxDimensions;
+  var transform2D = new Transform2D(new Vector2(50, 568),
+  0, new Vector2(1,1), new Vector2(1, 1), 
+  boundingBoxDimensions);
+
+  var artist = new AnimatedSpriteArtist(ctx, 1, runnerAnimData.spriteSheet, 
+    runnerAnimData.takes["run_right"].cellData, 
+    runnerAnimData.takes["run_right"].startCellIndex,
+    runnerAnimData.takes["run_right"].endCellIndex,
+    runnerAnimData.takes["run_right"].fps);
+
+  var sprite = new Sprite("player1", ActorType.Player, StatusType.Drawn | StatusType.Updated, 
+                transform2D, artist);
+  
+  objectManager.Add(sprite);
+
 
 }

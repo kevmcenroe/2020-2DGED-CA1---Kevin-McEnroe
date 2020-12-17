@@ -18,6 +18,7 @@ static RUNNER_ANIMATION_DATA = Object.freeze({
       maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
       startCellIndex: 0,
       endCellIndex: 8,
+      frameCount: 9,
       boundingBoxDimensions: new Vector2(49, 54), //notice I choose the largest of all the widths taken from the cellData array below
       cellData: [
         new Rect(414, 385, 47, 54),
@@ -37,6 +38,7 @@ static RUNNER_ANIMATION_DATA = Object.freeze({
       maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
       startCellIndex: 0,
       endCellIndex: 8,
+      frameCount: 9,
       boundingBoxDimensions: new Vector2(49, 54), //notice I choose the largest of all the widths taken from the cellData array below
       cellData: [
         new Rect(0, 305, 47, 54),

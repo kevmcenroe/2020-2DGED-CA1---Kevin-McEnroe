@@ -20,6 +20,7 @@ canvas {
   height:  768;
   z-index: 1;
 
+  
   /*we can repeat and animate an image*/
   background-image: url("../assets/images/background/Brown.png");
   background-repeat: repeat;
@@ -28,7 +29,7 @@ canvas {
   animation-duration: 4s;
   animation-timing-function:linear;     /*https://www.w3schools.com/cssref/css3_pr_animation-timing-function.asp*/
   animation-delay: 0s;
-  animation-direction: normal;          /*https://www.w3schools.com/cssref/css3_pr_animation-direction.asp*/
+  animation-direction: reverse;          /*https://www.w3schools.com/cssref/css3_pr_animation-direction.asp*/
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;        /*https://www.w3schools.com/cssref/css3_pr_animation-fill-mode.asp*/
 }
@@ -39,7 +40,7 @@ canvas {
   }
   
   to {
-    background-position:  0px 768px;
+    background-position:  1024px 0px;
   }
 }
 

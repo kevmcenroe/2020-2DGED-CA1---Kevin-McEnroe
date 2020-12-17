@@ -57,6 +57,7 @@ function Update() {
     document.getElementById("menu_opening").style.display = "none";
     document.getElementById("menu_instructions").style.display = "none";
     document.getElementById("menu_winlose").style.display = "block";
+    document.getElementById("menu_winlose").innerHTML = "Better luck next time!";
     document.getElementById("main_game").style.display = "none";
   } 
 

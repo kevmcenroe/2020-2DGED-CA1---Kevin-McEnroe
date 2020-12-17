@@ -19,27 +19,6 @@ canvas {
   width: 1024;
   height:  768;
   z-index: 1;
-
-  /*or we can repeat and animate an image*/
-  background-image: url("../assets/images/background/Brown.png");
-  animation-name: vertical_scroll;
-  background-size: 100% 100%;           /*https://www.w3schools.com/cssref/css3_pr_background-size.asp*/
-  animation-duration: 4s;
-  animation-timing-function:linear;     /*https://www.w3schools.com/cssref/css3_pr_animation-timing-function.asp*/
-  animation-delay: 0s;
-  animation-direction: normal;          /*https://www.w3schools.com/cssref/css3_pr_animation-direction.asp*/
-  animation-iteration-count: infinite;
-  animation-fill-mode: forwards;        /*https://www.w3schools.com/cssref/css3_pr_animation-fill-mode.asp*/
-}
-
-@keyframes vertical_scroll {
-  from {
-    background-position:  0px 0px;
-  }
-  
-  to {
-    background-position:  -1024px 0px;
-  }
 }
 
 /*********************** Fonts ****************************/
@@ -175,34 +154,4 @@ body {
    opacity: 0;
    transform: scale(0.1) translate(0px, -120px);
  }
-}
-
-
-.neon {
-  position: absolute;
-  top: 50px;
-  right: 100px;
-  font-family: neon;
-  color: #FB4264;
-  font-size: 9vw;
-  line-height: 9vw;
-  text-shadow: 0 0 3vw #F40A35;
-}
-
-.neon {
-  animation: neon 1s ease infinite;
-  -moz-animation: neon 1s ease infinite;
-  -webkit-animation: neon 1s ease infinite;
-}
-
-@keyframes neon {
-  0%,
-  100% {
-    text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
-    color: #FED128;
-  }
-  50% {
-    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
-    color: #806914;
-  }
 }
