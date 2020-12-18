@@ -7,14 +7,12 @@
 
 <body>
     <div id="parent_container">
-        <!--
         <div id="score" class="ui">Score...</div>
-        <div id="lives" class="ui">Lives...</div>
+        <div id="objectives" class="ui">Objectives here</div>
         <div id="toast" class="ui">Press Enter</div>
         <div id="countdown" class="ui">Let's Play!</div>
         <div id="pickup-value" class="ui">25</div>
-        -->
-        <canvas id="main_canvas"></canvas>
+        <canvas id="main_canvas" width="1024" height="768"></canvas>
     </div>
     <!---------------------------- Assets ---------------------------->
     <!-- Load the audio assets -->
@@ -26,8 +24,7 @@
 
     <!-- Load the texture assets -->
     <!-- NAME, URL, ACCESSED DEC 2020-->
-    <img id="spritesheet_main" src="assets/images/terrain/spritesheet_jungle.png" style="display: none" />
-  
+    <img id="spritesheet_main" src="assets/images/spritesheet_main.png" style="display: none" />
   
     <!---------------------------- Engine ---------------------------->
 
@@ -38,6 +35,8 @@
     <script src="../../Engine/Constants/Constants.js"></script>
     <script src="../../Engine/Time/GameTime.js"></script>
     <script src="../../Engine/Utilities/GDUtilities.js"></script>
+
+    <script src="../../Engine/Controllers/Controller.js"></script>
 
     <script src="../../Engine/Actors/Actor2D.js"></script>
     <script src="../../Engine/Artists/Artist.js"></script>

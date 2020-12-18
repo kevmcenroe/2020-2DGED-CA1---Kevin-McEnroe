@@ -12,13 +12,19 @@ const ActorType = Object.freeze({
    * the highest number and the LAST drawn. That would mean we would NOT see anything
    * EXCEPT the background sprites because it would be OVERDRAWING everything else.
    */
-  Background: 0,
-  NPC: 1,
-  Player: 2,
-  Projectile: 3,
+  Background: 1,
+  Platform: 2,
+  Decorator: 3,
+  Architecture: 4,
+  Pickup: 5,
+  Interactable: 6,
+  Bullet: 7,
+  Enemy: 8,
+  NPC: 9,
+  Player: 10,
+  Weapon: 11
   //add as many actor types as your game needs here BUT remember that the assigned number will determine drawn sort order...
 });
-
 /**
  * Defines whether a Sprite is Drawn and/or Updated by the ObjectManager Draw and Update methods
  *

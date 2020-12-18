@@ -49,7 +49,7 @@ body {
 /*********************** UI Text ****************************/
 
 .ui#score,
-.ui#lives,
+.ui#objectives,
 .ui#toast,
 .ui#countdown {
   position: absolute;
@@ -66,10 +66,14 @@ body {
   left: 20;
 }
 
-.ui#lives {
+.ui#objectives {
   left: 20;
   bottom: 20;
   display: none;
+  text-align: left;
+  font-size: 24px;
+  color: rgb(29, 43, 238);
+  text-shadow: 1px 1px #f5119ef3;
 }
 
 .ui#toast {

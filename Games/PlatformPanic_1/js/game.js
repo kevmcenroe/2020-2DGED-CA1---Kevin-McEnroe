@@ -1,4 +1,4 @@
-//'use strict' //throw an exception if a variable is used without being declared
+'use strict' //throw an exception if a variable is used without being declared
 
 window.addEventListener("load", Start);
 
@@ -18,6 +18,7 @@ var gameTime = null;
 var objectManager = null;
 var soundManager = null;
 var keyboardManager = null;
+var sprite = null;
 
 const cueArray = [
   new AudioCue("coin_pickup", 1, 1, false, 1),
@@ -26,11 +27,6 @@ const cueArray = [
   new AudioCue("background", 1, 1, false, 0),
   //add more cues here but make sure you load in the HTML!
 ];
-
-//create an asset dictionary (basically an array) to load and store the image data
-var textureDictionary = new AssetDictionary("textures");
-
-
 
 //#endregion
 
@@ -69,35 +65,19 @@ function Update(gameTime) {
 
   //call object manager to update all sprites
   objectManager.Update(gameTime);
-/*
-  if(keyboardManager.IsKeyDown(Keys.A)){
-    console.log("A was pressed!");
-    soundManager.Play("coin_pickup");
-  }
 
-  if(keyboardManager.IsKeyDown(Keys.D)){
-    console.log("B was pressed!");
-    soundManager.Play("gameover");
-  }
+//#region DEMO - REMOVE LATER
+  DemoSoundManager();
+  DemoHTMLDOM();
+  DemoChangeTransformAndAnimationOfPlayer();
+//#endregion
 
-  if(keyboardManager.IsKeyDown(Keys.Enter)){
-    let element = document.getElementById("toast");
-   element.style.display = "none";
-
-   element = document.getElementById("countdown");
-   element.style.display = "block";
-   element.innerHTML = "Whatever we want!";
-  }
-
-  if(keyboardManager.IsKeyDown(Keys.S)){
-    HTMLDom.RevealToast("lives", "Objectives....", 3000);
-  }
-  */
 }
+
 
 function Draw(gameTime) {
   //if we add a pattern or animate the canvas then we shouldnt clear the background
- // ClearCanvas(Color.White);
+  ClearCanvas(Color.White);
 
   //call object manager to draw all sprites
   objectManager.Draw(gameTime);
@@ -117,7 +97,8 @@ function ClearCanvas(color) {
 function Initialize() {
 
   //sets any variables we created in CSS e.g. canvas scroll speed
-  SetAnyCSSVariables();
+  //BUG - was causing a bug with drawing sprites to the screen
+  ////SetAnyCSSVariables(); 
 
   //load managers
   LoadManagers();
@@ -127,20 +108,6 @@ function Initialize() {
 
   //load sprites
   LoadSprites();
-}
-
-function SetAnyCSSVariables(){
-  let width = "1024px";
-  let height = "768px";
-
-  //parent container - dimensions
-  let parent = document.getElementById("parent_container");
-  parent.style.width = width;
-  parent.style.height = height;
-  
-  //canvas - dimensions
-  cvs.style.width = width;
-  cvs.style.height = height;
 }
 
 function LoadManagers(){
@@ -177,24 +144,96 @@ function LoadEnemySprites(){
 
 }
 function LoadPlayerSprite(){
+ 
+  //step 1 - create AnimatedSpriteArtist
+  var takeName = "run_right";
+  var artist = new AnimatedSpriteArtist(ctx, SpriteData.RUNNER_ANIMATION_DATA);
 
-  var runnerAnimData = SpriteData.RUNNER_ANIMATION_DATA;
+    //step 2 - set initial take
+  artist.SetTake(takeName);
 
-  var boundingBoxDimensions = runnerAnimData.takes["run_right"].boundingBoxDimensions;
-  var transform2D = new Transform2D(new Vector2(50, 568),
-  0, new Vector2(1,1), new Vector2(1, 1), 
-  boundingBoxDimensions);
+  //step 3 - create transform and use bounding box from initial take (this is why we make AnimatedSpriteArtist before Transform2D)
+  var transform2D = new Transform2D(
+          new Vector2(100, 100),                            //position
+            GDMath.ToRadians(0),                            //rotation
+            new Vector2(1,1),                               //scale
+            new Vector2(25, 27),                            //origin - roughly since each frame is different size
+            artist.GetSingleFrameDimensions(takeName)       //bounding box taken from 1st frame of current take
+            );
 
-  var artist = new AnimatedSpriteArtist(ctx, 1, runnerAnimData.spriteSheet, 
-    runnerAnimData.takes["run_right"].cellData, 
-    runnerAnimData.takes["run_right"].startCellIndex,
-    runnerAnimData.takes["run_right"].endCellIndex,
-    runnerAnimData.takes["run_right"].fps);
-
-  var sprite = new Sprite("player1", ActorType.Player, StatusType.Drawn | StatusType.Updated, 
-                transform2D, artist);
+  //step 4 - create the Sprite
+  sprite = new Sprite("player1",                            //a unique id that we could use to find sprite in ObjectManager
+                    ActorType.Player,                       //a type that is used to group all same type in the same row of the 2D sprites array in ObjectManager
+                    StatusType.Drawn | StatusType.Updated,  //sets whether we draw AND update a Sprite 
+                    transform2D,                            //transform that positions the sprite 
+                    artist);                                //artist that draws the sprite
   
-  objectManager.Add(sprite);
-
-
+  //step 5 - add to the object manager so it is drawn (if we set StatusType.Drawn) and updated (if we set StatusType.Updated)
+  objectManager.Add(sprite);                                //add to the object manager
 }
+
+//#region DEMO - REMOVE LATER
+/***************************************DEMO FUNCTIONS ***************************************/
+/**
+ * Demos how we can transform the animated sprite (running character)
+ * and change animations
+ */
+function DemoChangeTransformAndAnimationOfPlayer(){
+  if(keyboardManager.IsKeyDown(Keys.Numpad4)){
+   sprite.Transform2D.TranslateBy(new Vector2(-1, 0));
+  }
+
+  if(keyboardManager.IsKeyDown(Keys.Numpad6)){
+    sprite.Transform2D.TranslateBy(new Vector2(1, 0));
+  }
+
+  if(keyboardManager.IsKeyDown(Keys.Numpad1)){
+    sprite.Transform2D.RotateBy(GDMath.ToRadians(-1));
+   }
+ 
+   if(keyboardManager.IsKeyDown(Keys.Numpad9)){
+     sprite.Transform2D.RotateBy(GDMath.ToRadians(1));
+   }
+
+   if(keyboardManager.IsKeyDown(Keys.Numpad8)){
+    sprite.Transform2D.ScaleBy(new Vector2(0.05, 0.05));
+   }
+ 
+   if(keyboardManager.IsKeyDown(Keys.Numpad2)){
+    sprite.Transform2D.ScaleBy(new Vector2(-0.05, -0.05));
+   }
+}
+
+/**
+ * Demos how we can use the SoundManager to play sounds
+ */
+function DemoSoundManager(){
+  if(keyboardManager.IsKeyDown(Keys.A)){
+    console.log("A was pressed!");
+    soundManager.Play("coin_pickup");
+  }
+}
+
+
+/**
+ * Demos how we can set HTML DOM attributes from JS
+ */
+function DemoHTMLDOM(){
+  if(keyboardManager.IsKeyDown(Keys.Enter)){
+    let element = document.getElementById("toast");
+   element.style.display = "none";
+
+   element = document.getElementById("countdown");
+   element.style.display = "block";
+   element.innerHTML = "Whatever we want!";
+  }
+
+  if(keyboardManager.IsKeyDown(Keys.O)){
+    HTMLDom.RevealToast("objectives", "<b><u>Objectives</u><b><br><ol>"
+    + "<li><strike>Get Key</strike></li>"
+    + "<li>Unlock door</li>"
+    + "<li>Free prisoners</li>"
+    + "</ol>", 3000);
+  }
+}
+//#endregion

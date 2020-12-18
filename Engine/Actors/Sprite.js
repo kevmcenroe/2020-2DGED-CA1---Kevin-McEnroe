@@ -12,6 +12,12 @@ class Sprite extends Actor2D {
     get Artist(){
       return this.artist;
     }
+    get LayerDepth() {
+      return this.layerDepth;
+    }
+    set LayerDepth(value) {
+      this.layerDepth = (value >= 0 && value <= 1) ? value : 1;
+    }
   //#endregion
 
   //#region Constructors and Core methods
@@ -23,10 +29,12 @@ class Sprite extends Actor2D {
    * @param {StatusType} statusType An "enum" used to set if the sprite is Drawn and/or Updated, or Off
    * @param {Transform2D} transform2D Transform2D holding the position-related information used to render the image
    * @param {Artist} artist Used to draw the image to the canvas (can be either a SpriteArtist or AnimatedSpriteArtist) 
+   * @param {Number} layerDepth Used to sort two sprites of the same ActorType by depth (e.g. two ActorType.Pickup objects where we want to drawn one in front of the other)
    */
-  constructor(id, actorType, statusType, transform2D, artist) {
+  constructor(id, actorType, statusType, transform2D, artist, layerDepth=1) {
     super(id, actorType, statusType, transform2D);
     this.artist = artist;
+    this.layerDepth = layerDepth;
   }
 
   Update(gameTime) {
@@ -40,6 +48,22 @@ class Sprite extends Actor2D {
     if((this.statusType & StatusType.Drawn) != 0)
       this.artist.Draw(gameTime, this);
   }
+
+  /**
+   * Allows the sprite to be transformed (i.e. translation, rotation, scale) based on its transform values.
+   * 
+   * @param {context} context
+   * @see SpriteArtist::Draw()
+   * @memberof Sprite
+   */
+  SetContext(context) {
+    //Mo -> SRoT -> -Mo
+    context.translate(this.transform2D.translation.x, this.transform2D.translation.y);
+    context.scale(this.transform2D.scale.x, this.transform2D.scale.y);
+    context.rotate(this.transform2D.rotationInRadians);
+    context.translate(-this.transform2D.translation.x, -this.transform2D.translation.y);
+  }
+
   //#endregion
 
   //#region Equals, Clone, ToString
@@ -51,7 +75,8 @@ class Sprite extends Actor2D {
     this.ActorType,
     this.StatusType,
     this.Transform2D.Clone(), 
-    this.artist.Clone());
+    this.artist.Clone(),
+    this.layerDepth);
   }
   //#endregion
 }

@@ -13,12 +13,10 @@ static RUNNER_ANIMATION_DATA = Object.freeze({
   alpha: 1,
   takes: {  
     "run_right" :  {       
-      alpha: 1,
       fps: 12,
       maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
       startCellIndex: 0,
       endCellIndex: 8,
-      frameCount: 9,
       boundingBoxDimensions: new Vector2(49, 54), //notice I choose the largest of all the widths taken from the cellData array below
       cellData: [
         new Rect(414, 385, 47, 54),
@@ -32,13 +30,11 @@ static RUNNER_ANIMATION_DATA = Object.freeze({
         new Rect(0, 385, 35, 54)
       ]
     },
-    "run_left" : {
-        alpha: 1,       
+    "run_left" : {     
       fps: 12,
       maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
       startCellIndex: 0,
       endCellIndex: 8,
-      frameCount: 9,
       boundingBoxDimensions: new Vector2(49, 54), //notice I choose the largest of all the widths taken from the cellData array below
       cellData: [
         new Rect(0, 305, 47, 54),
@@ -60,8 +56,7 @@ static ENEMY_ANIMATION_DATA = Object.freeze({
   spriteSheet: document.getElementById("spritesheet_main"),
   alpha: 1,
   takes: {  
-    "wasp_fly" :  {
-    alpha: 1,       
+    "wasp_fly" :  {    
       fps: 16,
       maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
       startCellIndex: 0,
@@ -83,7 +78,6 @@ static COLLECTIBLES_ANIMATION_DATA = Object.freeze({
   takes: {  
     "sapphire_glint" :  {
       fps: 6,
-      alpha: 1,
       maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
       startCellIndex: 0,
       endCellIndex: 4,
@@ -98,7 +92,6 @@ static COLLECTIBLES_ANIMATION_DATA = Object.freeze({
     },
     "ruby_glint" :  {
       fps: 6,
-      alpha: 1,
       maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
       startCellIndex: 0,
       endCellIndex: 4,
@@ -113,7 +106,6 @@ static COLLECTIBLES_ANIMATION_DATA = Object.freeze({
     },
     "gold_glint" :  {
       fps: 6,
-      alpha: 1,
       maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
       startCellIndex: 0,
       endCellIndex: 2,
