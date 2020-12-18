@@ -154,7 +154,7 @@ function LoadPlayerSprite(){
 
   //step 3 - create transform and use bounding box from initial take (this is why we make AnimatedSpriteArtist before Transform2D)
   var transform2D = new Transform2D(
-          new Vector2(100, 100),                            //position
+          new Vector2(200, 100),                            //position
             GDMath.ToRadians(0),                            //rotation
             new Vector2(1,1),                               //scale
             new Vector2(25, 27),                            //origin - roughly since each frame is different size
@@ -169,7 +169,8 @@ function LoadPlayerSprite(){
                     artist);                                //artist that draws the sprite
   
   //step 5(optional) - add controller(s)
-  sprite.AttachController(new PlayerController(0.12));
+  //sprite.AttachController(new PlayerController(0.12));
+  sprite.AttachController(new PatrolController(new Vector2(0.6, 0), 60));
 
   //step 6 - add to the object manager so it is drawn (if we set StatusType.Drawn) and updated (if we set StatusType.Updated)
   objectManager.Add(sprite);                                //add to the object manager
