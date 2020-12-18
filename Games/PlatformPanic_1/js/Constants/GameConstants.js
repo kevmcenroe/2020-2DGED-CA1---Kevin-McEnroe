@@ -13,7 +13,7 @@ static RUNNER_ANIMATION_DATA = Object.freeze({
   alpha: 1,
   takes: {  
     "run_right" :  {       
-      fps: 12,
+      fps: 6,
       maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
       startCellIndex: 0,
       endCellIndex: 8,
@@ -31,7 +31,7 @@ static RUNNER_ANIMATION_DATA = Object.freeze({
       ]
     },
     "run_left" : {     
-      fps: 12,
+      fps: 6,
       maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
       startCellIndex: 0,
       endCellIndex: 8,

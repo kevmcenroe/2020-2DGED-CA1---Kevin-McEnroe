@@ -56,11 +56,11 @@ class Actor2D {
      * @param {*} controller
      * @memberof Actor2D
      */
-    AttachController(behavior) {
+    AttachController(controller) {
       if(this.controllers == undefined)
         this.controllers = [];
   
-      this.controllers.push(behavior);
+      this.controllers.push(controller);
     }
   
     /**

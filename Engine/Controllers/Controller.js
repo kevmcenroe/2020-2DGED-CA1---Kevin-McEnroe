@@ -4,7 +4,7 @@
  * @version 1.0
  * @class Controller
  */
-class Behavior {
+class Controller {
 
     constructor() {
     }

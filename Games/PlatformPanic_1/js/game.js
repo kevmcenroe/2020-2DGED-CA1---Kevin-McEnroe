@@ -146,7 +146,7 @@ function LoadEnemySprites(){
 function LoadPlayerSprite(){
  
   //step 1 - create AnimatedSpriteArtist
-  var takeName = "run_right";
+  var takeName = "run_left";
   var artist = new AnimatedSpriteArtist(ctx, SpriteData.RUNNER_ANIMATION_DATA);
 
     //step 2 - set initial take
@@ -168,7 +168,10 @@ function LoadPlayerSprite(){
                     transform2D,                            //transform that positions the sprite 
                     artist);                                //artist that draws the sprite
   
-  //step 5 - add to the object manager so it is drawn (if we set StatusType.Drawn) and updated (if we set StatusType.Updated)
+  //step 5(optional) - add controller(s)
+  sprite.AttachController(new PlayerController(0.12));
+
+  //step 6 - add to the object manager so it is drawn (if we set StatusType.Drawn) and updated (if we set StatusType.Updated)
   objectManager.Add(sprite);                                //add to the object manager
 }
 
