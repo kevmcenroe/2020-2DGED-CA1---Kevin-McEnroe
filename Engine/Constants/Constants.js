@@ -18,9 +18,9 @@ const ActorType = Object.freeze({
   Architecture: 4,
   Pickup: 5,
   Interactable: 6,
-  Bullet: 7,
-  Enemy: 8,
-  NPC: 9,
+  Enemy: 7,
+  NPC: 8,
+  Bullet: 9,
   Player: 10,
   Weapon: 11
   //add as many actor types as your game needs here BUT remember that the assigned number will determine drawn sort order...

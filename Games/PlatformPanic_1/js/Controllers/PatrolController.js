@@ -77,6 +77,7 @@ class PatrolController {
 
           //add to the object manager
           objectManager.Add(bulletSprite);
+            
 
           this.timeSinceLastBullet = 0;
           this.numberOfBullets--;

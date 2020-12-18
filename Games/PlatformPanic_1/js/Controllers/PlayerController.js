@@ -18,6 +18,8 @@ class PlayerController {
                 parent.Artist.SetTake("run_left");
             }
 
+         //   soundManager.Play("gunshot");
+
         }
         else if(keyboardManager.IsKeyDown(Keys.E)){
             parent.Transform2D.TranslateBy(Vector2.MultiplyScalar(new Vector2(this.moveSpeed, 0), gameTime.ElapsedTimeInMs));

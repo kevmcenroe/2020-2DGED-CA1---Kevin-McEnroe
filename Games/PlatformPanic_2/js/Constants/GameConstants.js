@@ -138,16 +138,6 @@ static PLATFORM_DATA = Object.freeze({
     new Vector2(300, 650),
     new Vector2(350, 650),
 
-    new Vector2(400, 550),
-    new Vector2(450, 550),
-    new Vector2(500, 550),
-
-    new Vector2(550, 500),
-    new Vector2(600, 450),
-    new Vector2(650, 450),
-    new Vector2(700, 450),
-    new Vector2(750, 450),
-    new Vector2(800, 450)
   ]
 });
 

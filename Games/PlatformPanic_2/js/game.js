@@ -57,7 +57,7 @@ function Animate(now) {
  * Loads the code managers used by the game (object, keyboard, sound)
  */
 function LoadManagers() {
-  objectManager = new ObjectManager(ctx, StatusType.Drawn | StatusType.Updated);
+  objectManager = new ObjectManager(ctx, StatusType.Drawn);
   keyboardManager = new KeyboardManager();
   soundManager = new SoundManager(cueArray);
 }
@@ -127,6 +127,13 @@ function HandleInput(gameTime) {
   if (keyboardManager.IsKeyDown(Keys.Enter)) {
     StartGame(gameTime);
   }
+
+  //add more code to check for input (e.g. O for Objective)
+
+  //is score == 0
+    //sound
+    //show div
+    //pause object manager
 }
 
 function StartGame(gameTime){
@@ -134,7 +141,7 @@ function StartGame(gameTime){
   //set any win/lose variables
   var livesElement = document.getElementById("ui_lives");
   livesElement.style.display = "block";
-  livesElement.innerHTML = lives + "/5";
+  livesElement.innerHTML = "<strike>hello</strike> - " + lives + "/5";
 
   var scoreElement = document.getElementById("ui_score");
   scoreElement.style.display = "block";
@@ -144,7 +151,7 @@ function StartGame(gameTime){
   document.getElementById("menu_opening").style.display = "none";
 
   //unpause game
-  //to do...
+  objectManager.StatusType = StatusType.Drawn | StatusType.Updated;
 
   //play sound
   soundManager.Play("background");
@@ -255,7 +262,7 @@ function LoadPlayerSprite() {
   ); //artist that draws the sprite
 
   //step 5(optional) - add any controller(s)
-  sprite.AttachController(new SimpleMoveController(new Vector2(1, 0), 0.075));
+  sprite.AttachController(new BulletController(new Vector2(1, 0), 5));
 
   //step 6 - add to the object manager so it is drawn (if we set StatusType.Drawn) and updated (if we set StatusType.Updated)
   objectManager.Add(sprite); //add to the object manager
