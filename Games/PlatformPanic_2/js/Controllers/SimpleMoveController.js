@@ -8,8 +8,8 @@ class SimpleMoveController
 {
     /**
      * Creates an instance of SimpleMoveController to show how we can move a sprite with a controller
-     * @param {Vector2} moveDirection
-     * @param {Number} moveSpeed
+     * @param {Vector2} moveDirection Vector2 direction mormalize with length=1 (see Vector2.Normalize())
+     * @param {Number} moveSpeed Floating-point speed value
      * @memberof SimpleMoveController
      */
     constructor(moveDirection, moveSpeed)
@@ -32,8 +32,11 @@ class SimpleMoveController
        parent.Transform2D.TranslateBy(translateBy);
     }
 
+
    Clone() {
     return new SimpleMoveController(this.moveDirection, this.moveSpeed);
    }
+
+   //to do...Equals, GetHashCode
 
 }

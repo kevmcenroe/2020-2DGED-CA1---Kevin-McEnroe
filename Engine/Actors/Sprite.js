@@ -38,10 +38,10 @@ class Sprite extends Actor2D {
   }
 
   Update(gameTime) {
-    if((this.statusType & StatusType.Updated) != 0)
+    if((this.statusType & StatusType.Updated) != 0){
       this.artist.Update(gameTime, this);
-
       super.Update(gameTime);
+    }
   }
 
   Draw(gameTime) {

@@ -4,7 +4,7 @@ window.addEventListener("load", Start);
 
 /********************************* Game Engine Core Variables & Functions (Do Not Change in Your Game) *********************************/
 
-//#region Variables
+//#region Core Variables [DO NOT CHANGE]
 //get a handle to the canvas
 var cvs = document.getElementById("main_canvas");
 
@@ -14,19 +14,10 @@ var ctx = cvs.getContext("2d");
 //stores elapsed and total game time
 var gameTime = null;
 
-//stores object manager which holds all sprites
+//managers
 var objectManager = null;
 var soundManager = null;
 var keyboardManager = null;
-var sprite = null;
-
-const cueArray = [
-  new AudioCue("coin_pickup", 1, 1, false, 1),
-  new AudioCue("gameover", 1, 1, false, 1),
-  new AudioCue("gunshot", 1, 1, false, 0),
-  new AudioCue("background", 1, 1, true, 0),
-  //add more cues here but make sure you load in the HTML!
-];
 
 //#endregion
 
@@ -36,6 +27,9 @@ const cueArray = [
 function Start() {
   //instanticate GameTime
   gameTime = new GameTime();
+
+  //load managers
+  LoadManagers();
 
   //Initialize all assets (sound, textures), load all sprites, load all managers
   Initialize();
@@ -57,6 +51,17 @@ function Animate(now) {
   //request the next frame to repeat the update/draw cycle
   window.requestAnimationFrame(Animate);
 }
+
+
+/**
+ * Loads the code managers used by the game (object, keyboard, sound)
+ */
+function LoadManagers() {
+  objectManager = new ObjectManager(ctx, StatusType.Drawn | StatusType.Updated);
+  keyboardManager = new KeyboardManager();
+  soundManager = new SoundManager(cueArray);
+}
+
 //#endregion
 
 //#region Update, Draw & Clear
@@ -87,21 +92,43 @@ function ClearCanvas(color) {
 //#endregion
 
 /********************************* Game-Specific Variables & Functions (Change in Your Game) *********************************/
+//#region Game Specific Variables [CHANGE FOR YOUR GAME]
+//stores object manager which holds all sprites
+
+const cueArray = [
+  new AudioCue("coin_pickup", 1, 1, false, 1),
+  new AudioCue("gameover", 1, 1, false, 1),
+  new AudioCue("gunshot", 1, 1, false, 0),
+  new AudioCue("background", 1, 1, true, 0),
+  //add more cues here but make sure you load in the HTML!
+];
+
+var lives = 5;
+var score = 0;
+//#endregion
+
 function Initialize() {
-
-  //load managers
-  LoadManagers();
-
-  //load multiple images
-  LoadImages();
 
   //load sprites
   LoadSprites();
 
 }
 
-var lives = 5;
-var score = 0;
+
+/**
+ * Use this function to check for keyboard or mouse input and start the game, mute sounds,
+ * show/hide UI elements
+ *
+ * @param {*} gameTime
+ */
+function HandleInput(gameTime) {
+
+  //is the game starting
+  if (keyboardManager.IsKeyDown(Keys.Enter)) {
+    StartGame(gameTime);
+  }
+}
+
 function StartGame(gameTime){
 
   //set any win/lose variables
@@ -121,25 +148,6 @@ function StartGame(gameTime){
 
   //play sound
   soundManager.Play("background");
-}
-
-
-function HandleInput(gameTime) {
-
-  //is the game starting
-  if (keyboardManager.IsKeyDown(Keys.Enter)) {
-    StartGame(gameTime);
-  }
-}
-
-function LoadManagers() {
-  objectManager = new ObjectManager(ctx, StatusType.Drawn | StatusType.Updated);
-  keyboardManager = new KeyboardManager();
-  soundManager = new SoundManager(cueArray);
-}
-
-function LoadImages() {
-  //add more here...
 }
 
 function LoadSprites() {
@@ -238,7 +246,7 @@ function LoadPlayerSprite() {
   );
 
   //step 4 - create the Sprite
-  sprite = new Sprite(
+  var sprite = new Sprite(
     "player1", //a unique id that we could use to find sprite in ObjectManager
     ActorType.Player, //a type that is used to group all same type in the same row of the 2D sprites array in ObjectManager
     StatusType.Drawn | StatusType.Updated, //sets whether we draw AND update a Sprite
@@ -247,7 +255,7 @@ function LoadPlayerSprite() {
   ); //artist that draws the sprite
 
   //step 5(optional) - add any controller(s)
-  sprite.AttachController(new SimpleMoveController())
+  sprite.AttachController(new SimpleMoveController(new Vector2(1, 0), 0.075));
 
   //step 6 - add to the object manager so it is drawn (if we set StatusType.Drawn) and updated (if we set StatusType.Updated)
   objectManager.Add(sprite); //add to the object manager

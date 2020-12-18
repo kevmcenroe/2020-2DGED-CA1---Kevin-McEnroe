@@ -14,7 +14,7 @@ var ctx = cvs.getContext("2d");
 function Start() {
 
   var e = document.getElementById("main_canvas");
-  e.style.animationDuration = 0 + "s";
+  e.style.animationDuration = 4 + "s";
   e.style.width = 1024;
   e.style.height = 768;
 

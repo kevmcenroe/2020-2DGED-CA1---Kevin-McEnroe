@@ -89,7 +89,7 @@ class Actor2D {
       if(this.controllers != undefined)
       {
         for (let i = 0; i < this.controllers.length; i++)
-          this.controllers[i].Update(gameTime, this);
+          this.controllers[i].Execute(gameTime, this);
       }
     }
   
