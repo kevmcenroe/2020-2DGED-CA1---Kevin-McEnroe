@@ -9,15 +9,15 @@ class Sprite extends Actor2D {
   //#endregion
 
   //#region  Properties
-    get Artist(){
-      return this.artist;
-    }
-    get LayerDepth() {
-      return this.layerDepth;
-    }
-    set LayerDepth(value) {
-      this.layerDepth = (value >= 0 && value <= 1) ? value : 1;
-    }
+  get Artist() {
+    return this.artist;
+  }
+  get LayerDepth() {
+    return this.layerDepth;
+  }
+  set LayerDepth(value) {
+    this.layerDepth = (value >= 0 && value <= 1) ? value : 1;
+  }
   //#endregion
 
   //#region Constructors and Core methods
@@ -31,21 +31,21 @@ class Sprite extends Actor2D {
    * @param {Artist} artist Used to draw the image to the canvas (can be either a SpriteArtist or AnimatedSpriteArtist) 
    * @param {Number} layerDepth Used to sort two sprites of the same ActorType by depth (e.g. two ActorType.Pickup objects where we want to drawn one in front of the other)
    */
-  constructor(id, actorType, statusType, transform2D, artist, layerDepth=1) {
+  constructor(id, actorType, statusType, transform2D, artist, layerDepth = 1) {
     super(id, actorType, statusType, transform2D);
     this.artist = artist;
     this.layerDepth = layerDepth;
   }
 
   Update(gameTime) {
-    if((this.statusType & StatusType.Updated) != 0){
+    if ((this.statusType & StatusType.Updated) != 0) {
       this.artist.Update(gameTime, this);
       super.Update(gameTime);
     }
   }
 
   Draw(gameTime) {
-    if((this.statusType & StatusType.Drawn) != 0)
+    if ((this.statusType & StatusType.Drawn) != 0)
       this.artist.Draw(gameTime, this);
   }
 
@@ -68,15 +68,24 @@ class Sprite extends Actor2D {
 
   //#region Equals, Clone, ToString
   //to do...
-  
+
   //deep-copy
-  Clone(){
-    return new Sprite(this.ID + " - clone", 
-    this.ActorType,
-    this.StatusType,
-    this.Transform2D.Clone(), 
-    this.artist.Clone(),
-    this.layerDepth);
+  Clone() {
+    var clone = new Sprite(this.ID + " - clone",
+      this.ActorType,
+      this.StatusType,
+      this.Transform2D.Clone(),
+      this.artist.Clone(),
+      this.layerDepth);
+
+    //now clone all the actors attached behaviors
+    for (let controller of this.Controllers)
+      clone.AttachController(controller.Clone());
+
+    if (this.collisionPrimitive)
+      clone.collisionPrimitive = this.collisionPrimitive.Clone();
+
+    return clone;
   }
   //#endregion
 }

@@ -24,8 +24,8 @@ class CollidableSprite extends Sprite {
     }
     //#endregion
 
-    
-    constructor(id, actorType, statusType, transform2D, artist, layerDepth=1) {
+
+    constructor(id, actorType, statusType, transform2D, artist, layerDepth = 1) {
         super(id, actorType, statusType, transform2D, artist, layerDepth);
     }
 
@@ -51,13 +51,12 @@ class CollidableSprite extends Sprite {
         );
 
         //now clone all the actors attached behaviors
-        if(this.behaviors != null)
-        {
-        for (let behavior of this.behaviors) 
-            clone.AttachBehavior(behavior.Clone());
-        }
+        for (let controller of this.Controllers)
+            clone.AttachController(controller.Clone());
 
-        //lastly return the actor
+        if (this.collisionPrimitive)
+            clone.collisionPrimitive = this.collisionPrimitive.Clone();
+
         return clone;
     }
     //#endregion

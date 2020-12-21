@@ -193,6 +193,10 @@ class CollisionPrimitive {
     ToString() {
         throw "Error: Base class is never directly instanciated - Create RectCollisionPrimitive or CircleCollisionPrimitive for your Sprite";
     }
+
+    Clone(){
+        return new CollisionPrimitive(this.transform2D.Clone());
+    }
 }
 
 /**
@@ -205,7 +209,6 @@ class CollisionPrimitive {
 class RectCollisionPrimitive extends CollisionPrimitive {
 
     //#region Fields
-    rectDimensions;
     explodeRectBy;
     boundingRectangle; //rectangle
     //#endregion
@@ -283,6 +286,10 @@ class RectCollisionPrimitive extends CollisionPrimitive {
     ToString() {
         return this.boundingRectangle.ToString();
     }
+
+    Clone(){
+        return new RectCollisionPrimitive(this.transform2D.Clone(), this.explodeRectBy);
+    }
 }
 
 /**
@@ -355,6 +362,10 @@ class CircleCollisionPrimitive extends CollisionPrimitive {
     ToString() {
         return this.boundingCircle.ToString();
     }
+
+    Clone(){
+        return new CircleCollisionPrimitive(this.transform2D.Clone(), this.radius);
+    }
 }
 
 /**
@@ -414,6 +425,10 @@ class Collision {
         //if same (e.g. player testing against themself then return false)
         if (actorA === actorB)
             return false;
+
+        if(actorA.collisionPrimitive == null || actorB.collisionPrimitive == null)
+            throw "One or more sprites [" + actorA.id + "," + actorB.id + "] does not have a valid collision primitive!";
+
 
         //get bounding primitives for the two actors
         let boundingPrimitiveA = actorA.collisionPrimitive.GetBoundingPrimitive();
@@ -555,9 +570,10 @@ class DebugDrawer {
     //#region Properties
     //#endregion
 
-    constructor(id, statusType, objectManager) {
+    constructor(id, statusType, context, objectManager) {
         this.id = id;
         this.statusType = statusType;
+        this.context = context;
         this.objectManager = objectManager;
     }
 
@@ -568,8 +584,8 @@ class DebugDrawer {
     }
 
     Draw(gameTime) {
-        if ((this.statusType & StatusType.IsDrawn) != 0) {
-            this.DrawCollisionPrimitives(activeCamera);
+        if ((this.statusType & StatusType.Drawn) != 0) {
+            this.DrawCollisionPrimitives();
         }
     }
 
@@ -577,21 +593,26 @@ class DebugDrawer {
     SetContext(transform) {
         this.context.translate(transform.translation.x, transform.translation.y);
         this.context.scale(transform.scale.x, transform.scale.y);
-        this.rotate(transform.rotationInRadians);
+        this.context.rotate(transform.rotationInRadians);
         this.context.translate(-transform.translation.x, -transform.translation.y);
     }
 
     DrawCollisionPrimitives() {
-        let sprites = this.objectManager.Sprites;
-        //for each of the keys in the sprites array (e.g. keys could be...ActorType.Enemy, ActorType.Player)
-        for (let key of Object.keys(sprites)) {
-            //for the sprites inside the array for the current key call update
-            for (let sprite of sprites[key]) {
-                this.context.save();
-                this.SetContext(sprite.Transform2D);
-                collisionPrimitive.DebugDraw(this.context, DebugDrawer.BOUNDING_PRIMITIVE_LINE_WIDTH,
-                    DebugDrawer.BOUNDING_PRIMITIVE_LINE_ALPHA, DebugDrawer.BOUNDING_PRIMITIVE_COLOR);
-                this.context.restore();
+        let sprites = objectManager.FindAll();
+
+        if(sprites){
+            //for each of the keys in the sprites array (e.g. keys could be...ActorType.Enemy, ActorType.Player)
+            for (let key of Object.keys(sprites)) {
+                //for the sprites inside the array for the current key call update
+                for (let sprite of sprites[key]) {
+                    if(sprite.collisionPrimitive){
+                        this.context.save();
+                        this.SetContext(sprite.Transform2D);
+                        sprite.collisionPrimitive.DebugDraw(this.context, DebugDrawer.BOUNDING_PRIMITIVE_LINE_WIDTH,
+                            DebugDrawer.BOUNDING_PRIMITIVE_LINE_ALPHA, DebugDrawer.BOUNDING_PRIMITIVE_COLOR);
+                        this.context.restore();
+                    }
+                }
             }
         }
     }

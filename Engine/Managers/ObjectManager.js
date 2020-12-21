@@ -139,6 +139,14 @@ class ObjectManager {
     else return null;
   }
 
+  /**
+   * Returns an array of all the sprites in the object manager
+   * @returns {Array} An array of all sprites, otherwise null
+   */
+  FindAll() {
+    return this.sprites;
+  }
+
   
   /**
    * Sorts the array of ActorType sprites using the function provided

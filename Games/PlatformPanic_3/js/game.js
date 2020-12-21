@@ -19,6 +19,9 @@ var objectManager = null;
 var soundManager = null;
 var keyboardManager = null;
 
+//debug
+var debugDrawer = null;
+
 //#endregion
 
 //#region Functions
@@ -71,14 +74,20 @@ function Update(gameTime) {
 
   //Check for menu, win/lose, sound events
   HandleInput(gameTime);
+
+  //update scores on the UI
+  UpdateUI(gameTime);
 }
 
 function Draw(gameTime) {
   //if we add a pattern or animate the canvas then we shouldnt clear the background
-  ClearCanvas(Color.White);
+ // ClearCanvas(Color.White);
 
   //call object manager to draw all sprites
   objectManager.Draw(gameTime);
+
+  if(debugDrawer)
+    debugDrawer.Draw(gameTime);
 }
 
 function ClearCanvas(color) {
@@ -86,6 +95,11 @@ function ClearCanvas(color) {
   ctx.fillStyle = color;
   ctx.fillRect(0, 0, cvs.clientWidth, cvs.clientHeight);
   ctx.restore();
+}
+
+function LoadDebug(bDebugEnabled) {
+  if(bDebugEnabled)
+    debugDrawer = new DebugDrawer("shows debug info", StatusType.Update | StatusType.Drawn, ctx, objectManager);
 }
 //#endregion
 
@@ -109,9 +123,19 @@ var score = 0;
 
 function Initialize() {
 
+  //debug drawer to show bounding rect or circle around collidable sprites
+  LoadDebug(true);
+
   //load sprites
   LoadSprites();
+}
 
+function UpdateUI(gameTime){
+  var scoreElement = document.getElementById("ui_score");
+  if(scoreElement){
+      scoreElement.style.display = "block";
+      scoreElement.innerHTML = score;
+  }
 }
 
 
@@ -227,10 +251,10 @@ function LoadPlatformSprites() {
   );
 
   let clone = null;
-
   for (let i = 0; i < platformData.translationArray.length; i++) {
     clone = platformSprite.Clone();
     clone.Transform2D.Translation = platformData.translationArray[i];
+    clone.collisionPrimitive = new RectCollisionPrimitive(clone.Transform2D, 0);
     objectManager.Add(clone);
   }
 }
@@ -247,100 +271,77 @@ function LoadPlayerSprite() {
 
   //step 3 - create transform and use bounding box from initial take (this is why we make AnimatedSpriteArtist before Transform2D)
   let transform = new Transform2D(
-    RUNNER_START_POSITION,
+    SpriteData.RUNNER_START_POSITION,
     0,
     Vector2.One,
     Vector2.Zero,
-    artist.GetBoundingBoxDimensionsByTakeName("run_right"),
+    artist.GetSingleFrameDimensions("run_right"),
     0
   );
 
-  //step 4 - create the CollidableSprite
+  //step 4 - create the CollidableSprite which adds Body which allows us to test for collision and add gravity
   let playerSprite = new CollidableSprite(
     "player",
     ActorType.Player,
-    StatusType.IsUpdated | StatusType.IsDrawn,
+    StatusType.Updated | StatusType.Drawn,
     transform,
     artist,
     1
   );
 
-  // //set performance characteristics of the body attached to the moveable sprite
+  //step 5 - set performance characteristics of the body attached to the moveable sprite
   playerSprite.Body.MaximumSpeed = 6;
   playerSprite.Body.Friction = FrictionType.Normal;
   playerSprite.Body.Gravity = GravityType.Normal;
 
-  playerSprite.AttachBehavior(
-    new PlayerBehavior(
-      keyboardManager,
-      objectManager,
-      RUNNER_MOVE_KEYS,
-      RUNNER_RUN_VELOCITY,
-      RUNNER_JUMP_VELOCITY
+  //step 6 - add collision surface
+  playerSprite.collisionPrimitive = new RectCollisionPrimitive(playerSprite.Transform2D, 0);
+
+  //step 7 - add movement controller
+  playerSprite.AttachController(
+    new PlayerController(
+      SpriteData.RUNNER_MOVE_KEYS,
+      SpriteData.RUNNER_RUN_VELOCITY,
+      SpriteData.RUNNER_JUMP_VELOCITY
     )
   );
 
+  //step 8 - add to the object manager so it is drawn (if we set StatusType.Drawn) and updated (if we set StatusType.Updated)
   objectManager.Add(playerSprite); //add player sprite
 }
 
-// function LoadPlayerSprite() {
-//   //step 1 - create AnimatedSpriteArtist
-//   var takeName = "run_right";
-//   var artist = new AnimatedSpriteArtist(ctx, SpriteData.RUNNER_ANIMATION_DATA);
+function LoadPickupSprites() {
+  let spriteArtist = new AnimatedSpriteArtist(ctx, SpriteData.COLLECTIBLES_ANIMATION_DATA);
+  spriteArtist.SetTake("gold_glint");
 
-//   //step 2 - set initial take
-//   artist.SetTake(takeName);
+  var frameDimensions = spriteArtist.GetSingleFrameDimensions("gold_glint");
+  
+  //set the origin so that the collision surface is in the center of the sprite
+  var origin = Vector2.DivideScalar(frameDimensions, 2);
 
-//   //step 3 - create transform and use bounding box from initial take (this is why we make AnimatedSpriteArtist before Transform2D)
-//   var transform2D = new Transform2D(
-//     new Vector2(100, 100), //position
-//     GDMath.ToRadians(0), //rotation
-//     new Vector2(1, 1), //scale
-//     new Vector2(25, 27), //origin - roughly since each frame is different size
-//     artist.GetSingleFrameDimensions(takeName) //bounding box taken from 1st frame of current take
-//   );
+  let transform = new Transform2D(
+    new Vector2(530, 250),
+    0,
+    Vector2.One,
+    origin,
+    frameDimensions
+  );
 
-//   //step 4 - create the Sprite
-//   var sprite = new Sprite(
-//     "player1", //a unique id that we could use to find sprite in ObjectManager
-//     ActorType.Player, //a type that is used to group all same type in the same row of the 2D sprites array in ObjectManager
-//     StatusType.Drawn | StatusType.Updated, //sets whether we draw AND update a Sprite
-//     transform2D, //transform that positions the sprite
-//     artist
-//   ); //artist that draws the sprite
+  let pickupSprite = new Sprite(
+    "gold",
+    ActorType.Pickup,
+    StatusType.Updated | StatusType.Drawn,
+    transform,
+    spriteArtist,
+    1
+  );
 
-//   //step 5(optional) - add any controller(s)
-//   sprite.AttachController(new BulletController(new Vector2(1, 0), 5));
+  // add the collision surface to test for collisions against
+  pickupSprite.collisionPrimitive = new CircleCollisionPrimitive(pickupSprite.Transform2D, 15);
 
-//   //step 6 - add to the object manager so it is drawn (if we set StatusType.Drawn) and updated (if we set StatusType.Updated)
-//   objectManager.Add(sprite); //add to the object manager
-// }
+  objectManager.Add(pickupSprite);
+}
 
-// LoadPickupSprites() {
-//   let spriteArtist = new AnimatedSpriteArtist(
-//     SpriteData.COLLECTIBLES_ANIMATION_DATA
-//   );
-//   spriteArtist.SetTake("gold_glint");
-
-//   let transform = new Transform2D(
-//     new Vector2(530, 250),
-//     0,
-//     Vector2.One,
-//     Vector2.Zero,
-//     spriteArtist.GetBoundingBoxDimensionsByTakeName("gold_glint"),
-//     0
-//   );
-
-//   let pickupSprite = new Sprite(
-//     "gold",
-//     ActorType.Pickup,
-//     CollisionType.Collidable,
-//     transform,
-//     spriteArtist,
-//     StatusType.IsUpdated | StatusType.IsDrawn,
-//     1,
-//     1
-//   );
 
 
 function LoadEnemySprites() {

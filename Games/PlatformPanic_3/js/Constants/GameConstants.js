@@ -6,10 +6,15 @@
 class SpriteData {
 
 //#region Sprite Data
+static RUNNER_START_POSITION = new Vector2(100, 450);
+static RUNNER_MOVE_KEYS = [Keys.A, Keys.D, Keys.Space, Keys.Enter];
+static RUNNER_RUN_VELOCITY = 0.1;
+static RUNNER_JUMP_VELOCITY = 0.6;
 
 static RUNNER_ANIMATION_DATA = Object.freeze({
   id: "runner_animation_data",
   spriteSheet: document.getElementById("spritesheet_main"),
+  actorType: ActorType.Player,
   alpha: 1,
   takes: {  
     "run_right" :  {       
@@ -75,6 +80,7 @@ static COLLECTIBLES_ANIMATION_DATA = Object.freeze({
   id: "collectibles_animation_data",
   spriteSheet: document.getElementById("spritesheet_main"),
   alpha: 1,
+  actorType: ActorType.Pickup,
   takes: {  
     "sapphire_glint" :  {
       fps: 6,
@@ -135,9 +141,19 @@ static PLATFORM_DATA = Object.freeze({
     new Vector2(150, 650),
     new Vector2(200, 650),
 
-    new Vector2(300, 650),
-    new Vector2(350, 650),
+    new Vector2(250, 600),
+    new Vector2(300, 600),
 
+    new Vector2(400, 550),
+    new Vector2(450, 550),    
+    new Vector2(500, 550),
+    new Vector2(550, 550),  
+
+    new Vector2(750, 450),
+    new Vector2(800, 450),
+
+    new Vector2(550, 350),
+    new Vector2(500, 350),
   ]
 });
 
