@@ -245,6 +245,7 @@ LoadPlayerSprite() {
   //step 2 - set initial take
   artist.SetTake(takeName);
 
+  //step 3 - create transform and use bounding box from initial take (this is why we make AnimatedSpriteArtist before Transform2D)
   let transform = new Transform2D(
     RUNNER_START_POSITION,
     0,
@@ -254,14 +255,13 @@ LoadPlayerSprite() {
     0
   );
 
-  let playerSprite = new PlayerSprite(
+  //step 4 - create the CollidableSprite
+  let playerSprite = new CollidableSprite(
     "player",
     ActorType.Player,
-    CollisionType.Collidable,
+    StatusType.IsUpdated | StatusType.IsDrawn,
     transform,
     artist,
-    StatusType.IsUpdated | StatusType.IsDrawn,
-    1,
     1
   );
 

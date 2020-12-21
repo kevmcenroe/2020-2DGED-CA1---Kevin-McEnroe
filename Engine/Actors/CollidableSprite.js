@@ -7,10 +7,10 @@
  * 
  * @author niall mcguinness
  * @version 1.0
- * @class PlayerSprite
+ * @class CollidableSprite
  */
 
-class PlayerSprite extends Sprite {
+class CollidableSprite extends Sprite {
     //#region  Fields
     body = new Body();
     //#endregion
@@ -41,7 +41,7 @@ class PlayerSprite extends Sprite {
 
     Clone() {
         //make a clone of the actor
-        let clone = new PlayerSprite(
+        let clone = new CollidableSprite(
             this.ID,
             this.ActorType,
             this.StatusType,
