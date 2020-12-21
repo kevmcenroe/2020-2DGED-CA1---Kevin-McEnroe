@@ -236,7 +236,7 @@ function LoadPlatformSprites() {
 }
 
 
-LoadPlayerSprite() {
+function LoadPlayerSprite() {
 
   //step 1 - create AnimatedSpriteArtist
   var takeName = "run_right";
