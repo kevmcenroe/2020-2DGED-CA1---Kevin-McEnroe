@@ -268,9 +268,6 @@ function LoadPlayerSprite() {
   objectManager.Add(sprite); //add to the object manager
 }
 
-function LoadPickupSprites() {
-  //to do...
-}
 
 function LoadEnemySprites() {
   //to do...
