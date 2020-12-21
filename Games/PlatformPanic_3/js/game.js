@@ -163,7 +163,7 @@ function LoadSprites() {
   LoadBackgroundSprites();
 
   //to do...
-  LoadPickupSprites()
+  LoadPickupSprites();
   //LoadEnemySprites();
 }
 
@@ -316,31 +316,31 @@ LoadPlayerSprite() {
 //   objectManager.Add(sprite); //add to the object manager
 // }
 
-LoadPickupSprites() {
-  let spriteArtist = new AnimatedSpriteArtist(
-    SpriteData.COLLECTIBLES_ANIMATION_DATA
-  );
-  spriteArtist.SetTake("gold_glint");
+// LoadPickupSprites() {
+//   let spriteArtist = new AnimatedSpriteArtist(
+//     SpriteData.COLLECTIBLES_ANIMATION_DATA
+//   );
+//   spriteArtist.SetTake("gold_glint");
 
-  let transform = new Transform2D(
-    new Vector2(530, 250),
-    0,
-    Vector2.One,
-    Vector2.Zero,
-    spriteArtist.GetBoundingBoxDimensionsByTakeName("gold_glint"),
-    0
-  );
+//   let transform = new Transform2D(
+//     new Vector2(530, 250),
+//     0,
+//     Vector2.One,
+//     Vector2.Zero,
+//     spriteArtist.GetBoundingBoxDimensionsByTakeName("gold_glint"),
+//     0
+//   );
 
-  let pickupSprite = new Sprite(
-    "gold",
-    ActorType.Pickup,
-    CollisionType.Collidable,
-    transform,
-    spriteArtist,
-    StatusType.IsUpdated | StatusType.IsDrawn,
-    1,
-    1
-  );
+//   let pickupSprite = new Sprite(
+//     "gold",
+//     ActorType.Pickup,
+//     CollisionType.Collidable,
+//     transform,
+//     spriteArtist,
+//     StatusType.IsUpdated | StatusType.IsDrawn,
+//     1,
+//     1
+//   );
 
 
 function LoadEnemySprites() {
