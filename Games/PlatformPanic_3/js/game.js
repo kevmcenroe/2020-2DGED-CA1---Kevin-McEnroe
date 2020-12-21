@@ -81,7 +81,7 @@ function Update(gameTime) {
 
 function Draw(gameTime) {
   //if we add a pattern or animate the canvas then we shouldnt clear the background
- // ClearCanvas(Color.White);
+  ClearCanvas(Color.White);
 
   //call object manager to draw all sprites
   objectManager.Draw(gameTime);
