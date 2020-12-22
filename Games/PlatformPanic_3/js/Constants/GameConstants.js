@@ -6,7 +6,7 @@
 class SpriteData {
 
 //#region Sprite Data
-static RUNNER_START_POSITION = new Vector2(100, 450);
+static RUNNER_START_POSITION = new Vector2(100, 575);
 static RUNNER_MOVE_KEYS = [Keys.A, Keys.D, Keys.Space, Keys.Enter];
 static RUNNER_RUN_VELOCITY = 0.1;
 static RUNNER_JUMP_VELOCITY = 0.6;
@@ -149,11 +149,8 @@ static PLATFORM_DATA = Object.freeze({
     new Vector2(500, 550),
     new Vector2(550, 550),  
 
-    new Vector2(750, 450),
-    new Vector2(800, 450),
-
-    new Vector2(550, 350),
-    new Vector2(500, 350),
+    new Vector2(650, 500),
+    new Vector2(700, 450),
   ]
 });
 

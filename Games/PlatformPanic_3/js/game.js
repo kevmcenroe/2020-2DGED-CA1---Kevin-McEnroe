@@ -55,7 +55,6 @@ function Animate(now) {
   window.requestAnimationFrame(Animate);
 }
 
-
 /**
  * Loads the code managers used by the game (object, keyboard, sound)
  */
@@ -76,7 +75,7 @@ function Update(gameTime) {
   HandleInput(gameTime);
 
   //update scores on the UI
-  UpdateUI(gameTime);
+  UpdateGameState(gameTime);
 }
 
 function Draw(gameTime) {
@@ -86,8 +85,7 @@ function Draw(gameTime) {
   //call object manager to draw all sprites
   objectManager.Draw(gameTime);
 
-  if(debugDrawer)
-    debugDrawer.Draw(gameTime);
+  if (debugDrawer) debugDrawer.Draw(gameTime);
 }
 
 function ClearCanvas(color) {
@@ -98,8 +96,13 @@ function ClearCanvas(color) {
 }
 
 function LoadDebug(bDebugEnabled) {
-  if(bDebugEnabled)
-    debugDrawer = new DebugDrawer("shows debug info", StatusType.Update | StatusType.Drawn, ctx, objectManager);
+  if (bDebugEnabled)
+    debugDrawer = new DebugDrawer(
+      "shows debug info",
+      StatusType.Update | StatusType.Drawn,
+      ctx,
+      objectManager
+    );
 }
 //#endregion
 
@@ -113,7 +116,7 @@ const cueArray = [
   new AudioCue("coin_pickup", 1, 1, false, 1),
   new AudioCue("gameover", 1, 1, false, 1),
   new AudioCue("gunshot", 1, 1, false, 0),
-  new AudioCue("background", 1, 1, true, 0),
+  new AudioCue("background", 0.6, 1, true, 0),
   //add more cues here but make sure you load in the HTML!
 ];
 
@@ -122,7 +125,6 @@ var score = 0;
 //#endregion
 
 function Initialize() {
-
   //debug drawer to show bounding rect or circle around collidable sprites
   LoadDebug(true);
 
@@ -130,14 +132,17 @@ function Initialize() {
   LoadSprites();
 }
 
-function UpdateUI(gameTime){
-  var scoreElement = document.getElementById("ui_score");
-  if(scoreElement){
-      scoreElement.style.display = "block";
-      scoreElement.innerHTML = score;
-  }
-}
+function UpdateGameState(gameTime) {
 
+  //update UI with new score
+  var scoreElement = document.getElementById("ui_score");
+  if (scoreElement) {
+    scoreElement.style.display = "block";
+    scoreElement.innerHTML = score;
+  }
+
+  //if score == 100 then show "You Win! or if time exceeds 60000ms then "Time Up! You Lose!"
+}
 
 /**
  * Use this function to check for keyboard or mouse input and start the game, mute sounds,
@@ -146,22 +151,15 @@ function UpdateUI(gameTime){
  * @param {*} gameTime
  */
 function HandleInput(gameTime) {
-
   //is the game starting
   if (keyboardManager.IsKeyDown(Keys.Enter)) {
     StartGame(gameTime);
   }
 
-  //add more code to check for input (e.g. O for Objective)
-
-  //is score == 0
-    //sound
-    //show div
-    //pause object manager
+  //add more code to check for input (e.g. Press "O" for Objective or "M" for menu)
 }
 
-function StartGame(gameTime){
-
+function StartGame(gameTime) {
   //set any win/lose variables
   var livesElement = document.getElementById("ui_lives");
   livesElement.style.display = "block";
@@ -186,82 +184,13 @@ function LoadSprites() {
   LoadPlatformSprites();
   LoadBackgroundSprites();
 
-  //to do...
   LoadPickupSprites();
+
+    //to do...
   //LoadEnemySprites();
 }
 
-function LoadBackgroundSprites() {
-  var backgroundData = SpriteData.BACKGROUND_DATA;
-
-  for (let i = 0; i < backgroundData.length; i++) {
-    let spriteArtist = new SpriteArtist(
-      ctx,
-      backgroundData[i].spriteSheet,
-      backgroundData[i].alpha,
-      backgroundData[i].sourcePosition,
-      backgroundData[i].sourceDimensions
-    );
-
-    let transform = new Transform2D(
-      backgroundData[i].translation,
-      backgroundData[i].rotation,
-      backgroundData[i].scale,
-      backgroundData[i].origin,
-      new Vector2(cvs.clientWidth, cvs.clientHeight)
-    );
-
-    objectManager.Add(
-      new Sprite(
-        backgroundData[i].id,
-        backgroundData[i].actorType,
-        StatusType.Updated | StatusType.Drawn,
-        transform,
-        spriteArtist,
-        backgroundData[i].layerDepth
-      ));
-  }
-}
-
-function LoadPlatformSprites() {
-  var platformData = SpriteData.PLATFORM_DATA;
-
-  let spriteArtist = new SpriteArtist(
-    ctx,
-    platformData.spriteSheet,
-    platformData.alpha,
-    platformData.sourcePosition,
-    platformData.sourceDimensions
-  );
-
-  let transform = new Transform2D(
-    platformData.translationArray[0],
-    platformData.rotation,
-    platformData.scale,
-    platformData.origin,
-    platformData.sourceDimensions
-  );
-
-  let platformSprite = new Sprite(
-    platformData.id,
-    platformData.actorType,
-    StatusType.Updated | StatusType.Drawn,
-    transform,
-    spriteArtist
-  );
-
-  let clone = null;
-  for (let i = 0; i < platformData.translationArray.length; i++) {
-    clone = platformSprite.Clone();
-    clone.Transform2D.Translation = platformData.translationArray[i];
-    clone.collisionPrimitive = new RectCollisionPrimitive(clone.Transform2D, 0);
-    objectManager.Add(clone);
-  }
-}
-
-
 function LoadPlayerSprite() {
-
   //step 1 - create AnimatedSpriteArtist
   var takeName = "run_right";
   var artist = new AnimatedSpriteArtist(ctx, SpriteData.RUNNER_ANIMATION_DATA);
@@ -295,7 +224,10 @@ function LoadPlayerSprite() {
   playerSprite.Body.Gravity = GravityType.Normal;
 
   //step 6 - add collision surface
-  playerSprite.collisionPrimitive = new RectCollisionPrimitive(playerSprite.Transform2D, 0);
+  playerSprite.collisionPrimitive = new RectCollisionPrimitive(
+    playerSprite.Transform2D,
+    0
+  );
 
   //step 7 - add movement controller
   playerSprite.AttachController(
@@ -311,38 +243,142 @@ function LoadPlayerSprite() {
 }
 
 function LoadPickupSprites() {
-  let spriteArtist = new AnimatedSpriteArtist(ctx, SpriteData.COLLECTIBLES_ANIMATION_DATA);
-  spriteArtist.SetTake("gold_glint");
+  //to add lots of pickups we can also just create a local array of positions for the pickups
+  let pickTranslationArray = [
+    new Vector2(450, 525),
+    new Vector2(525, 525),
+    new Vector2(725, 425),
+  ];
 
-  var frameDimensions = spriteArtist.GetSingleFrameDimensions("gold_glint");
-  
-  //set the origin so that the collision surface is in the center of the sprite
-  var origin = Vector2.DivideScalar(frameDimensions, 2);
+  //set the take name for the animation - we could change to "gold_glint" easily
+  var takeName = "ruby_glint";
 
-  let transform = new Transform2D(
-    new Vector2(530, 250),
-    0,
-    Vector2.One,
-    origin,
-    frameDimensions
-  );
+  //loop through the translation array
+  for (var translation of pickTranslationArray) {
+    //create an animated artist
+    let spriteArtist = new AnimatedSpriteArtist(
+      ctx,
+      SpriteData.COLLECTIBLES_ANIMATION_DATA
+    );
 
-  let pickupSprite = new Sprite(
-    "gold",
-    ActorType.Pickup,
-    StatusType.Updated | StatusType.Drawn,
-    transform,
-    spriteArtist,
-    1
-  );
+    //set the take
+    spriteArtist.SetTake(takeName);
 
-  // add the collision surface to test for collisions against
-  pickupSprite.collisionPrimitive = new CircleCollisionPrimitive(pickupSprite.Transform2D, 15);
+    //retrieve the dimensions of a single frame of the animation for the bounding box
+    var frameDimensions = spriteArtist.GetSingleFrameDimensions(takeName);
 
-  objectManager.Add(pickupSprite);
+    //set the origin so that the collision surface is in the center of the sprite
+    var origin = Vector2.DivideScalar(frameDimensions, 2);
+
+    //create a transform to position the pickup
+    let transform = new Transform2D(
+      translation,
+      0,
+      Vector2.One,
+      origin,
+      frameDimensions
+    );
+
+    //create the sprite and give it type "Pickup"
+    let pickupSprite = new Sprite(
+      "gold",
+      ActorType.Pickup,
+      StatusType.Updated | StatusType.Drawn,
+      transform,
+      spriteArtist,
+      1
+    );
+
+    // add the collision surface to test for collisions against
+    pickupSprite.collisionPrimitive = new CircleCollisionPrimitive(
+      pickupSprite.Transform2D,
+      15
+    );
+
+    //add to the object manager
+    objectManager.Add(pickupSprite);
+  }
 }
 
+function LoadBackgroundSprites() {
+  //access the data
+  var backgroundData = SpriteData.BACKGROUND_DATA;
 
+  for (let i = 0; i < backgroundData.length; i++) {
+    //create tha artist
+    let spriteArtist = new SpriteArtist(
+      ctx,
+      backgroundData[i].spriteSheet,
+      backgroundData[i].alpha,
+      backgroundData[i].sourcePosition,
+      backgroundData[i].sourceDimensions
+    );
+    //create the transform
+    let transform = new Transform2D(
+      backgroundData[i].translation,
+      backgroundData[i].rotation,
+      backgroundData[i].scale,
+      backgroundData[i].origin,
+      new Vector2(cvs.clientWidth, cvs.clientHeight)
+    );
+
+    //create a sprite and add to the manager
+    objectManager.Add(
+      new Sprite(
+        backgroundData[i].id,
+        backgroundData[i].actorType,
+        StatusType.Updated | StatusType.Drawn,
+        transform,
+        spriteArtist,
+        backgroundData[i].layerDepth
+      )
+    );
+  }
+}
+
+function LoadPlatformSprites() {
+  //access the data
+  var platformData = SpriteData.PLATFORM_DATA;
+
+  //create tha artist
+  let spriteArtist = new SpriteArtist(
+    ctx,
+    platformData.spriteSheet,
+    platformData.alpha,
+    platformData.sourcePosition,
+    platformData.sourceDimensions
+  );
+
+  //create the transform
+  let transform = new Transform2D(
+    platformData.translationArray[0],
+    platformData.rotation,
+    platformData.scale,
+    platformData.origin,
+    platformData.sourceDimensions
+  );
+
+  //create a single archetypal platform sprite
+  let archetypeSprite = new Sprite(
+    platformData.id,
+    platformData.actorType,
+    StatusType.Updated | StatusType.Drawn,
+    transform,
+    spriteArtist
+  );
+
+  //now clone the archetype
+  let clone = null;
+  for (let i = 0; i < platformData.translationArray.length; i++) {
+    clone = archetypeSprite.Clone();
+    //set the position of the clone
+    clone.Transform2D.Translation = platformData.translationArray[i];
+    //dont forget - if its collidable then it needs a circle or rect collision primitive
+    clone.collisionPrimitive = new RectCollisionPrimitive(clone.Transform2D, 0);
+    //add to the manager
+    objectManager.Add(clone);
+  }
+}
 
 function LoadEnemySprites() {
   //to do...
