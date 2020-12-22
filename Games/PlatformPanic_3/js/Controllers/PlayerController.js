@@ -119,10 +119,32 @@ class PlayerController {
 
   //#region Your Game Specific Methods - add code for more CD/CR or input handling
 
+
+  /**
+   * Add code in the method to listen for mouse input and do something in the game
+   *
+   * @param {*} gameTime
+   * @param {*} parent
+   * @memberof PlayerController
+   */
   HandleMouse(gameTime, parent) {}
 
+    /**
+   * Add code in the method to listen for keyboard input and do something in the game
+   *
+   * @param {*} gameTime
+   * @param {*} parent
+   * @memberof PlayerController
+   */
   HandleKeyboard(gameTime, parent) {}
 
+  /**
+   * Change the names of the takes in this method to suit the take names in your game
+   *
+   * @param {*} gameTime
+   * @param {*} parent
+   * @memberof PlayerController
+   */
   HandleMove(gameTime, parent) {
     //if left or right key pressed and player is on the ground then add/remove move velocity
     if (keyboardManager.IsKeyDown(this.moveKeys[0])) {
@@ -136,6 +158,14 @@ class PlayerController {
     }
   }
 
+  /**
+   * Change the code in this method to play a particular sound when the player jumps
+   * and (optionally) change the animation
+   *
+   * @param {*} gameTime
+   * @param {*} parent
+   * @memberof PlayerController
+   */
   HandleJump(gameTime, parent) {
     //if jump key is pressed and player is not jumping and on the ground then jump
     if (
@@ -148,10 +178,20 @@ class PlayerController {
       parent.Body.SetVelocityY(-this.jumpVelocity * gameTime.ElapsedTimeInMs);
 
       //add your code here...
+      //set take to "player_jump"
       soundManager.Play("gunshot"); //obviously we would source and load an appropriate "jump" sound here
     }
   }
 
+  /**
+   * Change the code in this method to play a particular sound when the player collects
+   * a pickup, update the score based on the pickup ID, and possibly play a celebration 
+   * animation if the pickup is the final level objective.
+   *
+   * @param {*} gameTime
+   * @param {*} parent
+   * @memberof PlayerController
+   */
   HandlePickupCollision(parent) {
     let sprites = objectManager.Find(ActorType.Pickup);
 
@@ -176,6 +216,17 @@ class PlayerController {
     }
   }
 
+  /**
+   * Change the code in this method to play a particular sound when the player 
+   * collides with the enemy, or remove the enemy, or kill the player and change
+   * to game over screen (i.e. by setting object manager to StatusType.Drawn only to pause
+   * update and then by setting the "menu_winlose" <div> block to display=block with a message set in
+   * the innerHTML of that <div> block )
+   *
+   * @param {*} gameTime
+   * @param {*} parent
+   * @memberof PlayerController
+   */
   HandleEnemyCollision(parent) {
     let sprites = objectManager.Find(ActorType.Enemy);
 
