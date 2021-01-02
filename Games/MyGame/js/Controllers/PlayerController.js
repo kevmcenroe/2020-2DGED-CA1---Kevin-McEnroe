@@ -220,7 +220,7 @@ class PlayerController {
             //add your code here...
   
             //add to the score
-            score += 10;
+            score += 1;
   
             //play a sound
             soundManager.Play("coin_pickup");

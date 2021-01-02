@@ -138,7 +138,7 @@ function UpdateGameState(gameTime) {
   var scoreElement = document.getElementById("ui_score");
   if (scoreElement) {
     scoreElement.style.display = "block";
-    scoreElement.innerHTML = score;
+    scoreElement.innerHTML = "Tresure Collected: </>" + score + "/5";
   }
 
   //if score == 100 then show "You Win! or if time exceeds 60000ms then "Time Up! You Lose!"
@@ -160,14 +160,14 @@ function HandleInput(gameTime) {
 }
 
 function StartGame(gameTime) {
-  //set any win/lose variables
-  var livesElement = document.getElementById("ui_lives");
-  livesElement.style.display = "block";
-  livesElement.innerHTML = "<text>Health</> - " + lives + "/5";
+  // //set any win/lose variables
+  // var livesElement = document.getElementById("ui_lives");
+  // livesElement.style.display = "block";
+  // livesElement.innerHTML = "<text>Tresure Collected: </>" + score + "/5";
 
   var scoreElement = document.getElementById("ui_score");
   scoreElement.style.display = "block";
-  scoreElement.innerHTML = score;
+  scoreElement.innerHTML = "<text>_______Tresure Collected: </>" + score + "/5";
 
   //Hide "Press Enter"
   document.getElementById("menu_opening").style.display = "none";
@@ -185,6 +185,7 @@ function LoadSprites() {
   LoadBackgroundSprites();
 
   LoadPickupSprites();
+  LoadEnemySprites();
 
     //to do...
   //LoadEnemySprites();
@@ -246,9 +247,11 @@ function LoadPlayerSprite() {
 function LoadPickupSprites() {
   //to add lots of pickups we can also just create a local array of positions for the pickups
   let pickTranslationArray = [
-    new Vector2(450, 525),
-    new Vector2(525, 525),
-    new Vector2(725, 425),
+    new Vector2(525, 425),
+    new Vector2(910, 175),
+    new Vector2(125, 625),
+    new Vector2(125, 325),
+    new Vector2(910, 700),
   ];
 
   //set the take name for the animation - we could change to "gold_glint" easily
@@ -382,7 +385,61 @@ function LoadPlatformSprites() {
 }
 
 function LoadEnemySprites() {
-  //to do...
+  //to add lots of pickups we can also just create a local array of positions for the pickups
+  let enemyTranslationArray = [
+    new Vector2(75, 225),
+    new Vector2(940, 275),
+    new Vector2(775, 725),
+  ];
+
+  //set the take name for the animation - we could change to "gold_glint" easily
+  var takeName = "fish";
+
+  //loop through the translation array
+  for (var translation of enemyTranslationArray) {
+    //create an animated artist
+    let spriteArtist = new AnimatedSpriteArtist(
+      ctx,
+      SpriteData.ENEMY_ANIMATION_DATA
+    );
+
+    //set the take
+    spriteArtist.SetTake(takeName);
+
+    //retrieve the dimensions of a single frame of the animation for the bounding box
+    var frameDimensions = spriteArtist.GetSingleFrameDimensions(takeName);
+
+    //set the origin so that the collision surface is in the center of the sprite
+    var origin = Vector2.DivideScalar(frameDimensions, 2);
+
+    //create a transform to position the pickup
+    let transform = new Transform2D(
+      translation,
+      0,
+      Vector2.One,
+      origin,
+      frameDimensions
+    );
+
+    //create the sprite and give it type "Pickup"
+    let pickupSprite = new Sprite(
+      "wasp_fly",
+      ActorType.Enemey,
+      StatusType.Updated | StatusType.Drawn,
+      transform,
+      spriteArtist,
+      1
+    );
+
+    // add the collision surface to test for collisions against
+    pickupSprite.collisionPrimitive = new CircleCollisionPrimitive(
+      pickupSprite.Transform2D,
+      15
+    );
+
+    //add to the object manager
+    objectManager.Add(pickupSprite);
+  }
 }
 
 //#region DEMO - REMOVE LATER

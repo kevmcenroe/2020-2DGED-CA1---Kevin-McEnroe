@@ -93,8 +93,8 @@ class SpriteData {
     spriteSheet: document.getElementById("spritesheet_main"),
     alpha: 1,
     takes: {  
-      "wasp_fly" :  {    
-        fps: 16,
+      "fish" :  {    
+        fps: 5,
         maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
         startCellIndex: 0,
         endCellIndex: 2,
@@ -279,6 +279,42 @@ class SpriteData {
       new Vector2(500, 200),
       new Vector2(500, 250),
       new Vector2(500, 300),
+
+      new Vector2(500, 650),
+      new Vector2(500, 700),
+
+      new Vector2(800, 700),
+      new Vector2(800, 650),
+      new Vector2(800, 600),
+      new Vector2(800, 550),
+      new Vector2(800, 500),
+      new Vector2(800, 450),
+
+      new Vector2(650, 550),
+      new Vector2(650, 600),
+
+      new Vector2(650, 350),
+      new Vector2(650, 400),
+      new Vector2(650, 450),
+      new Vector2(650, 500),
+
+      new Vector2(600, 500),
+      new Vector2(550, 500),
+      new Vector2(500, 500),
+      new Vector2(450, 500),
+      new Vector2(400, 500),
+
+      new Vector2(350, 550),
+      new Vector2(350, 600),
+      new Vector2(300, 600),
+      new Vector2(250, 600),
+      new Vector2(350, 600),
+      new Vector2(200, 600),
+
+      new Vector2(200, 450),
+      new Vector2(150, 450),
+      new Vector2(100, 450),
+      new Vector2(50, 450),
 
       new Vector2(650, 300),
       new Vector2(700, 300),
