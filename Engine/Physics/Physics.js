@@ -559,7 +559,7 @@ class Collision {
 class DebugDrawer {
     //#region Statics
     static BOUNDING_PRIMITIVE_COLOR = "red";
-    static BOUNDING_PRIMITIVE_LINE_WIDTH = 2;
+    static BOUNDING_PRIMITIVE_LINE_WIDTH = 0;
     static BOUNDING_PRIMITIVE_LINE_ALPHA = 1;
     //#endregion
 
