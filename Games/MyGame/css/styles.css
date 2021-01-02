@@ -61,6 +61,16 @@ body {
   text-align: center;
   z-index: 2;
 }
+#ui_win{
+  position: absolute;
+  font-family: Orbitron, Impact, Charcoal, sans-serif;
+  letter-spacing: 2px;
+  font-size: 24px;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px rgb(255, 115, 0);
+  text-align: center;
+  z-index: 2;
+}
 
 #menu_opening{
   font-size: 48px;
@@ -78,10 +88,15 @@ body {
 
 #ui_score{
   top:10px;
-  left:340px;
+  left:0px;
 }
 
 #ui_lives{
-  right:20px;
-  top:20px;
+  right:0px;
+  top:10px;
+}
+
+#ui_win{
+  top: 510px;
+  left:450px;
 }

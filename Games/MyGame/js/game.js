@@ -138,7 +138,14 @@ function UpdateGameState(gameTime) {
   var scoreElement = document.getElementById("ui_score");
   if (scoreElement) {
     scoreElement.style.display = "block";
-    scoreElement.innerHTML = "Tresure Collected: </>" + score + "/5";
+    scoreElement.innerHTML = "Treasure Collected: </>" + score + "/5";
+
+    if(score >= 5)
+    {
+      var winElement = document.getElementById("ui_win");
+      winElement.style.display = "block";
+      winElement.innerHTML = "YOU WIN!";
+    }
   }
 
   //if score == 100 then show "You Win! or if time exceeds 60000ms then "Time Up! You Lose!"
@@ -161,13 +168,17 @@ function HandleInput(gameTime) {
 
 function StartGame(gameTime) {
   // //set any win/lose variables
-  // var livesElement = document.getElementById("ui_lives");
-  // livesElement.style.display = "block";
-  // livesElement.innerHTML = "<text>Tresure Collected: </>" + score + "/5";
+   var livesElement = document.getElementById("ui_lives");
+   livesElement.style.display = "block";
+   livesElement.innerHTML = "Health: 100%";
 
   var scoreElement = document.getElementById("ui_score");
   scoreElement.style.display = "block";
-  scoreElement.innerHTML = "<text>_______Tresure Collected: </>" + score + "/5";
+  scoreElement.innerHTML = "<text>_______Treasure Collected: </>" + score + "/5";
+
+  var winElement = document.getElementById("ui_win");
+  winElement.style.display = "block";
+  winElement.innerHTML = "";
 
   //Hide "Press Enter"
   document.getElementById("menu_opening").style.display = "none";

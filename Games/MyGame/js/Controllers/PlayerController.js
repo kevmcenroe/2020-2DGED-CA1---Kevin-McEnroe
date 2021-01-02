@@ -152,12 +152,12 @@ class PlayerController {
 
       //if left or right key pressed and player is on the ground then add/remove move velocity
       if (keyboardManager.IsKeyDown(this.moveKeys[0])) {
-        parent.Body.AddVelocityX(-this.runVelocity * gameTime.ElapsedTimeInMs);
+        parent.Body.AddVelocityX(-this.runVelocity * gameTime.ElapsedTimeInMs * 1.5);
         //parent.Body.velocityX -= 2;
         //add your code here...
         parent.Artist.SetTake("run_left");
       } else if (keyboardManager.IsKeyDown(this.moveKeys[1])) {
-        parent.Body.AddVelocityX(this.runVelocity * gameTime.ElapsedTimeInMs);
+        parent.Body.AddVelocityX(this.runVelocity * gameTime.ElapsedTimeInMs * 1.5);
         //parent.Body.velocityX += 2;
         //add your code here...
         parent.Artist.SetTake("run_right");
