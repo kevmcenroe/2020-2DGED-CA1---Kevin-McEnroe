@@ -114,20 +114,6 @@ class SpriteData {
     alpha: 1,
     actorType: ActorType.Pickup,
     takes: {  
-      "sapphire_glint" :  {
-        fps: 6,
-        maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
-        startCellIndex: 0,
-        endCellIndex: 4,
-        boundingBoxDimensions: new Vector2(46, 50), 
-        cellData: [
-          new Rect(185, 138, 30, 35),
-          new Rect(220, 138, 30, 35),
-          new Rect(258, 138, 30, 35),
-          new Rect(294, 138, 30, 35),
-          new Rect(331, 138, 30, 35)
-        ]
-      },
       "ruby_glint" :  {
         fps: 6,
         maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
@@ -142,18 +128,6 @@ class SpriteData {
           new Rect(148, 138, 30, 35)
         ]
       },
-      "gold_glint" :  {
-        fps: 6,
-        maxLoopCount: -1, //-1 = always, 0 = run once, N = run N times
-        startCellIndex: 0,
-        endCellIndex: 2,
-        boundingBoxDimensions: new Vector2(30, 30), 
-        cellData: [
-          new Rect(65, 540, 30, 30),
-          new Rect(96, 540, 30, 30),
-          new Rect(128, 540, 30, 30)
-        ]
-      }
     }
   });
   
@@ -317,7 +291,7 @@ class SpriteData {
       new Vector2(50, 450),
 
       new Vector2(650, 300),
-      
+
       new Vector2(800, 300),
       new Vector2(850, 300),
       new Vector2(900, 300),
@@ -329,7 +303,7 @@ class SpriteData {
   static BACKGROUND_DATA = [
     {
       id: "background_1",
-      spriteSheet: document.getElementById("forest-1"),
+      spriteSheet: document.getElementById("water-1"),
       sourcePosition: new Vector2(0, 0),
       sourceDimensions: new Vector2(384, 216),
       translation: new Vector2(0, 0),
@@ -341,51 +315,9 @@ class SpriteData {
       layerDepth: 1,
       scrollSpeedMultiplier: 0.2
     },
-    // {
-    //   id: "background_2",
-    //   spriteSheet: document.getElementById("forest-2"),
-    //   sourcePosition: new Vector2(0, 0),
-    //   sourceDimensions: new Vector2(384, 216),
-    //   translation: new Vector2(0, 0),
-    //   rotation: 0,
-    //   scale: new Vector2(1, 1),
-    //   origin: new Vector2(0, 0),
-    //   alpha: 1,
-    //   actorType: ActorType.Background,
-    //   layerDepth: 1,
-    //   scrollSpeedMultiplier: 0.15
-    // },
-    // {
-    //   id: "background_3",
-    //   spriteSheet: document.getElementById("forest-3"),
-    //   sourcePosition: new Vector2(0, 0),
-    //   sourceDimensions: new Vector2(384, 216),
-    //   translation: new Vector2(0, 0),
-    //   rotation: 0,
-    //   scale: new Vector2(1, 1),
-    //   origin: new Vector2(0, 0),
-    //   alpha: 1,
-    //   actorType: ActorType.Background,
-    //   layerDepth: 1,
-    //   scrollSpeedMultiplier: 0.1
-    // },
-    // {
-    //   id: "background_4",
-    //   spriteSheet: document.getElementById("forest-4"),
-    //   sourcePosition: new Vector2(0, 0),
-    //   sourceDimensions: new Vector2(384, 216),
-    //   translation: new Vector2(0, 0),
-    //   rotation: 0,
-    //   scale: new Vector2(1, 1),
-    //   origin: new Vector2(0, 0),
-    //   alpha: 1,
-    //   actorType: ActorType.Background,
-    //   layerDepth: 1,
-    //   scrollSpeedMultiplier: 0.05
-    // },
     {
       id: "background_5",
-      spriteSheet: document.getElementById("forest-5"),
+      spriteSheet: document.getElementById("water-2"),
       sourcePosition: new Vector2(0, 0),
       sourceDimensions: new Vector2(384, 216),
       translation: new Vector2(0, 0),

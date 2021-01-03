@@ -5,7 +5,11 @@
 ### GitHub Repo Link
 https://github.com/kevmcenroe/2020-2DGED-CA1---Kevin-McEnroe.git
 
-### Art Assets Used
+### Art Resources Used
 http://pixelartmaker.com/art/bdfdc289ef48db9
 https://opengameart.org/content/underwater-theme-1
 https://opengameart.org/content/underwater-diving-pack
+
+### Other Resources Used
+I used the examples and resources provided to us in the sample projects to construct my game.
+I built upon exising project spritesheets for ease of understanding and to guarantee functionality.

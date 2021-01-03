@@ -1,6 +1,5 @@
 /**
  * Moves the parent sprite based on keyboard input and detect collisions against platforms, pickups etc
- * @author niall mcguinness
  * @version 1.0
  * @class PlayerController
  */
