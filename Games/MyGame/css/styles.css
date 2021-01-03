@@ -88,11 +88,11 @@ body {
 
 #ui_score{
   top:10px;
-  left:0px;
+  left:10px;
 }
 
 #ui_lives{
-  right:0px;
+  right:10px;
   top:10px;
 }
 

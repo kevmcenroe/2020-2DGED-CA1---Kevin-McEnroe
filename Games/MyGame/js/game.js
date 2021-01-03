@@ -116,10 +116,13 @@ function LoadDebug(bDebugEnabled) {
 //stores object manager which holds all sprites
 
 const cueArray = [
+  new AudioCue("winning_jingle", .4, 1, false, 0),
   new AudioCue("coin_pickup", 1, 1, false, 1),
+  new AudioCue("gem_pickup", 1, 1, false, 1),
   new AudioCue("gameover", 1, 1, false, 1),
-  new AudioCue("gunshot", 1, 1, false, 0),
-  new AudioCue("background", 0.6, 1, true, 0),
+  new AudioCue("gunshot", 0, 1, false, 0),
+  new AudioCue("background", 0.05, 1, true, 0),
+  new AudioCue("swim", .1, 1, false, 1),
   //add more cues here but make sure you load in the HTML!
 ];
 
@@ -135,19 +138,30 @@ function Initialize() {
   LoadSprites();
 }
 
+var jinglePlayed = false;
 function UpdateGameState(gameTime) {
 
   //update UI with new score
   var scoreElement = document.getElementById("ui_score");
+  var livesElement = document.getElementById("ui_lives");
   if (scoreElement) {
     scoreElement.style.display = "block";
     scoreElement.innerHTML = "Treasure Collected: </>" + score + "/5";
+
+    livesElement.style.display = "block";
+    livesElement.innerHTML = "Health: 100%";
 
     if(score >= 5)
     {
       var winElement = document.getElementById("ui_win");
       winElement.style.display = "block";
       winElement.innerHTML = "YOU WIN!";
+
+      // if(jinglePlayed == false)
+      // {//play winning sound
+      //   soundManager.Play("winning_jingle");
+      //   jinglePlayed = true;
+      // }
     }
   }
 }

@@ -152,23 +152,22 @@ class PlayerController {
       //if left or right key pressed and player is on the ground then add/remove move velocity
       if (keyboardManager.IsKeyDown(this.moveKeys[0])) {
         parent.Body.AddVelocityX(-this.runVelocity * gameTime.ElapsedTimeInMs * 1.5);
-        //parent.Body.velocityX -= 2;
-        //add your code here...
+        soundManager.Play("swim");
         parent.Artist.SetTake("run_left");
+
       } else if (keyboardManager.IsKeyDown(this.moveKeys[1])) {
         parent.Body.AddVelocityX(this.runVelocity * gameTime.ElapsedTimeInMs * 1.5);
-        //parent.Body.velocityX += 2;
-        //add your code here...
+        soundManager.Play("swim");
         parent.Artist.SetTake("run_right");
+
       }else if (keyboardManager.IsKeyDown(this.moveKeys[2])) {
-        //parent.Body.AddVelocityY(-this.runVelocity * gameTime.ElapsedTimeInMs);
         parent.Body.velocityY -= 2;
-        //add your code here...
+        soundManager.Play("swim");
         parent.Artist.SetTake("run_up");
+
       }else if (keyboardManager.IsKeyDown(this.moveKeys[3])) {
-        //parent.Body.AddVelocityY(this.runVelocity * gameTime.ElapsedTimeInMs);
         parent.Body.velocityY += 2;
-        //add your code here...
+        soundManager.Play("swim");
         parent.Artist.SetTake("run_down");
       }
     }
@@ -221,9 +220,12 @@ class PlayerController {
             //add to the score
             score += 1;
   
-            //play a sound
-            soundManager.Play("coin_pickup");
-  
+            //play the usual pickup sound, unless the totoal is 5 in which case play the victory sound
+            if(score != 5)
+              soundManager.Play("gem_pickup");
+            else
+              soundManager.Play("winning_jingle");
+
             //remove the pickup
             objectManager.Remove(sprite);
           }
