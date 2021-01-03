@@ -88,8 +88,8 @@ class SpriteData {
     }
   });
   
-  static ENEMY_ANIMATION_DATA = Object.freeze({
-    id: "enemy_animation_data",
+  static NPC_ANIMATION_DATA = Object.freeze({
+    id: "npc_animation_data",
     spriteSheet: document.getElementById("spritesheet_main"),
     alpha: 1,
     takes: {  
@@ -317,8 +317,7 @@ class SpriteData {
       new Vector2(50, 450),
 
       new Vector2(650, 300),
-      new Vector2(700, 300),
-      new Vector2(750, 300),
+      
       new Vector2(800, 300),
       new Vector2(850, 300),
       new Vector2(900, 300),

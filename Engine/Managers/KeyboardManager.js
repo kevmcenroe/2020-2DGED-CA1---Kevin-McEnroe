@@ -1,6 +1,5 @@
 /**
  * Stores keyboard state and allows user to query key state through methods. See also Keys in constants.js.
- * @author niall mcguinness
  * @version 1.0
  * @class KeyboardManager
  */

@@ -61,6 +61,16 @@ body {
   text-align: center;
   z-index: 2;
 }
+#play_button{
+  position: absolute;
+  font-family: Orbitron, Impact, Charcoal, sans-serif;
+  letter-spacing: 2px;
+  font-size: 24px;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px rgb(255, 115, 0);
+  text-align: center;
+  z-index: 2;
+}
 
 #menu_opening{
   font-size: 48px;

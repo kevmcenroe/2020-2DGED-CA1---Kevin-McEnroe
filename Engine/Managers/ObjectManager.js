@@ -200,11 +200,14 @@ class ObjectManager {
    *
    * @param {GameTime} gameTime GameTime object
    */
-  Draw(gameTime) {
+ Draw(gameTime) {
 
     if((this.statusType & StatusType.Drawn) != 0){
         for (let key in this.sprites) {
         for (let sprite of this.sprites[key]) {
+            // Added this check to make sure only things on-screen are rendered but was unsuccesful. Attempt included below:
+            //if(screenBounds.Intersects(sprite.collisionPrimitive.GetBoundingPrimitive()))
+            
             sprite.Draw(gameTime);
         }
         }

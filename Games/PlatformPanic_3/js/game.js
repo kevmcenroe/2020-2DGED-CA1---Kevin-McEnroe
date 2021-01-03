@@ -169,6 +169,11 @@ function StartGame(gameTime) {
   scoreElement.style.display = "block";
   scoreElement.innerHTML = score;
 
+  var playElement = document.getElementById("play_button");
+  playElement.style.display = "block";
+  playElement.innerHTML = "Click to Play!";
+  object.onclick = function(){myScript};
+
   //Hide "Press Enter"
   document.getElementById("menu_opening").style.display = "none";
 
@@ -177,6 +182,7 @@ function StartGame(gameTime) {
 
   //play sound
   soundManager.Play("background");
+
 }
 
 function LoadSprites() {

@@ -81,6 +81,7 @@ const Color = Object.freeze({
   //Use https://html-color-codes.info/colors-from-image/ to determine hex codes for colors that you use in free 3rd party images/sprites that you find online
 });
 
+
 /**
  * Used by the KeyboardManager to map key codes (e.g. 65 for A) to a human-readable symbol (e.g. A)
  * @see KeyboardManager

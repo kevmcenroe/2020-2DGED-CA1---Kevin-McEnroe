@@ -11,6 +11,9 @@ var cvs = document.getElementById("main_canvas");
 //get a handle to the 2D context of the canvas
 var ctx = cvs.getContext("2d");
 
+//screenbounds set so that anything outside is not rendered
+var screenBounds = new Rect(0,0,1024, 768);
+
 //stores elapsed and total game time
 var gameTime = null;
 
@@ -147,23 +150,26 @@ function UpdateGameState(gameTime) {
       winElement.innerHTML = "YOU WIN!";
     }
   }
-
-  //if score == 100 then show "You Win! or if time exceeds 60000ms then "Time Up! You Lose!"
 }
 
-/**
- * Use this function to check for keyboard or mouse input and start the game, mute sounds,
- * show/hide UI elements
- *
- * @param {*} gameTime
- */
-function HandleInput(gameTime) {
-  //is the game starting
-  if (keyboardManager.IsKeyDown(Keys.Enter)) {
-    StartGame(gameTime);
-  }
+// /**
+//  * Use this function to check for keyboard or mouse input and start the game, mute sounds,
+//  * show/hide UI elements
+//  *
+//  * @param {*} gameTime
+//  */
+ function HandleInput(gameTime) {
+//   //is the game starting
+//   if (keyboardManager.IsKeyDown(Keys.MouseClick)) {
+//     //StartGame(gameTime);
+//   }
+ }
 
-  //add more code to check for input (e.g. Press "O" for Objective or "M" for menu)
+//detect mouse click and start the game
+var mouseDown = 0;
+document.body.onmousedown = function() { 
+  ++mouseDown;
+  StartGame(gameTime);
 }
 
 function StartGame(gameTime) {
@@ -196,10 +202,7 @@ function LoadSprites() {
   LoadBackgroundSprites();
 
   LoadPickupSprites();
-  LoadEnemySprites();
-
-    //to do...
-  //LoadEnemySprites();
+  LoadNPCSprites();
 }
 
 function LoadPlayerSprite() {
@@ -395,23 +398,23 @@ function LoadPlatformSprites() {
   }
 }
 
-function LoadEnemySprites() {
-  //to add lots of pickups we can also just create a local array of positions for the pickups
-  let enemyTranslationArray = [
+function LoadNPCSprites() {
+  //to add lots of NPCs we can also just create a local array of positions for the npc
+  let npcTranslationArray = [
     new Vector2(75, 225),
     new Vector2(940, 275),
     new Vector2(775, 725),
   ];
 
-  //set the take name for the animation - we could change to "gold_glint" easily
+  //set the take name for the animation
   var takeName = "fish";
 
   //loop through the translation array
-  for (var translation of enemyTranslationArray) {
+  for (var translation of npcTranslationArray) {
     //create an animated artist
     let spriteArtist = new AnimatedSpriteArtist(
       ctx,
-      SpriteData.ENEMY_ANIMATION_DATA
+      SpriteData.NPC_ANIMATION_DATA
     );
 
     //set the take
@@ -423,7 +426,7 @@ function LoadEnemySprites() {
     //set the origin so that the collision surface is in the center of the sprite
     var origin = Vector2.DivideScalar(frameDimensions, 2);
 
-    //create a transform to position the pickup
+    //create a transform to position the npc
     let transform = new Transform2D(
       translation,
       0,
@@ -432,9 +435,9 @@ function LoadEnemySprites() {
       frameDimensions
     );
 
-    //create the sprite and give it type "Pickup"
+    //create the sprite and give it type "Enemy"
     let pickupSprite = new Sprite(
-      "wasp_fly",
+      "fish",
       ActorType.Enemey,
       StatusType.Updated | StatusType.Drawn,
       transform,
@@ -452,8 +455,3 @@ function LoadEnemySprites() {
     objectManager.Add(pickupSprite);
   }
 }
-
-//#region DEMO - REMOVE LATER
-/***************************************DEMO FUNCTIONS ***************************************/
-
-//#endregion
